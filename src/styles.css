@@ -1,1 +1,166 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*, *::before, *::after
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root
+{
+    font-family: 'Roboto', sans-serif;
+    --color-blanco: #FFF;
+    --color-icono-gris: #ADB7BE;
+    --color-rojo-suave: #F35F62;
+    --color-azul-suave: #1B99CF;
+    --color-verde-suave: #46C35F;
+    --color-gris:#53575A;
+    --color-negro: #000;
+    --color-fondo: #ECEFF4;
+    --color-azul-primario: #16B4FC;
+    --color-naranja-suave: #F29824;
+    --color-morado-suave: #AC6BEC;
+    
+}
+
+body
+{
+    color: var(--color-gris);
+}
+
+h1
+{
+    color: var(--color-negro);
+}
+
+.minh-100
+{
+    height: 80vh;
+}
+
+.mt-100
+{
+    margin-top: 100px;
+}
+.icono
+{
+    margin-right: 5px;
+}
+.icono-azul-suave
+{
+    color: var(--color-azul-primario);
+}
+
+.icono-rojo-suave
+{
+    color: var(--color-rojo-suave);
+}
+
+.icono-verde-suave
+{
+    color: var(--color-verde-suave);
+}
+
+.icono-naranja-suave
+{
+    color: var(--color-naranja-suave);
+}
+
+.icono-morado-suave
+{
+    color: var(--color-morado-suave);
+}
+.icono-gris
+{
+    color: var(--color-icono-gris);
+}
+
+.seccion
+{
+  padding: 10px;
+}
+
+.titulo-icono
+{
+    color: var(--color-blanco);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.texto-blanco
+{
+    color: var(--color-blanco);
+}
+
+.texto-gris
+{
+    color: var(--color-gris);
+}
+
+.texto-negro
+{
+    color: var(--color-negro);
+}
+
+.fondo-gris
+{
+    background: var(--color-fondo);
+}
+
+.fondo-blanco
+{
+    background: var(--color-blanco);
+}
+
+.btn-primario
+{
+    color: var(--color-azul-primario);
+}
+
+.btn-primario:hover
+{
+    color: var(--color-blanco);
+}
+
+
+.dataTables_filter input
+{
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 2px;
+  margin-bottom: 5px;
+}
+
+.icono-dt
+{
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+table{
+    font-size: .85em;
+    text-align: center;
+  }
+
+  .margen-izquierdo
+  {
+      margin-left: 5px;
+  }
+
+  .fondo-azul-primario
+  {
+    background: #212B30;
+  }
+
+  .portada-evento
+  {
+      width: 100%;
+      height: 100%;
+  }
+
+  .texto-negrita
+  {
+      font-weight: bold;
+  }

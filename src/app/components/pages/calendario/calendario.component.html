@@ -1,0 +1,121 @@
+<div class="row box-typical seccion">
+
+    <div class="row">
+      <div class="col-md-10">
+        <h3 class="">Calendario de eventos</h3>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn fondo-blanco btn-rounded btn-primario btn-block" data-toggle="modal"
+          data-target="#registroEvento">Nuevo evento</button>
+      </div>
+    </div>
+  
+    <div class="col-12 " id="full-calendar"></div>
+  </div>
+  
+  <!--Modal de registro-->
+  <div class="modal fade" id="registroEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+            <i class="font-icon-close-2"></i>
+          </button>
+          <h4 class="modal-title text-center" id="myModalLabel">Nuevo evento</h4>
+        </div>
+        <div class="modal-body">
+  
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label class="form-label semibold" for="exampleInput">Nombre</label>
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword"></p>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label class="form-label semibold" for="exampleInput">Departamento</label>
+              <select id="exampleSelect" class="form-control">
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label class="form-label semibold" for="exampleInput">Costo (Cero si no aplica)</label>
+              <p class="form-control-static"><input type="text" class="form-control" id="inputPassword"></p>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="exampleInput">Tipo de actividad</label>
+                <select id="exampleSelect" class="form-control">
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="exampleInputEmail1">Categoría</label>
+                <select id="exampleSelect" class="form-control">
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </fieldset>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="exampleInput">Fecha de inicio</label>
+                <input type="date" class="form-control" id="exampleInput">
+              </fieldset>
+            </div>
+            <div class="col-lg-6">
+              <fieldset class="form-group">
+                <label class="form-label semibold" for="exampleInputEmail1">Fecha de termino</label>
+                <input type="date" class="form-control" id="exampleInputEmail1">
+              </fieldset>
+            </div>
+  
+          </div>
+          <!--.row-->
+  
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label class="form-label semibold" for="exampleInputEmail1">Descripción</label>
+              <textarea rows="4" class="form-control"></textarea>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <span class="btn btn-rounded btn-file">
+                <span>Selecciona portada</span>
+                <input type="file" id="input-custom-file" name="Archivo"
+                        (change)=onFileChange($event)>
+              </span>
+              <span class="margen-izquierdo">Ningún archivo seleccionado</span>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-rounded btn-success">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--.modal-->
