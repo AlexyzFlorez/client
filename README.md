@@ -2,6 +2,8 @@
 
 Ejecutar los siguientes comandos dentro del directorio client
 
--npm install
--npm update
+npm install
 
+npm update
+
+ng serve
