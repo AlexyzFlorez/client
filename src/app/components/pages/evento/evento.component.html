@@ -1,32 +1,127 @@
 <div class="row">
-    <div class="col-xl-6 dahsboard-column">
+  <div class="col-xl-6 dahsboard-column">
 
-        <article class="card-typical">
-            <div class="card-typical-section fondo-azul-primario">
-                <h4 class="title text-center texto-blanco texto-negrita">Curso</h4>
-            </div>
-      
-            <div class="card-typical-section card-typical-content">
-              <div class="photo">
-                <img src="../../../../assets/img/banner.jpg" alt="" class="portada-evento">
-              </div>
-            
-            </div>
-      
-            <div class="card-typical-section">
-              <button class="btn btn-primary btn-block">Ver evidencias</button>
-            </div>
-          </article><!--.card-typical-->
-    </div>
+    <article class="card-typical">
+      <div class="card-typical-section fondo-azul-primario">
+        <h4 class="title text-center texto-blanco texto-negrita">Curso</h4>
+      </div>
 
-    <div class="col-xl-6 dahsboard-column box-typical box-typical-dashboard panel panel-default seccion">
-        <h4 class="title text-center">Fundamentos de JavaScript</h4>
-        <p><span class="texto-negrita">Descripción:</span></p>
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt totam iste eos, autem temporibus saepe distinctio minus eveniet quae provident vero, corporis, quia et eaque sit non repellendus odio nostrum? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum reprehenderit ab nisi? Commodi ad vero expedita ipsum aliquam. Recusandae nisi, numquam provident saepe facere laudantium neque ex aut? Dolorem, adipisci!</p>
-      <p><span class="texto-negrita">Departamento: </span>Dirección</p>
-      <p><span class="texto-negrita">Categoría: </span>Actividad para estudiantes</p>
-      <p><span class="texto-negrita">Costo: </span>$150</p>
-      <p><span class="texto-negrita">Fecha de inicio: </span>12/Junio/2019</p>
-      <p><span class="texto-negrita">Fecha de termino: </span>01/Julio/2019</p>
-    </div>
+      <div class="card-typical-section card-typical-content">
+        <div class="photo">
+          <img src="../../../../assets/img/banner.jpg" alt="" class="portada-evento">
+        </div>
+
+      </div>
+
+      <div class="card-typical-section">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#verEvidencias">Ver
+          evidencias</button>
+      </div>
+    </article>
+    <!--.card-typical-->
+  </div>
+
+  <div class="col-xl-6 dahsboard-column box-typical box-typical-dashboard panel panel-default seccion">
+    <h4 class="title text-center">Fundamentos de JavaScript</h4>
+    <p><span class="texto-negrita">Descripción:</span></p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt totam iste eos, autem temporibus saepe distinctio
+      minus eveniet quae provident vero, corporis, quia et eaque sit non repellendus odio nostrum? Lorem, ipsum dolor
+      sit amet consectetur adipisicing elit. Ipsum reprehenderit ab nisi? Commodi ad vero expedita ipsum aliquam.
+      Recusandae nisi, numquam provident saepe facere laudantium neque ex aut? Dolorem, adipisci!</p>
+    <p><span class="texto-negrita">Departamento: </span>Dirección</p>
+    <p><span class="texto-negrita">Categoría: </span>Actividad para estudiantes</p>
+    <p><span class="texto-negrita">Costo: </span>$150</p>
+    <p><span class="texto-negrita">Fecha de inicio: </span>12/Junio/2019</p>
+    <p><span class="texto-negrita">Fecha de termino: </span>01/Julio/2019</p>
+  </div>
 </div>
+
+<!--Modal de evidencias-->
+<div class="modal fade" id="verEvidencias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+          <i class="font-icon-close-2"></i>
+        </button>
+        <h4 class="modal-title text-center" id="myModalLabel">Evidencia del evento: Conferencia "Sororidad"</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group row">
+          <div class="col-md-4 text-center">
+            <p>Hombres</p>
+            <p class="texto-negrita">25</p>
+          </div>
+
+          <div class="col-md-4 text-center">
+            <p>Mujeres</p>
+            <p class="texto-negrita">28</p>
+          </div>
+
+          <div class="col-md-4 text-center">
+            <p>Pobración atendida</p>
+            <p class="texto-negrita">Interna</p>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti aliquid debitis delectus, obcaecati rem adipisci minima neque velit! Provident quis, at facere nemo delectus sequi cum asperiores hic quos voluptas.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi molestiae eum excepturi enim error aperiam assumenda, rerum ratione, fugit fugiat voluptate perferendis libero tenetur atque nobis velit iste aspernatur ipsa!
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12 col-md-4">
+              <article class="card-typical">
+                  <div class="zoom">
+                    <p class="text-center texto-negrita">Evidencia 1</p>
+                  </div>
+
+                  <div class="">
+                        <img src="../../../../assets/img/ev1.jpg" alt="" class="portada-evento imagen-evidencia zoom" >
+                  </div>
+                  
+                </article><!--.card-typical-->
+          </div>
+
+          <div class="col-sm-12 col-md-4">
+              <article class="card-typical">
+                  <div class="">
+                    <p class="text-center texto-negrita">Evidencia 2</p>
+                  </div>
+
+                  <div class="zoom">
+                        <img src="../../../../assets/img/ev2.jpg" alt="" class="portada-evento imagen-evidencia zoom" >
+                  </div>
+                  
+                </article><!--.card-typical-->
+          </div>
+
+          <div class="col-sm-12 col-md-4">
+              <article class="card-typical">
+                  <div class="">
+                    <p class="text-center texto-negrita">Evidencia 3</p>
+                  </div>
+
+                  <div class="zoom">
+                        <img src="../../../../assets/img/ev3.jpg" alt="" class="portada-evento imagen-evidencia zoom" >
+                  </div>
+                  
+                </article><!--.card-typical-->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--.modal-->
