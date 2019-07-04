@@ -164,3 +164,75 @@ table{
   {
       font-weight: bold;
   }
+
+  .caja-evidencia
+  {
+      border: solid 1px black;
+  }
+
+  .imagen-evidencia
+  {
+    object-fit: cover;
+    height: 100px;
+  }
+
+  /*Estilos para datatables*/
+  .dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+    padding-top: 0.25em;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1em;
+    padding: 0.5em 1em;
+    margin-left: 2px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333333 !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: black !important;
+    border: 1px solid var(--color-gris);  
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    cursor: default;
+    color: #666 !important;
+    border: 1px solid transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    background: var(--color-gris);
+  }
+  .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+   color: black !important;
+    background: var(--color-gris);
+  }
+
+  .zoom{
+    /* Aumentamos la anchura y altura durante 2 segundos */
+    transition: width 2s, height 2s, transform 2s;
+    -moz-transition: width 2s, height 2s, -moz-transform 2s;
+    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
+    -o-transition: width 2s, height 2s,-o-transform 2s;
+    position:relative;
+     z-index:1;
+    
+}
+.zoom:hover{
+    /* tranformamos el elemento al pasar el mouse por encima al doble de
+       su tamaño con scale(2). */
+    transform : scale(2);
+    -moz-transform : scale(2);      /* Firefox */
+    -webkit-transform : scale(2);   /* Chrome - Safari */
+    -o-transform : scale(2);        /* Opera */
+    position:relative;
+     z-index:2;
+}
