@@ -1,3 +1,103 @@
-<p>
-  editar-evento works!
-</p>
+<div class="row box-typical seccion">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="">Editar evento</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="photo">
+        <img src="../../../../assets/img/banner.jpg" alt="" class="portada-evento">
+      </div>
+
+      <div class="seccion">
+        <span class="btn btn-rounded btn-file">
+          <span>Selecciona portada</span>
+          <input type="file" id="input-custom-file" name="Archivo" (change)=onFileChange($event)>
+        </span>
+        <span class="margen-izquierdo">Ningún archivo seleccionado</span>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      
+      <div class="form-group">
+        <label class="form-label semibold" for="exampleInput">Nombre</label>
+        <input type="text" class="form-control" id="inputPassword">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label semibold" for="exampleInput">Departamento</label>
+        <select id="exampleSelect" class="form-control">
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select>
+      </div>
+
+      <div class="">
+          <fieldset class="form-group">
+        <label class="form-label semibold" for="exampleInput">Costo (Cero si no aplica)</label>
+        <input type="text" class="form-control" id="inputPassword">
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-20">
+    <div class="col-sm-6">
+      <div class="">
+        <fieldset class="form-group">
+          <label class="form-label semibold" for="exampleInput">Tipo de actividad</label>
+          <select id="exampleSelect" class="form-control">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </fieldset>
+      </div>
+
+      <div class="">
+        <fieldset class="form-group">
+          <label class="form-label semibold" for="exampleInput">Fecha de inicio</label>
+          <input type="date" class="form-control" id="exampleInput">
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="">
+        <fieldset class="form-group">
+          <label class="form-label semibold" for="exampleInputEmail1">Categoría</label>
+          <select id="exampleSelect" class="form-control">
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </fieldset>
+      </div>
+
+      <div class="">
+        <fieldset class="form-group">
+          <label class="form-label semibold" for="exampleInputEmail1">Fecha de termino</label>
+          <input type="date" class="form-control" id="exampleInputEmail1">
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <label class="form-label semibold" for="exampleInputEmail1">Descripción</label>
+      <textarea rows="4" class="form-control"></textarea>
+    </div>
+  </div>
+
+  <div class="row mt-20">
+    <div class="col-sm-12 text-center">
+      <button type="button" class="btn btn-rounded btn-success">Guardar cambios</button>
+    </div>
+  </div>
+</div>
