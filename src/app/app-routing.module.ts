@@ -13,6 +13,7 @@ import { MisEventosComponent } from './components/pages/mis-eventos/mis-eventos.
 import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
 import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
 import { EventoComponent } from './components/pages/evento/evento.component';
+import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: 'mis-eventos',
         component: MisEventosComponent
+      },
+        {
+        path: 'editar-evento',
+        component: EditarEventoComponent
       },
       {
         path: 'evidencias',
