@@ -22,6 +22,8 @@
     --color-azul-primario: #16B4FC;
     --color-naranja-suave: #F29824;
     --color-morado-suave: #AC6BEC;
+    --color-link:#0056B3;
+    --color-blanco-hover:#E8EAED;
     
 }
 
@@ -253,3 +255,12 @@ table{
   .fc-event-dot {
     background-color: var(--color-azul-primario);
     /* default BACKGROUND color */ }
+
+.error
+{
+  color: var(--color-rojo-suave);
+  font-size: 14px;
+  padding: 0;
+  margin:0;
+  margin-left: 5px;
+}
