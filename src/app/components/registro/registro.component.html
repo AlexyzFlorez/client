@@ -8,18 +8,29 @@
               <header class="sign-title">Crear cuenta</header>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Nombre (s)"/>
+                <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p> 
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Apellido paterno"/>
+                <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p> 
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Apellido materno"/>
+                <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p> 
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Teléfono"/>
+                <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p> 
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="No. empleado"/>
+                <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p>
+                <p class="error">Num. de empleado en uso.</p> 
             </div>
             <div class="form-group">
                 <select id="exampleSelect" class="form-control">
@@ -28,16 +39,25 @@
                     <option>3</option>
                     <option>4</option>
                 </select>
+                <p class="error">Selecciona un departamento.</p>
             </div>
            
               <div class="form-group">
                   <input type="text" class="form-control" placeholder="Correo electrónico"/>
+                  <p class="error">Completa este campo.</p>
+                <p class="error">Formato inválido.</p>
+                <p class="error">Correo electrónico en uso.</p> 
               </div>
               <div class="form-group">
                   <input type="password" class="form-control" placeholder="Contraseña"/>
+                  <p class="error">Completa este campo.</p>
+                  <p class="error">Formato inválido.</p>
               </div>
               <div class="form-group">
                   <input type="password" class="form-control" placeholder="Confirmar contraseña"/>
+                  <p class="error">Completa este campo.</p>
+                  <p class="error">Formato inválido.</p>
+                  <p class="error">Las contraseñas no coinciden.</p>
               </div>
               <button type="submit" class="btn btn-rounded btn-success sign-up">Crear cuenta</button>
               <p class="sign-note">¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a></p>
