@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {dataTablePersonalizada} from '../../../fnAuxiliares/datatablePersonalizada';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'ipn-evento',
@@ -8,7 +9,10 @@ import {dataTablePersonalizada} from '../../../fnAuxiliares/datatablePersonaliza
 })
 export class EventoComponent implements OnInit {
   dtOptions:any;
-  constructor() { }
+  constructor(private titleService: Title) {
+    
+    this.titleService.setTitle('Evento');
+  }
 
   ngOnInit() {
     this.dtOptions=dataTablePersonalizada.dtOptions();
