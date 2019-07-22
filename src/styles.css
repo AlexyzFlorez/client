@@ -24,6 +24,7 @@
     --color-morado-suave: #AC6BEC;
     --color-link:#0056B3;
     --color-blanco-hover:#E8EAED;
+    --color-azul-marino:#212B30;
     
 }
 
@@ -205,8 +206,8 @@ table{
     border-radius: 2px;
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    color: black !important;
-    border: 1px solid var(--color-gris);  
+    color: white !important;
+    border: 1px solid var(--color-azul-primario);  
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
     cursor: default;
@@ -217,7 +218,7 @@ table{
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     color: white !important;
-    background: var(--color-gris);
+    background: var(--color-azul-marino);
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button:active {
    color: black !important;
