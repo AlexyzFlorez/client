@@ -1,67 +1,106 @@
 <div class="page-center">
-  <div class="page-center-in">
-      <div class="container-fluid">
-          <form class="sign-box">
-                  <div class="sign-avatar">
-                          <img src="assets/img/avatar-sign.png" alt="">
-                      </div>
-              <header class="sign-title">Crear cuenta</header>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Nombre (s)"/>
-                <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p> 
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Apellido paterno"/>
-                <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p> 
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Apellido materno"/>
-                <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p> 
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Teléfono"/>
-                <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p> 
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="No. empleado"/>
-                <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p>
-                <p class="error">Num. de empleado en uso.</p> 
-            </div>
-            <div class="form-group">
-                <select id="exampleSelect" class="form-control">
-                    <option disabled>Departamento</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                </select>
-                <p class="error">Selecciona un departamento.</p>
-            </div>
-           
-              <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Correo electrónico"/>
-                  <p class="error">Completa este campo.</p>
-                <p class="error">Formato inválido.</p>
-                <p class="error">Correo electrónico en uso.</p> 
-              </div>
-              <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Contraseña"/>
-                  <p class="error">Completa este campo.</p>
-                  <p class="error">Formato inválido.</p>
-              </div>
-              <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Confirmar contraseña"/>
-                  <p class="error">Completa este campo.</p>
-                  <p class="error">Formato inválido.</p>
-                  <p class="error">Las contraseñas no coinciden.</p>
-              </div>
-              <button type="submit" class="btn btn-rounded btn-success sign-up">Crear cuenta</button>
-              <p class="sign-note">¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a></p>
-          </form>
-      </div>
-  </div>
-</div><!--.page-center-->
+    <div class="page-center-in">
+        <div class="container-fluid">
+            <form class="sign-box">
+                <div class="sign-avatar">
+                    <img src="assets/img/avatar-sign.png" alt="">
+                </div>
+                <header class="sign-title">Crear cuenta</header>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre (s)" [(ngModel)]="usuario.nombre"
+                        #nombre="ngModel" name="nombre" />
+                    <p class="error" *ngIf='miFormulario.nombreVacio'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.nombreFormato==false && !this.miFormulario.nombreVacio'>Formato
+                        inválido.</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="apellidoPaterno" name="apellidoPaterno" placeholder="Apellido paterno"
+                        [(ngModel)]="usuario.apellido_paterno" #apellidoPaterno="ngModel" />
+                    <p class="error" *ngIf='miFormulario.apellidoPaternoVacio'>Completa este campo.</p>
+                    <p class="error"
+                        *ngIf='miFormulario.apellidoPaternoFormato==false && !this.miFormulario.apellidoPaternoVacio'>
+                        Formato inválido.</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="apellidoMaterno" name="apellidoMaterno" placeholder="Apellido materno" name="apellidoMaterno"
+                        [(ngModel)]="usuario.apellido_materno" #apellidoMaterno="ngModel" />
+                    <p class="error" *ngIf='miFormulario.apellidoMaternoVacio'>Completa este campo.</p>
+                    <p class="error"
+                        *ngIf='miFormulario.apellidoMaternoFormato==false && !this.miFormulario.apellidoMaternoVacio'>
+                        Formato inválido.</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono"  [(ngModel)]="usuario.telefono" #telefono="ngModel"/>
+                    <p class="error" *ngIf='miFormulario.telefonoVacio'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.telefonoFormato==false && !this.miFormulario.telefonoVacio'>
+                        Formato inválido.</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="numEmpleado" name="numEmpleado" placeholder="No. Empleado"
+                        [(ngModel)]="usuario.num_empleado" #numEmpleado="ngModel" />
+                    <p class="error" *ngIf='miFormulario.numEmpleadoVacio'>Completa este campo.</p>
+                    <p class="error"
+                        *ngIf='miFormulario.numEmpleadoFormato==false && !this.miFormulario.numEmpleadoVacio'>
+                        Formato
+                        inválido.</p>
+                    <p class="error" *ngIf='miFormulario.numEmpleadoRegistrado'>Este No. empleado ya esta en uso.</p>
+                </div>
+
+                <div class="form-group">
+                    <select id="exampleSelect" class="form-control" id="departamento" name="departamento" [(ngModel)]="usuario.departamento"
+                        #departamento="ngModel">
+                        <option disabled>Departamento</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                    <p class="error" *ngIf='miFormulario.departamentoVacio'>Selecciona un departamento.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="usuario.correo"
+                        #correo="ngModel" />
+                    <p class="error" *ngIf='miFormulario.correoVacio'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.correoFormato==false && !this.miFormulario.correoVacio'>Formato
+                        inválido.</p>
+                    <p class="error" *ngIf='miFormulario.correoNoPreregistrado'>Es necesario estar pre registrado.</p>
+                    <p class="error" *ngIf='miFormulario.usuarioRegistrado'>El correo electrónico en uso.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                        [(ngModel)]="usuario.password" #password="ngModel" />
+                    <p class="error" *ngIf='miFormulario.passwordVacia'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.passwordFormato==false && !this.miFormulario.passwordVacia'>
+                        Formato
+                        inválido.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password2">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="password2" name="password2"
+                        [(ngModel)]="usuario.password2" #password2="ngModel" />
+                    <p class="error" *ngIf='miFormulario.password2Vacia'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.password2Formato==false && !this.miFormulario.password2Vacia'>
+                        Formato
+                        inválido.</p>
+                    <p class="error"
+                        *ngIf='miFormulario.passwordIguales==false && !miFormulario.password2Vacia && !miFormulario.passwordVacia'>
+                        Las contraseñas son distintas</p>
+                </div>
+
+                <button type="submit" class="btn btn-rounded btn-success sign-up" (click)="registrarUsuario()">Crear
+                    cuenta</button>
+                <p class="sign-note">¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+<!--.page-center-->

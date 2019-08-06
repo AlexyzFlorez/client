@@ -1,8 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
-
 import { AppRoutingModule } from './app-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiSisEventService } from './services/api-sis-event.service';
+
+//GUARDS
+import { LoginGuard } from './services/guards/login.guard';
+import { UsuarioGuard } from './services/guards/usuario.guard';
+import { AdminGuard } from './services/guards/admin.guard';
+
+//COMPONENTES
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -44,9 +53,18 @@ import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/su
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ApiSisEventService,
+    LoginGuard,
+    AdminGuard,
+    UsuarioGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

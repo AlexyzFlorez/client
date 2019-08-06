@@ -264,3 +264,13 @@ table{
   margin:0;
   margin-left: 5px;
 }
+
+.color-azul-primario
+{
+    color: var(--color-azul-primario);
+}
+
+.verde
+{
+    color: var(--color-verde-suave);
+}
