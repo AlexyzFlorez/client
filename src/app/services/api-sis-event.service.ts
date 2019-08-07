@@ -45,9 +45,9 @@ export class ApiSisEventService {
   }
 
   //USUARIO-----------------------------------------------------
-  registrarUsuario(formulario)
+  preregistrarUsuario(formulario)
   {
-    return this.http.post(`${this.API_URI}/usuario/registro`, formulario);
+    return this.http.post(`${this.API_URI}/usuario/preregistrar-usuario`, formulario);
   }
 
   iniciarSesion(usuario: Usuario)
@@ -58,6 +58,12 @@ export class ApiSisEventService {
   recuperarPassword(correo)
   {
     return this.http.post(`${this.API_URI}/usuario/recuperar-password`, correo);
+  }
+
+  //REGISTRO
+  ObtenerDepartamentos()
+  {
+    return this.http.get(`${this.API_URI}/usuario/obtener-departamentos`);
   }
 
   salir()

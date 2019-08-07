@@ -25,7 +25,13 @@
                   </div>
               </div>
 
-              <button type="submit" class="btn btn-rounded">Iniciar sesión</button>
+              <div class="text-center">
+                <button type="submit" class="btn btn-rounded m-5" (click)="iniciarSesion()">Iniciar sesión</button>
+              
+                 <a class="btn btn-rounded btn-secondary m-5" routerLink="/calendario">Cancelar</a>
+            </div>
+
+              
               <p class="sign-note">¿No tienes una cuenta? <a routerLink="/registro">Crear cuenta</a></p>
 
           </form>

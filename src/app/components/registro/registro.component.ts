@@ -15,6 +15,7 @@ export class RegistroComponent implements OnInit {
   usuario = new Usuario();
   miFormulario = new Formulario();
   respuesta:any={errores:[]};
+  departamentos:any;
 
   constructor(private titleService: Title,private router:Router,private apiSisEvent: ApiSisEventService )
   {
@@ -35,6 +36,15 @@ export class RegistroComponent implements OnInit {
     this.usuario.telefono="";
     this.usuario.password="";
     this.usuario.password2="";
+    this.usuario.departamento="Departamento";
+
+    this.apiSisEvent.ObtenerDepartamentos().subscribe(
+      res =>
+      {
+          this.departamentos=res;
+      },
+      err => console.log("error")
+    );
   }
 
   registrarUsuario()
@@ -48,6 +58,7 @@ export class RegistroComponent implements OnInit {
     let correo=this.usuario.correo;
     let password=this.usuario.password;
     let password2=this.usuario.password2;
+    this.usuario.estado_registro="Pre registrado";
     
     //VALIDACIONES DE FORMULARIO
 
@@ -95,7 +106,7 @@ export class RegistroComponent implements OnInit {
         if(this.miFormulario.nombreFormato && this.miFormulario.apellidoPaternoFormato && this.miFormulario.apellidoMaternoFormato && this.miFormulario.telefonoFormato && this.miFormulario.correoFormato && this.miFormulario.passwordFormato && this.miFormulario.password2Formato && this.miFormulario.passwordIguales)
         {
         
-          this.apiSisEvent.registrarUsuario(this.usuario).subscribe(
+          this.apiSisEvent.preregistrarUsuario(this.usuario).subscribe(
             res =>
             {
               this.respuesta=res;

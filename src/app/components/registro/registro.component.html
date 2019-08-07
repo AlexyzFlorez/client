@@ -55,16 +55,15 @@
                     <select id="exampleSelect" class="form-control" id="departamento" name="departamento" [(ngModel)]="usuario.departamento"
                         #departamento="ngModel">
                         <option disabled>Departamento</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option *ngFor="let departamento of departamentos" [value]="departamento.nombre">
+                            {{departamento.nombre}}
+                          </option>
                     </select>
                     <p class="error" *ngIf='miFormulario.departamentoVacio'>Selecciona un departamento.</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="correo">Correo electrónico</label>
-                    <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="usuario.correo"
+                    <input type="email" class="form-control" id="correo" name="correo" [(ngModel)]="usuario.correo" placeholder="Correo electrónico"
                         #correo="ngModel" />
                     <p class="error" *ngIf='miFormulario.correoVacio'>Completa este campo.</p>
                     <p class="error" *ngIf='miFormulario.correoFormato==false && !this.miFormulario.correoVacio'>Formato
@@ -74,8 +73,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password"
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"
                         [(ngModel)]="usuario.password" #password="ngModel" />
                     <p class="error" *ngIf='miFormulario.passwordVacia'>Completa este campo.</p>
                     <p class="error" *ngIf='miFormulario.passwordFormato==false && !this.miFormulario.passwordVacia'>
@@ -84,8 +82,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password2">Confirmar contraseña</label>
-                    <input type="password" class="form-control" id="password2" name="password2"
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirmar contraseña"
                         [(ngModel)]="usuario.password2" #password2="ngModel" />
                     <p class="error" *ngIf='miFormulario.password2Vacia'>Completa este campo.</p>
                     <p class="error" *ngIf='miFormulario.password2Formato==false && !this.miFormulario.password2Vacia'>
@@ -96,8 +93,12 @@
                         Las contraseñas son distintas</p>
                 </div>
 
-                <button type="submit" class="btn btn-rounded btn-success sign-up" (click)="registrarUsuario()">Crear
-                    cuenta</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-rounded btn-success m-5" (click)="registrarUsuario()">Crear
+                        cuenta</button>
+                    <a class="btn btn-rounded btn-secondary m-5" routerLink="/calendario">Cancelar</a>
+                </div>
+               
                 <p class="sign-note">¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a></p>
             </form>
         </div>
