@@ -99,13 +99,17 @@ export class RegistroComponent implements OnInit {
 
       this.miFormulario.passwordIguales=this.miFormulario.validarPasswordsIguales(password, password2);
 
+      if(this.usuario.departamento=="Departamento")
+      {
+          this.miFormulario.departamentoVacio=true;
+      }
+
       //Validamos los estados de campos generales,primero campos vacios
       if( !this.miFormulario.nombreVacio && !this.miFormulario.apellidoPaternoVacio && !this.miFormulario.apellidoMaternoVacio && !this.miFormulario.telefonoVacio && !this.miFormulario.numEmpleadoVacio && !this.miFormulario.telefonoVacio && !this.miFormulario.departamentoVacio && !this.miFormulario.correoVacio && !this.miFormulario.passwordVacia && !this.miFormulario.password2Vacia)
       {
         //Validamos formatos
         if(this.miFormulario.nombreFormato && this.miFormulario.apellidoPaternoFormato && this.miFormulario.apellidoMaternoFormato && this.miFormulario.telefonoFormato && this.miFormulario.correoFormato && this.miFormulario.passwordFormato && this.miFormulario.password2Formato && this.miFormulario.passwordIguales)
         {
-        
           this.apiSisEvent.preregistrarUsuario(this.usuario).subscribe(
             res =>
             {
