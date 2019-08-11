@@ -170,7 +170,7 @@ export class RegistroComponent implements OnInit {
                 this.miFormulario.estado = 0;
               }, 2000);
     
-              /*
+              
               this.usuario.nombre="";
               this.usuario.apellido_paterno="";
               this.usuario.apellido_materno="";
@@ -180,7 +180,7 @@ export class RegistroComponent implements OnInit {
               this.usuario.correo="";
               this.usuario.password="";
               this.usuario.password2="";
-              */
+              
             });
         }
         else
