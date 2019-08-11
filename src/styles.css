@@ -128,6 +128,10 @@ h1
     color: var(--color-azul-primario);
 }
 
+.texto-blanco{
+    color: var(--color-blanco);
+}
+
 .btn-primario:hover
 {
     color: var(--color-blanco);
@@ -265,4 +269,9 @@ table{
   padding: 0;
   margin:0;
   margin-left: 5px;
+}
+
+.m-5
+{
+    margin: 5px;
 }

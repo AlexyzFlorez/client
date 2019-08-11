@@ -18,7 +18,7 @@ import { EditarEventoComponent } from './components/pages/editar-evento/editar-e
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/calendario',
     pathMatch: 'full'
   },
   {
