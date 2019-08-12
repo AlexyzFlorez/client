@@ -44,6 +44,28 @@ export class ApiSisEventService {
     }
   }
 
+  //ADMINISTRADOR--------------------------------------------
+  obtenerUsuarios()
+  {
+    return this.http.get(`${this.API_URI}/administrador/obtener-usuarios`);
+  }
+
+  aceptarUsuario(id:string,usuario)
+  {
+    return this.http.put(`${this.API_URI}/administrador/aceptar-usuario/${id}`,usuario);
+  }
+
+  rechazarUsuario(id:string)
+  {
+    return this.http.delete(`${this.API_URI}/administrador/rechazar-usuario/${id}`);
+  }
+
+  eliminarUsuario(id:string)
+  {
+    console.log("API")
+    return this.http.delete(`${this.API_URI}/administrador/eliminar-usuario/${id}`);
+  }
+
   //USUARIO-----------------------------------------------------
   preregistrarUsuario(formulario)
   {

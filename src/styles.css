@@ -54,8 +54,8 @@ h1
 }
 .icono
 {
-    padding-right: 7px;
-    padding-left: 7px;
+    padding-right: 3px;
+    padding-left: 3px;
 }
 .icono-azul-suave
 {
@@ -84,6 +84,12 @@ h1
 .icono-gris
 {
     color: var(--color-icono-gris);
+}
+
+.btn-icono
+{
+  border: none;
+  background: none;
 }
 
 .seccion
@@ -212,7 +218,8 @@ table{
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: white !important;
-    border: 1px solid var(--color-azul-primario);  
+    border: 1px solid var(--color-azul-primario);
+    background: var(--color-azul-primario);  
   }
   .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
     cursor: default;
@@ -274,4 +281,9 @@ table{
 .m-5
 {
     margin: 5px;
+}
+
+.width-100
+{
+    width: 100%;
 }

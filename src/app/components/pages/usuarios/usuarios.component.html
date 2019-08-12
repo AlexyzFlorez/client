@@ -5,124 +5,45 @@
     </div>
   </div>
 
-  <div class="col-sm-12">
-    <table datatable [dtOptions]="dtOptions" class="display table table-bordered" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Departamento</th>
-          <th>No empleado</th>
-          <th>Teléfono</th>
-          <th>Correo electrónico</th>
-          <th>Estado</th>
-          <th>Acciones</th>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive" *ngIf="mostrarTabla==true">
+        <table datatable [dtOptions]="dtOptions" class="table table-sm table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Departamento</th>
+              <th>No empleado</th>
+              <th>Teléfono</th>
+              <th>Correo electrónico</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Acciones</th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td>{{usuario.nombre}} {{usuario.apellido_paterno}} {{usuario.apellido_materno}}</td>
+              <td>{{usuario.nombre_departamento}}</td>
+              <td>{{usuario.num_empleado}}</td>
+              <td>{{usuario.telefono}}</td>
+              <td>{{usuario.correo}}</td>
+              <td>{{usuario.tipo}}</td>
+              <td>{{usuario.estado_registro}}</td>
+              <td class="text-center">
+                <button (click)="aceptarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-check icono-verde-suave icono-dt icono" title="Aceptar"></i></button>
+                <button (click)="rechazarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-times icono-dt icono-rojo-suave icono" title="Rechazar"></i></button>
+                <button (click)="eliminarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono" title="Eliminar"></i></button>
+              </td>
+            </tr>
 
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-        <tr>
-          <td>Cesar Alexis Fajardo Flores</td>
-          <td>Dirección</td>
-          <td>$123456</td>
-          <td>4921091542</td>
-          <td>alexyz.of@gmail.com</td>
-          <td>Pre registrado</td>
-          <td class="text-center"><i class="fas fa-check icono-verde-suave icono-dt icono"></i><i
-              class="fas fa-times icono-dt icono-rojo-suave icono"></i><i
-              class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
   </div>
+
 
 </div>

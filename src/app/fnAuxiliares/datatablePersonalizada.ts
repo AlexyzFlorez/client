@@ -5,8 +5,7 @@ class DatatablePersonalizada
     {
       let dtOptions = {
 
-        responsive: true,
-        pageLength: 5,
+        responsive: true,   
         /* below is the relevant part, e.g. translated to spanish */ 
         language: {
           processing: "Procesando...",
