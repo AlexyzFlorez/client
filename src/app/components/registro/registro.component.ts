@@ -38,7 +38,7 @@ export class RegistroComponent implements OnInit {
     this.usuario.password2="";
     this.usuario.departamento="Departamento";
 
-    this.apiSisEvent.ObtenerDepartamentos().subscribe(
+    this.apiSisEvent.obtenerDepartamentos().subscribe(
       res =>
       {
           this.departamentos=res;

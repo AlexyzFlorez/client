@@ -1,40 +1,96 @@
 <div class="page-center">
-  <div class="page-center-in">
-      <div class="container-fluid">
-          <form class="sign-box">
-              <div class="sign-avatar">
-                  <img src="assets/img/avatar-sign.png" alt="">
-              </div>
-              <header class="sign-title">Iniciar sesión</header>
-              <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Correo electrónico"/>
-                  <p class="error">Completa este campo.</p>
-                  <p class="error">Formato inválido.</p>
-                  <p class="error">El correo electrónico no existe.</p>
+    <div class="page-center-in">
+        <div class="container-fluid">
+            <form class="sign-box">
+                <div class="sign-avatar">
+                    <img src="assets/img/avatar-sign.png" alt="">
+                </div>
+                <header class="sign-title">Iniciar sesión</header>
 
-              </div>
-              <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Contraseña"/>
-                  <p class="error">Completa este campo.</p>
-                  <p class="error">Formato inválido.</p>
-              </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo electrónico"
+                        [(ngModel)]="usuario.correo" #correo="ngModel" />
+                    <p class="error" *ngIf='miFormulario.correoVacio'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.correoFormato==false && !this.miFormulario.correoVacio'>Formato
+                        inválido.</p>
+                    <p class="error" *ngIf='miFormulario.correoRegistrado==false && !this.miFormulario.correoVacio'>
+                        Correo electrónico no registrado.</p>
+                </div>
 
-              <div class="form-group">
-                  <div class="text-center reset">
-                      <a href="">¿Olvidaste tu contraseña?</a>
-                  </div>
-              </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"
+                        [(ngModel)]="usuario.password" #password="ngModel" />
+                    <p class="error" *ngIf='miFormulario.passwordVacia'>Completa este campo.</p>
+                    <p class="error" *ngIf='miFormulario.passwordFormato==false && !this.miFormulario.passwordVacia'>
+                        Formato
+                        inválido.</p>
+                    <p class="error" *ngIf='miFormulario.passwordIguales==false && !this.miFormulario.passwordVacia'>
+                        Contraseña incorrecta.</p>
+                </div>
 
-              <div class="text-center">
-                <button type="submit" class="btn btn-rounded m-5" (click)="iniciarSesion()">Iniciar sesión</button>
-              
-                 <a class="btn btn-rounded btn-secondary m-5" routerLink="/calendario">Cancelar</a>
+                <div class="form-group">
+                    <div class="text-center reset">
+                        <a href="" data-toggle="modal" data-target="#modal-recuperar-password">¿Olvidaste tu
+                            contraseña?</a>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-rounded m-5" (click)="iniciarSesion()">Iniciar sesión</button>
+                    <a class="btn btn-rounded btn-secondary m-5" routerLink="/calendario">Cancelar</a>
+                </div>
+
+                <p class="sign-note">¿No tienes una cuenta? <a routerLink="/registro">Crear cuenta</a></p>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!--.page-center-->
+
+<!-- Modal Recuperar Contraseña-->
+<div class="modal fade" id="modal-recuperar-password" tabindex="-1" role="dialog"
+    aria-labelledby="modal-recuperar-password-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-recuperar-password-label">
+                    Recuperar contraseña
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
-              
-              <p class="sign-note">¿No tienes una cuenta? <a routerLink="/registro">Crear cuenta</a></p>
+            <div class="modal-body">
+                <form #formularioRecuperarPassword="ngForm" (ngSubmit)="recuperarPassword(formularioRecuperarPassword)">
+                    <div class="form-group">
+                        <label for="correoR">Correo electrónico</label>
+                        <input type="email" class="form-control" id="correoR" name="correoR"
+                            [(ngModel)]="usuarioR.correo" #correoR="ngModel" />
+                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoVacio'>Completa este campo.
+                        </p>
+                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoFormato==false'>Formato inválido.
+                        </p>
+                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoRegistrado'>Este correo electrónico
+                            no está
+                            registrado.</p>
+                    </div>
 
-          </form>
-      </div>
-  </div>
-</div><!--.page-center-->
+                    <div class="form-group text-center">
+                        <p class="correcto" *ngIf='miFormularioRecuperarPassword.estado==1'>Contraseña enviada al correo
+                            electrónico</p>
+                        <p class="error" *ngIf='miFormularioRecuperarPassword.estado==2'>Algo ha salido mal, vuelve a
+                            intentarlo
+                        </p>
+                        <button type="submit" class="btn btn-block btn-guinda mt-2">Recuperar contraseña</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Cierre de modal recuperar password-->

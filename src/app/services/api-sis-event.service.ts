@@ -62,30 +62,28 @@ export class ApiSisEventService {
 
   eliminarUsuario(id:string)
   {
-    console.log("API")
     return this.http.delete(`${this.API_URI}/administrador/eliminar-usuario/${id}`);
   }
 
-  //USUARIO-----------------------------------------------------
+  //EDITOR-----------------------------------------------------
   preregistrarUsuario(formulario)
   {
-    return this.http.post(`${this.API_URI}/usuario/preregistrar-usuario`, formulario);
+    return this.http.post(`${this.API_URI}/editor/preregistrar-usuario`, formulario);
   }
 
   iniciarSesion(usuario: Usuario)
   {
-    return this.http.post(`${this.API_URI}/usuario/iniciar-sesion`, usuario);
+    return this.http.post(`${this.API_URI}/editor/iniciar-sesion`, usuario);
   }
 
   recuperarPassword(correo)
   {
-    return this.http.post(`${this.API_URI}/usuario/recuperar-password`, correo);
+    return this.http.post(`${this.API_URI}/editor/recuperar-password`, correo);
   }
 
-  //REGISTRO
-  ObtenerDepartamentos()
+  obtenerDepartamentos()
   {
-    return this.http.get(`${this.API_URI}/usuario/obtener-departamentos`);
+    return this.http.get(`${this.API_URI}/editor/obtener-departamentos`);
   }
 
   salir()
@@ -103,5 +101,7 @@ export class ApiSisEventService {
   
     this.router.navigate(['/login']);
   }
+
+  //USUARIO
 }
 

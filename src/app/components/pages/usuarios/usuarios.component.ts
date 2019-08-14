@@ -3,9 +3,10 @@ import { dataTablePersonalizada } from '../../../fnAuxiliares/datatablePersonali
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/models/Usuario';
+
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
-import { Usuario } from 'src/app/models/Usuario';
 const swal: SweetAlert = _swal as any;
 
 @Component({
@@ -30,14 +31,10 @@ export class UsuariosComponent implements OnInit {
   async mostrarUsuarios() {
     await this.apiSisEvent.obtenerUsuarios().subscribe(
       res => {
-        console.log("1")
         this.usuarios = res;
-        
-        console.log("2")
-        
         this.dtOptions = dataTablePersonalizada.dtOptions();
         this.mostrarTabla=true;
-        console.log("3")
+        
       },
       err => console.log("error")
     );
@@ -50,8 +47,8 @@ export class UsuariosComponent implements OnInit {
       title: "¿Estás seguro?",
       text: "Esta acción es permanente",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
-      dangerMode: true,
+      buttons: ["Cancelar", "Aceptar"],
+      dangerMode: false,
     })
       .then((aceptar) => {
         if (aceptar) {
@@ -76,9 +73,9 @@ export class UsuariosComponent implements OnInit {
   {
     swal({
       title: "¿Estás seguro?",
-      text: "Presiona aceptar para rechazar este usuario",
+      text: "Esta acción es permanente",
       icon: "warning",
-      buttons: ["Cancelar", "Eliminar"],
+      buttons: ["Cancelar", "Rechazar"],
       dangerMode: true,
     })
       .then((rechazar) => {

@@ -14,11 +14,11 @@
                 <div class="site-header-content-in">
                     <div class="site-header-shown">
 
-                            <a class="btn btn-nav btn-rounded btn-inline btn-success-outline" routerLink="/login">
+                            <a class="btn btn-nav btn-rounded btn-inline btn-success-outline" routerLink="/login" *ngIf='token==null'>
 	                            Iniciar sesión
                             </a>
 	                   
-                        <div class="dropdown user-menu">
+                        <div class="dropdown user-menu" *ngIf='tipoUsuario=="Editor" || tipoUsuario=="Administrador"'>
                                 <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <img src="assets/img/avatar-2-64.png" alt="">
@@ -29,7 +29,7 @@
                                         <span class="lbl">Perfil</span></a>
                                     <a class="dropdown-item" routerLink="/mis-eventos"><i class="far fa-calendar-check icono-gris icono"></i>
                                         <span class="lbl">Mis eventos</span></a>
-                                    <a class="dropdown-item"routerLink="/"><i class="fas fa-sign-out-alt icono-gris icono"></i>
+                                    <a class="dropdown-item"routerLink="/" (click)="apiSisEvent.salir()"><i class="fas fa-sign-out-alt icono-gris icono"></i>
                                         <span class="lbl">Salir</span></a>
                                 </div>
                             </div>

@@ -46,16 +46,13 @@
             </ul>
         </li>
 
-        <li>
+        <li *ngIf='tipoUsuario=="Editor" || tipoUsuario=="Administrador"'>
             <a routerLink="/usuarios"><span class="lbl"><i
                         class="fas fa-users icono-naranja-suave icono"></i>Usuarios</span></a>
         </li>
 
         <li>
-            <span>
-                <i class="fas fa-sign-out-alt icono-rojo-suave icono"></i>
-                <span class="lbl">Salir</span>
-            </span>
+            <a routerLink="/" (click)="apiSisEvent.salir()"><span class="lbl"><i class="fas fa-sign-out-alt icono-rojo-suave icono"></i>Salir</span></a>
         </li>
 
     </ul>

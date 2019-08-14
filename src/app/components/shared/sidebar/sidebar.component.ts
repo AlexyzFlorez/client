@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiSisEventService } from '../../../services/api-sis-event.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ipn-sidebar',
@@ -7,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  tipoUsuario:string;
+  tipoUsuario:String;
+  token:String="Ninguno";
 
-  constructor() { }
+  constructor(private router: Router, private apiSisEvent: ApiSisEventService) {
+    this.tipoUsuario=localStorage.getItem('tipo');
+    this.token=localStorage.getItem('token');
+  }
 
   ngOnInit() {
-    this.tipoUsuario="Administrador"
   }
 
 }

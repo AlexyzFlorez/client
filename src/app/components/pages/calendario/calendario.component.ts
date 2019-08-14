@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { Title } from '@angular/platform-browser';
+import { ApiSisEventService } from '../../../services/api-sis-event.service';
+import { Router } from '@angular/router';
 
 registerLocaleData(localeEs);
 @Component({
@@ -28,9 +30,14 @@ export class CalendarioComponent implements OnInit {
   eventDragStop:any;
 
   defaultConfigurations: any;
-  constructor(private titleService: Title) {
-    
-      this.titleService.setTitle('Calendario');
+  tipoUsuario:String;
+  token:String;
+
+  constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
+    this.tipoUsuario=localStorage.getItem('tipo');
+    this.token=localStorage.getItem('token');
+
+    this.titleService.setTitle('Calendario');
 
     this.eventData = [
       {
