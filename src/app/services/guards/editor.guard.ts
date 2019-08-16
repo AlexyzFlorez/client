@@ -5,15 +5,15 @@ import { ApiSisEventService } from '../api-sis-event.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioGuard implements CanActivate {
+export class EditorGuard implements CanActivate {
   
   constructor(public apiSisEvent: ApiSisEventService, public router:Router){}
 
   canActivate( )
   {
-   if(this.apiSisEvent.tipoUsuarioLogin==="Normal")
+   if(this.apiSisEvent.tipoUsuarioLogin==="Editor" || this.apiSisEvent.tipoUsuarioLogin==="Administrador")
    {
-     console.log("PASO GUARD USUARIO")
+     console.log("PASO GUARD EDITOR")
       return true;
    }
    else

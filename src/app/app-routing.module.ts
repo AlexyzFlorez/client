@@ -15,6 +15,12 @@ import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/su
 import { EventoComponent } from './components/pages/evento/evento.component';
 import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
 
+
+//GUARDS
+import { LoginGuard } from './services/guards/login.guard';
+import { EditorGuard } from './services/guards/editor.guard';
+import { AdminGuard } from './services/guards/admin.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +38,8 @@ const routes: Routes = [
       },
       {
         path: 'registrar-evento',
-        component: RegistrarEventoComponent
+        component: RegistrarEventoComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'usuarios',
@@ -40,31 +47,37 @@ const routes: Routes = [
       },
       {
         path: 'evento',
-        component: EventoComponent
+        component: EventoComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'eventos',
         component: EventosComponent
       },
       {
-        path: 'perfil',
-        component: PerfilComponent
+        path: 'perfil/:id',
+        component: PerfilComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'mis-eventos',
-        component: MisEventosComponent
+        component: MisEventosComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
         {
         path: 'editar-evento',
-        component: EditarEventoComponent
+        component: EditarEventoComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'evidencias',
-        component: EvidenciasComponent
+        component: EvidenciasComponent,
+        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'subir-evidencias',
-        component: SubirEvidenciasComponent
+        component: SubirEvidenciasComponent,
+        canActivate:[LoginGuard,EditorGuard]
       }
     ]
   },

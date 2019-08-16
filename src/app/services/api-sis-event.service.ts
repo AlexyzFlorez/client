@@ -47,22 +47,22 @@ export class ApiSisEventService {
   //ADMINISTRADOR--------------------------------------------
   obtenerUsuarios()
   {
-    return this.http.get(`${this.API_URI}/administrador/obtener-usuarios`);
+    return this.http.get(`${this.API_URI}/administrador/obtener-usuarios?token=${this.tokenLogin}`);
   }
 
   aceptarUsuario(id:string,usuario)
   {
-    return this.http.put(`${this.API_URI}/administrador/aceptar-usuario/${id}`,usuario);
+    return this.http.put(`${this.API_URI}/administrador/aceptar-usuario/${id}?token=${this.tokenLogin}`,usuario);
   }
 
   rechazarUsuario(id:string)
   {
-    return this.http.delete(`${this.API_URI}/administrador/rechazar-usuario/${id}`);
+    return this.http.delete(`${this.API_URI}/administrador/rechazar-usuario/${id}?token=${this.tokenLogin}`);
   }
 
   eliminarUsuario(id:string)
   {
-    return this.http.delete(`${this.API_URI}/administrador/eliminar-usuario/${id}`);
+    return this.http.delete(`${this.API_URI}/administrador/eliminar-usuario/${id}?token=${this.tokenLogin}`);
   }
 
   //EDITOR-----------------------------------------------------
@@ -83,7 +83,17 @@ export class ApiSisEventService {
 
   obtenerDepartamentos()
   {
-    return this.http.get(`${this.API_URI}/editor/obtener-departamentos`);
+    return this.http.get(`${this.API_URI}/editor/obtener-departamentos?token=${this.tokenLogin}`);
+  }
+
+  obtenerPerfil(id:string)
+  {
+    return this.http.get(`${this.API_URI}/editor/obtener-perfil/${id}?token=${this.tokenLogin}`);
+  }
+
+  actualizarPerfil(id:string,usuario)
+  {
+    return this.http.put(`${this.API_URI}/editor/actualizar-perfil/${id}?token=${this.tokenLogin}`, usuario);
   }
 
   salir()

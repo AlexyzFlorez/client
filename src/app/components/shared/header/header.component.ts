@@ -11,10 +11,12 @@ export class HeaderComponent implements OnInit {
 
   tipoUsuario:String;
   token:String;
+  idUsuarioLogin:string;
 
   constructor(private router: Router, private apiSisEvent: ApiSisEventService) {
     this.tipoUsuario=localStorage.getItem('tipo');
     this.token=localStorage.getItem('token');
+    this.idUsuarioLogin=localStorage.getItem('id')
   }
 
   ngOnInit() {

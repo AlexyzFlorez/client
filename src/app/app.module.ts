@@ -8,7 +8,7 @@ import { ApiSisEventService } from './services/api-sis-event.service';
 
 //GUARDS
 import { LoginGuard } from './services/guards/login.guard';
-import { UsuarioGuard } from './services/guards/usuario.guard';
+import { EditorGuard } from './services/guards/editor.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 
 //COMPONENTES
@@ -63,7 +63,7 @@ import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/su
     ApiSisEventService,
     LoginGuard,
     AdminGuard,
-    UsuarioGuard
+    EditorGuard
   ],
   bootstrap: [AppComponent]
 })
