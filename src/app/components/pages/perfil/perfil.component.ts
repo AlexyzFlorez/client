@@ -112,6 +112,7 @@ export class PerfilComponent implements OnInit {
         //Validamos formatos
         if(this.miFormulario.nombreFormato && this.miFormulario.apellidoPaternoFormato && this.miFormulario.apellidoMaternoFormato && this.miFormulario.telefonoFormato && this.miFormulario.correoFormato && this.miFormulario.passwordFormato && this.miFormulario.password2Formato && this.miFormulario.passwordIguales)
         {
+          console.log(this.usuario)
           this.apiSisEvent.actualizarPerfil(params.id,this.usuario).subscribe(
             res =>
             {
@@ -147,6 +148,8 @@ export class PerfilComponent implements OnInit {
                 usuarioActualizado.tipo=localStorage.getItem('tipo')
 
                 localStorage.setItem('usuario',JSON.stringify(usuarioActualizado));
+                this.usuario.password="";
+                this.usuario.password2="";
     
               }
               else if(this.respuesta.errores.includes('Consultas'))
@@ -166,23 +169,10 @@ export class PerfilComponent implements OnInit {
               setTimeout(() => {
                 this.miFormulario.estado = 0;
               }, 2000);
-    
-              
-              this.usuario.nombre="";
-              this.usuario.apellido_paterno="";
-              this.usuario.apellido_materno="";
-              this.usuario.telefono="";
-              this.usuario.departamento="";
-              this.usuario.num_empleado="";
-              this.usuario.correo="";
-              this.usuario.password="";
-              this.usuario.password2="";
-              
             });
         }
         else
         {
-          console.log("Formatos")
           console.log("Campos Invalidos");
         }
       }

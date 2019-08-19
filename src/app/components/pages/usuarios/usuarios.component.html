@@ -16,7 +16,6 @@
               <th>No empleado</th>
               <th>Teléfono</th>
               <th>Correo electrónico</th>
-              <th>Tipo</th>
               <th>Estado</th>
               <th>Acciones</th>
 
@@ -29,7 +28,6 @@
               <td>{{usuario.num_empleado}}</td>
               <td>{{usuario.telefono}}</td>
               <td>{{usuario.correo}}</td>
-              <td>{{usuario.tipo}}</td>
               <td>{{usuario.estado_registro}}</td>
               <td class="text-center">
                 <button *ngIf='usuario.estado_registro!="Registrado"' (click)="aceptarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-check icono-verde-suave icono-dt icono" title="Aceptar"></i></button>

@@ -11,7 +11,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate( )
   {
-   if(this.apiSisEvent.tipoUsuarioLogin==="Administrador")
+   if(this.apiSisEvent.tipoUsuarioLogin==="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom")
    {
      console.log("PASO GUARD ADMINISTRADOR")
       return true;

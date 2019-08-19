@@ -43,7 +43,8 @@ const routes: Routes = [
       },
       {
         path: 'usuarios',
-        component: UsuariosComponent
+        component: UsuariosComponent,
+        canActivate:[LoginGuard,AdminGuard]
       },
       {
         path: 'evento',

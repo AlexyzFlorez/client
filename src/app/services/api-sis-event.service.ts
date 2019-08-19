@@ -98,7 +98,6 @@ export class ApiSisEventService {
 
   salir()
   {
- 
     this.idUsuarioLogin="";
     this.tipoUsuarioLogin="";
     this.tokenLogin="";
