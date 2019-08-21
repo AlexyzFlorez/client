@@ -134,6 +134,11 @@ export class PerfilComponent implements OnInit {
                   this.miFormulario.numEmpleadoRegistrado = undefined;
                   }, 2000);
               }
+
+              if(this.respuesta.errores.includes('No existe'))
+              {
+                this.router.navigate(['/login']);
+              }
          
               if(this.respuesta.errores.includes('Ninguno'))
               {
