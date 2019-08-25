@@ -29,6 +29,7 @@ import { EventoComponent } from './components/pages/evento/evento.component';
 import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
 import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
 import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
+import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/su
     EventoComponent,
     EditarEventoComponent,
     EvidenciasComponent,
-    SubirEvidenciasComponent
+    SubirEvidenciasComponent,
+    RestablecerPasswordComponent
   ],
   imports: [
     BrowserModule,

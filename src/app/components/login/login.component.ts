@@ -5,6 +5,10 @@ import { Formulario } from 'src/app/models/Formulario';
 import { ApiSisEventService } from '../../services/api-sis-event.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
+
 
 @Component({
   selector: 'ipn-login',
@@ -137,6 +141,11 @@ export class LoginComponent implements OnInit {
 
             correo = "";
             formulario.resetForm();
+
+            swal({
+              icon: "success",
+              text:"Instrucciones enviadas al correo electrónico"
+            });
           }
         },
         err => console.log("error")

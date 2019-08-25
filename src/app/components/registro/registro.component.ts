@@ -4,6 +4,9 @@ import { Usuario } from 'src/app/models/Usuario';
 import { Formulario } from 'src/app/models/Formulario';
 import { Router } from '@angular/router';
 import { ApiSisEventService } from 'src/app/services/api-sis-event.service';
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
 
 @Component({
   selector: 'ipn-registro',
@@ -148,6 +151,11 @@ export class RegistroComponent implements OnInit {
                 this.usuario.correo="";
                 this.usuario.password="";
                 this.usuario.password2="";
+
+                swal({
+                  icon: "success",
+                  text:"Pre registro exitoso"
+                });
   
                 this.router.navigate(['/login']);
     

@@ -4,6 +4,9 @@ import { Usuario } from 'src/app/models/Usuario';
 import { Formulario } from 'src/app/models/Formulario';
 import { ApiSisEventService } from 'src/app/services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
 
 @Component({
   selector: 'ipn-perfil',
@@ -155,6 +158,11 @@ export class PerfilComponent implements OnInit {
                 localStorage.setItem('usuario',JSON.stringify(usuarioActualizado));
                 this.usuario.password="";
                 this.usuario.password2="";
+
+                swal({
+                  icon: "success",
+                  text:"Perfil actualizado correctamente"
+                });
     
               }
               else if(this.respuesta.errores.includes('Consultas'))

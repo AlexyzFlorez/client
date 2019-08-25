@@ -81,6 +81,19 @@ export class ApiSisEventService {
     return this.http.post(`${this.API_URI}/editor/recuperar-password`, correo);
   }
 
+  restablecerPassword(codigo:string, usuario)
+  {
+    console.log("savbhkjn")
+    console.log(usuario)
+    return this.http.put(`${this.API_URI}/editor/restablecer-password/${codigo}`,usuario);
+  }
+
+
+  validarCodigoPassword(codigo)
+  {
+    return this.http.get(`${this.API_URI}/editor/validar-codigo-password/${codigo}`);
+  }
+
   obtenerDepartamentos()
   {
     return this.http.get(`${this.API_URI}/editor/obtener-departamentos?token=${this.tokenLogin}`);

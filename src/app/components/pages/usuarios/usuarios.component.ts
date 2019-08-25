@@ -108,7 +108,7 @@ export class UsuariosComponent implements OnInit {
 
           this.apiSisEvent.eliminarUsuario(id).subscribe(
             res => {
-              swal("Eliminado correctamente.", {
+              swal("Usuario Eliminado correctamente.", {
                 icon: "success",
               });
               this.mostrarUsuarios();
