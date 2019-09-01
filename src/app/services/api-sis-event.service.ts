@@ -83,11 +83,8 @@ export class ApiSisEventService {
 
   restablecerPassword(codigo:string, usuario)
   {
-    console.log("savbhkjn")
-    console.log(usuario)
     return this.http.put(`${this.API_URI}/editor/restablecer-password/${codigo}`,usuario);
   }
-
 
   validarCodigoPassword(codigo)
   {
@@ -97,6 +94,21 @@ export class ApiSisEventService {
   obtenerDepartamentos()
   {
     return this.http.get(`${this.API_URI}/editor/obtener-departamentos?token=${this.tokenLogin}`);
+  }
+
+  obtenerActividades()
+  {
+    return this.http.get(`${this.API_URI}/editor/obtener-actividades?token=${this.tokenLogin}`);
+  }
+
+  obtenerCategorias()
+  {
+    return this.http.get(`${this.API_URI}/editor/obtener-categorias?token=${this.tokenLogin}`);
+  }
+
+  registrarEvento(evento: any)
+  {
+    return this.http.post(`${this.API_URI}/editor/registrar-evento?token=${this.tokenLogin}`, evento);
   }
 
   obtenerPerfil(id:string)

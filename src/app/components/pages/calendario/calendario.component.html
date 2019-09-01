@@ -1,123 +1,199 @@
 <div class="row box-typical seccion">
 
-    <div class="row">
-      <div class="col-md-10">
-        <h3 class="">Calendario de eventos</h3>
-      </div>
-      <div class="col-md-2" *ngIf='tipoUsuario=="Editor" || tipoUsuario=="Administrador"'>
-        <button type="button" class="btn texto-blanco btn-rounded btn-primario btn-block" data-toggle="modal"
-          data-target="#registroEvento">Nuevo evento</button>
-      </div>
+  <div class="row">
+    <div class="col-md-10">
+      <h3 class="">Calendario de eventos</h3>
     </div>
-  
-    <div class="col-12 " id="full-calendar"></div>
+    <div class="col-md-2"
+      *ngIf='tipoUsuario=="$2a$10$m3XP./02B3jWnBX1YV.Ua.vWD2LXw/oC81eAjnPaJrqV0ImnD3SxW" || tipoUsuario=="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom"'>
+      <button type="button" class="btn texto-blanco btn-rounded btn-primario btn-block" data-toggle="modal"
+        data-target="#registroEvento">Nuevo evento</button>
+    </div>
   </div>
-  
-  <!--Modal de registro-->
-  <div class="modal fade" id="registroEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        
-        <div class="modal-header">
-          <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-            <i class="font-icon-close-2"></i>
-          </button>
-          <h4 class="modal-title text-center" id="myModalLabel">Nuevo evento</h4>
+
+  <div class="col-12 " id="full-calendar"></div>
+</div>
+
+<!--Modal de registro-->
+<div class="modal fade" id="registroEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+          <i class="font-icon-close-2"></i>
+        </button>
+        <h4 class="modal-title text-center" id="myModalLabel">Nuevo evento</h4>
+      </div>
+
+      <div class="modal-body">
+
+        <!--Nombre-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="evento.nombre"
+              #nombre="ngModel" name="nombre" />
+            <p class="error" *ngIf='miFormularioEvento.nombreVacio'>Completa este campo.</p>
+            <p class="error" *ngIf='miFormularioEvento.nombreFormato==false && !this.miFormularioEvento.nombreVacio'>
+              Formato
+              inválido.</p>
+          </div>
         </div>
 
-        <div class="modal-body">
-  
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <label class="form-label semibold" for="exampleInput">Nombre</label>
-              <input type="text" class="form-control" id="inputPassword">
-            </div>
+        <!--Departamento-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="departamento">Departamento</label>
+            <select class="form-control" id="departamento" name="departamento" [(ngModel)]="evento.departamento"
+              #departamento="ngModel">
+              <option *ngFor="let departamento of departamentos" [value]="departamento.nombre">
+                {{departamento.nombre}}
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.departamentoVacio'>Selecciona un departamento.</p>
           </div>
-  
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <label class="form-label semibold" for="exampleInput">Departamento</label>
-              <select id="exampleSelect" class="form-control">
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
-            </div>
-          </div>
-  
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <label class="form-label semibold" for="exampleInput">Costo (Cero si no aplica)</label>
-              <input type="text" class="form-control" id="inputPassword">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-lg-6">
-              <fieldset class="form-group">
-                <label class="form-label semibold" for="exampleInput">Tipo de actividad</label>
-                <select id="exampleSelect" class="form-control">
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </fieldset>
-            </div>
-            <div class="col-lg-6">
-              <fieldset class="form-group">
-                <label class="form-label semibold" for="exampleInputEmail1">Categoría</label>
-                <select id="exampleSelect" class="form-control">
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                </select>
-              </fieldset>
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-lg-6">
-              <fieldset class="form-group">
-                <label class="form-label semibold" for="exampleInput">Fecha de inicio</label>
-                <input type="date" class="form-control" id="exampleInput">
-              </fieldset>
-            </div>
-            <div class="col-lg-6">
-              <fieldset class="form-group">
-                <label class="form-label semibold" for="exampleInputEmail1">Fecha de termino</label>
-                <input type="date" class="form-control" id="exampleInputEmail1">
-              </fieldset>
-            </div>
-  
-          </div>
-          <!--.row-->
-  
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <label class="form-label semibold" for="exampleInputEmail1">Descripción</label>
-              <textarea rows="4" class="form-control"></textarea>
-            </div>
-          </div>
-  
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <span class="btn btn-rounded btn-file">
-                <span>Selecciona portada</span>
-                <input type="file" id="input-custom-file" name="Archivo"
-                        (change)=onFileChange($event)>
-              </span>
-              <span class="margen-izquierdo">Ningún archivo seleccionado</span>
-            </div>
-          </div>
-  
         </div>
-  
-        <div class="modal-footer">
-          <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-rounded btn-success">Registrar</button>
+
+        <!--Costo-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="costo">Costo (0 si no aplica)</label>
+            <input type="text" class="form-control" id="costo" name="costo" [(ngModel)]="evento.costo" #costo="ngModel"
+              name="costo" />
+            <p class="error" *ngIf='miFormularioEvento.costoVacio'>Completa este campo.</p>
+            <p class="error" *ngIf='miFormularioEvento.costoFormato==false && !this.miFormularioEvento.costoVacio'>
+              Formato
+              inválido.</p>
+          </div>
         </div>
+
+        <!--Tipo de actividad-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="tipoActividad">Tipo de actividad</label>
+            <select class="form-control" id="tipoActividad" name="tipoActividad" [(ngModel)]="evento.tipoActividad"
+              #tipoActividad="ngModel">
+              <option *ngFor="let actividad of actividades" [value]="actividad.nombre">
+                {{actividad.nombre}}
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.tipoActividadVacio'>Selecciona un tipo de actividad.</p>
+          </div>
+        </div>
+
+        <!--Nombre actividad-->
+        <div class="form-group row" *ngIf="evento.tipoActividad=='Otro'">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="nombreActividad">Nombre de actividad</label>
+            <input type="text" class="form-control" id="nombreActividad" name="nombreActividad"
+              [(ngModel)]="evento.nombreActividad" #nombreActividad="ngModel" name="nombreActividad" />
+            <p class="error" *ngIf='miFormularioEvento.nombreActividadVacio'>Completa este campo.</p>
+            <p class="error"
+              *ngIf='miFormularioEvento.nombreActividadFormato==false && !this.miFormularioEvento.nombreActividadVacio'>
+              Formato
+              inválido.</p>
+          </div>
+        </div>
+
+        <!--Categoria-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="categoria">Categoría</label>
+            <select class="form-control" id="categoria" name="categoria" [(ngModel)]="evento.categoria"
+              #categoria="ngModel">
+              <option *ngFor="let categoria of categorias" [value]="categoria.nombre">
+                {{categoria.nombre}}
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.categoriaVacia'>Selecciona una categoría.</p>
+          </div>
+        </div>
+
+        <!--Fecha inicio-->
+        <div class="row">
+          <div class="col-lg-6">
+            <fieldset class="form-group">
+              <label class="form-label semibold" for="fechaInicio">Fecha de inicio</label>
+              <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                [(ngModel)]="evento.fechaInicio" #fechaInicio="ngModel" />
+              <p class="error" *ngIf='miFormularioEvento.fechaInicioVacia'>Completa este campo.</p>
+              <p class="error"
+                *ngIf='miFormularioEvento.fechaInicioValida==false && !miFormularioEvento.fechaInicioVacia'>Selecciona
+                una fecha válida.</p>
+            </fieldset>
+          </div>
+          <div class="col-lg-6">
+            <fieldset class="form-group">
+              <label class="form-label semibold" for="horaInicio">Hora</label>
+              <input type="time" class="form-control" id="horaInicio" name="horaInicio" [(ngModel)]="evento.horaInicio"
+                #horaInicio="ngModel" />
+              <p class="error" *ngIf='miFormularioEvento.horaInicioVacia'>Completa este campo.</p>
+            </fieldset>
+          </div>
+
+        </div>
+
+        <!--Fecha de termino-->
+        <div class="row">
+          <div class="col-lg-6">
+            <fieldset class="form-group">
+              <label class="form-label semibold" for="fechaTermino">Fecha de término</label>
+              <input type="date" class="form-control" id="fechaTermino" name="fechaTermino"
+                [(ngModel)]="evento.fechaTermino" #fechaTermino="ngModel" />
+              <p class="error" *ngIf='miFormularioEvento.fechaTerminoVacia'>Completa este campo.</p>
+              <p class="error"
+              *ngIf='miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia'>Selecciona
+              una fecha válida.</p>
+            </fieldset>
+          </div>
+          <div class="col-lg-6">
+            <fieldset class="form-group">
+              <label class="form-label semibold" for="exampleInputEmail1">Hora</label>
+              <input type="time" class="form-control" id="horaTermino" name="horaTermino"
+                [(ngModel)]="evento.horaTermino" #horaTermino="ngModel" />
+              <p class="error" *ngIf='miFormularioEvento.horaTerminoVacia'>Completa este campo.</p>
+            </fieldset>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="descripcion">Descripción</label>
+            <textarea rows="4" class="form-control" id="descripcion" [(ngModel)]="evento.descripcion"
+              #descripcion="ngModel" name="descripcion"> </textarea>
+            <p class="error" *ngIf='miFormularioEvento.descripcionVacia'>Completa este campo.</p>
+            <p class="error"
+              *ngIf='miFormularioEvento.descripcionFormato==false && !this.miFormularioEvento.descripcionVacia'>
+              Formato
+              inválido.</p>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <span class="btn btn-rounded btn-file">
+              <span>Selecciona portada</span>
+              <form enctype="multipart/form-data">
+                <input type="file" class="custom-file-input" id="input-custom-file" name="Archivo"
+                  (change)=onFileChange($event)>
+              </form>
+            </span>
+
+            <span for="" class="margen-izquierdo"><small class="texto-verde"
+                *ngIf='miFormularioEvento.archivoCargado'>Cargado</small></span>
+            <p class="error" *ngIf='miFormularioEvento.archivoFormato==false'>Selecciona un archivo válido.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-rounded btn-success" id="btn-registrar-evento" (click)="registrarEvento()">Registrar</button>
       </div>
     </div>
   </div>
-  <!--.modal-->
+</div>
+<!--.modal-->

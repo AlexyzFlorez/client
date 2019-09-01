@@ -15,11 +15,6 @@ export class Formulario {
     public password2Vacia: boolean;
     public passwordIguales:boolean;
 
-    //Validaciones de campos vacios de evento
-    public fechaVacia?:boolean;
-    public lugarVacio?:boolean;
-    public horaVacia?:boolean;
-  
     //Validacion de Formatos de usuario
     public nombreFormato: boolean;
     public apellidoPaternoFormato: boolean;
@@ -31,11 +26,6 @@ export class Formulario {
     public password2Formato: boolean;
     public archivoFormato:boolean;
 
-    //Validacion de Formatos de evento
-    public fechaValida?:boolean;
-    public lugarFormato?:boolean;
-    
-    public archivoCargado: boolean;
     public correoRegistrado: boolean;
     public usuarioRegistrado: boolean;
   

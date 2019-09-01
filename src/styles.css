@@ -109,6 +109,11 @@ h1
     color: var(--color-blanco);
 }
 
+.texto-verde
+{
+    color: var(--color-verde-suave);
+}
+
 .texto-gris
 {
     color: var(--color-gris);
