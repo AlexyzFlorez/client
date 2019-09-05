@@ -9,6 +9,9 @@ import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { Router } from '@angular/router';
 import { FormularioEvento } from 'src/app/models/FormularioEvento';
 import { Evento } from 'src/app/models/Evento';
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
 
 registerLocaleData(localeEs);
 @Component({
@@ -18,7 +21,6 @@ registerLocaleData(localeEs);
 })
 
 export class CalendarioComponent implements OnInit {
-
 
   @Input()
   set configurations(config: any) {
@@ -40,6 +42,8 @@ export class CalendarioComponent implements OnInit {
   departamentos: any;
   actividades: any;
   categorias: any;
+  ponentesArray: any;
+  poblaciones: any;
   portada: File;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
@@ -137,6 +141,20 @@ export class CalendarioComponent implements OnInit {
       },
       err => console.log("error")
     );
+
+    this.apiSisEvent.obtenerPonentes().subscribe(
+      res => {
+        this.ponentesArray = res;
+      },
+      err => console.log("error")
+    );
+
+    this.apiSisEvent.obtenerPoblacion().subscribe(
+      res => {
+        this.poblaciones = res;
+      },
+      err => console.log("error")
+    );
   }
 
   onFileChange(e) {
@@ -148,8 +166,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   registrarEvento() {
-    let btnRegistrarEvento = document.getElementById("btn-registrar-evento")
-    //Cerrar modal btnRegistrarEvento.setAttribute("data-dismiss", "modal");
+    let btnRegistrarEvento = document.getElementById("btn-registrar-evento");
 
     let nombre = this.evento.nombre;
     let departamento = this.evento.departamento;
@@ -157,11 +174,14 @@ export class CalendarioComponent implements OnInit {
     let tipoActividad = this.evento.tipoActividad;
     let nombreActividad = this.evento.nombreActividad;
     let categoria = this.evento.categoria;
+    let ponentes = this.evento.ponentes;
+    let poblacion = this.evento.poblacion;
     let fechaInicio = this.evento.fechaInicio;
     let fechaTermino = this.evento.fechaTermino;
     let horaInicio = this.evento.horaInicio;
     let horaTermino = this.evento.horaTermino;
     let descripcion = this.evento.descripcion;
+    
 
     //VALIDACIONES DE FORMULARIO
 
@@ -187,11 +207,20 @@ export class CalendarioComponent implements OnInit {
     //Categoria
     this.miFormularioEvento.categoriaVacia = this.miFormularioEvento.validarCampoVacio(categoria);
 
+     //Ponentes
+     this.miFormularioEvento.ponentesVacios = this.miFormularioEvento.validarCampoVacio(ponentes);
+
+      //poblacion
+    this.miFormularioEvento.poblacionVacia = this.miFormularioEvento.validarCampoVacio(poblacion);
+
     //Fecha inicio
     this.miFormularioEvento.fechaInicioValida = this.miFormularioEvento.validarFecha(new Date(), new Date(`${fechaInicio}`));
 
     //Fecha termino
     this.miFormularioEvento.fechaTerminoValida = this.miFormularioEvento.validarFecha(new Date(), new Date(`${fechaTermino}`));
+
+    //Fecha termino mayor  amenor
+    this.miFormularioEvento.fechasValidas = this.miFormularioEvento.validarFechas(new Date(`${fechaInicio}`), new Date(`${fechaTermino}`));
 
     //Hora inicio
     this.miFormularioEvento.horaInicioVacia = this.miFormularioEvento.validarCampoVacio(horaInicio);
@@ -209,15 +238,14 @@ export class CalendarioComponent implements OnInit {
     }
 
     //Validamos los estados de campos,primero campos vacios
-    if (!this.miFormularioEvento.nombreVacio && !this.miFormularioEvento.departamentoVacio && !this.miFormularioEvento.costoVacio && !this.miFormularioEvento.tipoActividadVacio && !this.miFormularioEvento.categoriaVacia && !this.miFormularioEvento.horaInicioVacia && !this.miFormularioEvento.horaTerminoVacia && !this.miFormularioEvento.descripcionVacia) {
-    console.log('1')
+    if (!this.miFormularioEvento.nombreVacio && !this.miFormularioEvento.departamentoVacio && !this.miFormularioEvento.costoVacio && !this.miFormularioEvento.tipoActividadVacio && !this.miFormularioEvento.categoriaVacia && !this.miFormularioEvento.ponentesVacios && !this.miFormularioEvento.poblacionVacia && !this.miFormularioEvento.horaInicioVacia && !this.miFormularioEvento.horaTerminoVacia && !this.miFormularioEvento.descripcionVacia) {
+
       if ((tipoActividad == "Otro" && !this.miFormularioEvento.nombreActividadVacio) || ((tipoActividad != "Otro"))) {
         //Validamos formatos
-        console.log('2')
-        if (this.miFormularioEvento.costoFormato && this.miFormularioEvento.fechaInicioValida && this.miFormularioEvento.fechaTerminoValida && this.miFormularioEvento.archivoFormato && this.miFormularioEvento.archivoCargado) {
-          console.log('3')
+        if (this.miFormularioEvento.costoFormato && this.miFormularioEvento.fechaInicioValida && this.miFormularioEvento.fechaTerminoValida && this.miFormularioEvento.fechasValidas  && this.miFormularioEvento.archivoFormato && this.miFormularioEvento.archivoCargado) {
+
           if ((tipoActividad == "Otro" && this.miFormularioEvento.nombreActividadFormato) || ((tipoActividad != "Otro"))) {
-            console.log('4')
+
             validacionFormulario = true;
           }
           else {
@@ -231,7 +259,7 @@ export class CalendarioComponent implements OnInit {
       }
       else {
         console.log("Campos vacios")
-        validacionFormulario =false;
+        validacionFormulario = false;
       }
     }
     else {
@@ -243,6 +271,7 @@ export class CalendarioComponent implements OnInit {
       console.log("Campos Validos");
       let formData = new FormData();
 
+      formData.append('id_usuario', localStorage.getItem('id'));
       formData.append('nombre', this.evento.nombre);
       formData.append('departamento', this.evento.departamento);
       formData.append('costo', this.evento.costo);
@@ -256,18 +285,40 @@ export class CalendarioComponent implements OnInit {
       formData.append('descripcion', this.evento.descripcion);
 
       formData.append('archivo', this.portada, this.portada.name);
-      console.log(formData)
-      console.log("Listo para enviar")
 
       this.apiSisEvent.registrarEvento(formData).subscribe(
         res => {
           this.respuesta = res;
 
           if (this.respuesta.errores.includes('Ninguno')) {
+
+            btnRegistrarEvento.setAttribute("data-dismiss", "modal");
+            btnRegistrarEvento.click();
+            btnRegistrarEvento.removeAttribute("data-dismiss");
+
             this.miFormularioEvento.estado = 1;
             setTimeout(() => {
               this.miFormularioEvento.estado = 0;
             }, 1000);
+
+            swal({
+              icon: "success",
+              text: "Evento registrado correctamente"
+            });
+
+            this.evento.nombre="";
+            this.evento.departamento="";
+            this.evento.costo="";
+            this.evento.tipoActividad="";
+            this.evento.nombreActividad="";
+            this.evento.ponentes="";
+            this.evento.poblacion="";
+            this.evento.categoria="";
+            this.evento.fechaInicio=undefined;
+            this.evento.fechaTermino=undefined;
+            this.evento.horaInicio="";
+            this.evento.horaTermino="";
+            this.evento.descripcion="";
 
             this.miFormularioEvento.archivoCargado = false;
             this.miFormularioEvento.archivoFormato = undefined;
@@ -278,6 +329,11 @@ export class CalendarioComponent implements OnInit {
             setTimeout(() => {
               this.miFormularioEvento.estado = 0;
             }, 2000);
+
+            swal({
+              icon: "error",
+              text: "Error, vuelve a intentarlo"
+            });
           }
         },
         err => {
@@ -287,6 +343,11 @@ export class CalendarioComponent implements OnInit {
           setTimeout(() => {
             this.miFormularioEvento.estado = 0;
           }, 2000);
+
+          swal({
+            icon: "error",
+            text: "Error, vuelve a intentarlo"
+          });
         });
     }
     else {

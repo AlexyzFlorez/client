@@ -172,6 +172,11 @@ export class PerfilComponent implements OnInit {
                 setTimeout(() => {
                 this.miFormulario.estado = 0;
                 }, 2000);
+
+                swal({
+                  icon: "error",
+                  text: "Error, vuelve a intentarlo"
+                });
               }
             },
             err=>
@@ -182,6 +187,11 @@ export class PerfilComponent implements OnInit {
               setTimeout(() => {
                 this.miFormulario.estado = 0;
               }, 2000);
+
+              swal({
+                icon: "error",
+                text: "Error, vuelve a intentarlo"
+              });
             });
         }
         else

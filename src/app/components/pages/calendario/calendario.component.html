@@ -111,6 +111,34 @@
           </div>
         </div>
 
+          <!--Ponentes-->
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label class="form-label semibold" for="ponentes">Ponentes</label>
+              <select class="form-control" id="ponentes" name="ponentes" [(ngModel)]="evento.ponentes"
+                #ponentes="ngModel">
+                <option *ngFor="let ponente of ponentesArray" [value]="ponente.tipo">
+                  {{ponente.tipo}}
+                </option>
+              </select>
+              <p class="error" *ngIf='miFormularioEvento.ponentesVacios'>Selecciona los ponentes.</p>
+            </div>
+          </div>
+
+            <!--Poblacion-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="poblacion">Poblacion</label>
+            <select class="form-control" id="poblacion" name="poblacion" [(ngModel)]="evento.poblacion"
+              #poblacion="ngModel">
+              <option *ngFor="let poblacion of poblaciones" [value]="poblacion.tipo">
+                {{poblacion.tipo}}
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.poblacionVacia'>Selecciona una población.</p>
+          </div>
+        </div>
+
         <!--Fecha inicio-->
         <div class="row">
           <div class="col-lg-6">
@@ -144,8 +172,9 @@
                 [(ngModel)]="evento.fechaTermino" #fechaTermino="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.fechaTerminoVacia'>Completa este campo.</p>
               <p class="error"
-              *ngIf='miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia'>Selecciona
+              *ngIf='(miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia) || (miFormularioEvento.fechasValidas==false && !miFormularioEvento.fechaTerminoVacia)'>Selecciona
               una fecha válida.</p>
+              
             </fieldset>
           </div>
           <div class="col-lg-6">

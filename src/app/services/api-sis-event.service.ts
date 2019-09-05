@@ -106,6 +106,16 @@ export class ApiSisEventService {
     return this.http.get(`${this.API_URI}/editor/obtener-categorias?token=${this.tokenLogin}`);
   }
 
+  obtenerPonentes()
+  {
+    return this.http.get(`${this.API_URI}/editor/obtener-ponentes?token=${this.tokenLogin}`);
+  }
+
+  obtenerPoblacion()
+  {
+    return this.http.get(`${this.API_URI}/editor/obtener-poblacion?token=${this.tokenLogin}`);
+  }
+
   registrarEvento(evento: any)
   {
     return this.http.post(`${this.API_URI}/editor/registrar-evento?token=${this.tokenLogin}`, evento);

@@ -167,6 +167,11 @@ export class RegistroComponent implements OnInit {
                 setTimeout(() => {
                 this.miFormulario.estado = 0;
                 }, 2000);
+
+                swal({
+                  icon: "error",
+                  text: "Error, vuelve a intentarlo"
+                });
               }
             },
             err=>
@@ -177,18 +182,12 @@ export class RegistroComponent implements OnInit {
               setTimeout(() => {
                 this.miFormulario.estado = 0;
               }, 2000);
-    
-              
-              this.usuario.nombre="";
-              this.usuario.apellido_paterno="";
-              this.usuario.apellido_materno="";
-              this.usuario.telefono="";
-              this.usuario.departamento="";
-              this.usuario.num_empleado="";
-              this.usuario.correo="";
-              this.usuario.password="";
-              this.usuario.password2="";
-              
+
+              swal({
+                icon: "error",
+                text: "Error, vuelve a intentarlo"
+              });
+            
             });
         }
         else

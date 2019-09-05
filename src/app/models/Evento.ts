@@ -12,6 +12,8 @@ export class Evento {
     public horaInicio?: string;
     public horaTermino?: string;
     public descripcion?: string;
+    public ponentes?: string;
+    public poblacion?: string;
 
     constructor() {
   
