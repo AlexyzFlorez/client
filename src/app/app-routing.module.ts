@@ -37,19 +37,20 @@ const routes: Routes = [
         component: CalendarioComponent
       },
       {
+        path: 'eventos/:tipo',
+        component: EventosComponent
+      },
+      {
         path: 'usuarios',
         component: UsuariosComponent,
         canActivate:[LoginGuard,AdminGuard]
       },
       {
-        path: 'evento',
+        path: 'evento/:id',
         component: EventoComponent,
         canActivate:[LoginGuard,EditorGuard]
       },
-      {
-        path: 'eventos',
-        component: EventosComponent
-      },
+    
       {
         path: 'perfil/:id',
         component: PerfilComponent,

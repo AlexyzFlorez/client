@@ -148,6 +148,15 @@ h1
     color: var(--color-blanco);
 }
 
+.margin-left-25
+{
+    margin-left:25px;
+}
+
+.side-menu::-webkit-scrollbar
+{
+    display: none;
+}
 
 .dataTables_filter input
 {

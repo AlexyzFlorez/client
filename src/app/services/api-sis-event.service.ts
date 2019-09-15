@@ -129,5 +129,8 @@ export class ApiSisEventService {
   }
 
   //USUARIO
+  obtenerNumeroEventos() {
+    return this.http.get(`${this.API_URI}/usuario/obtener-numero-eventos`);
+  }
 }
 

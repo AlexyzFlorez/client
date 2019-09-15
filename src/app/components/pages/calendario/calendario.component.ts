@@ -47,6 +47,7 @@ export class CalendarioComponent implements OnInit {
   portada: File;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
+    
     this.tipoUsuario = localStorage.getItem('tipo');
     this.token = localStorage.getItem('token');
 
@@ -115,6 +116,7 @@ export class CalendarioComponent implements OnInit {
     };
   }
   ngOnInit() {
+
     $('#full-calendar').fullCalendar(
       this.defaultConfigurations
     );
@@ -321,6 +323,10 @@ export class CalendarioComponent implements OnInit {
 
             this.miFormularioEvento.archivoCargado = false;
             this.miFormularioEvento.archivoFormato = undefined;
+
+            
+            this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
+
           }
           else if (this.respuesta.errores.includes('Actividad existente')) {
             this.miFormularioEvento.estado = 2;
