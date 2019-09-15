@@ -5,7 +5,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { PagesComponent } from './components/pages/pages.component';
 import { CalendarioComponent } from './components/pages/calendario/calendario.component';
-import { RegistrarEventoComponent } from './components/pages/registrar-evento/registrar-evento.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { EventosComponent } from './components/pages/eventos/eventos.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
@@ -36,11 +35,6 @@ const routes: Routes = [
       {
         path: 'calendario',
         component: CalendarioComponent
-      },
-      {
-        path: 'registrar-evento',
-        component: RegistrarEventoComponent,
-        canActivate:[LoginGuard,EditorGuard]
       },
       {
         path: 'usuarios',

@@ -20,7 +20,6 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { HeaderComponent } from './components/shared/header/header.component';
 import { PagesComponent } from './components/pages/pages.component';
 import { CalendarioComponent } from './components/pages/calendario/calendario.component';
-import { RegistrarEventoComponent } from './components/pages/registrar-evento/registrar-evento.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { EventosComponent } from './components/pages/eventos/eventos.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
@@ -41,7 +40,6 @@ import { RestablecerPasswordComponent } from './components/restablecer-password/
     HeaderComponent,
     PagesComponent,
     CalendarioComponent,
-    RegistrarEventoComponent,
     UsuariosComponent,
     EventosComponent,
     PerfilComponent,

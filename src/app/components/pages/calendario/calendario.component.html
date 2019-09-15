@@ -78,13 +78,16 @@
               <option *ngFor="let actividad of actividades" [value]="actividad.nombre">
                 {{actividad.nombre}}
               </option>
+              <option value="Otra">
+                Otra
+              </option>
             </select>
             <p class="error" *ngIf='miFormularioEvento.tipoActividadVacio'>Selecciona un tipo de actividad.</p>
           </div>
         </div>
 
         <!--Nombre actividad-->
-        <div class="form-group row" *ngIf="evento.tipoActividad=='Otro'">
+        <div class="form-group row" *ngIf="evento.tipoActividad=='Otra'">
           <div class="col-sm-12">
             <label class="form-label semibold" for="nombreActividad">Nombre de actividad</label>
             <input type="text" class="form-control" id="nombreActividad" name="nombreActividad"
@@ -219,8 +222,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-rounded btn-success" id="btn-registrar-evento" (click)="registrarEvento()">Registrar</button>
+        <button type="button" class="btn btn-rounded btn-default" id="btn-cerrar-modal" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-rounded btn-success" (click)="registrarEvento()">Registrar</button>
       </div>
     </div>
   </div>

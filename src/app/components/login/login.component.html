@@ -71,18 +71,11 @@
                             [(ngModel)]="usuarioR.correo" #correoR="ngModel" />
                         <p class="error" *ngIf='miFormularioRecuperarPassword.correoVacio'>Completa este campo.
                         </p>
-                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoFormato==false'>Formato inválido.
+                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoFormato==false && !miFormularioRecuperarPassword.correoVacio'>Formato inválido.
                         </p>
-                        <p class="error" *ngIf='miFormularioRecuperarPassword.correoRegistrado'>Este correo electrónico
-                            no está
-                            registrado.</p>
                     </div>
 
                     <div class="form-group text-center">
-                        <p class="correcto" *ngIf='miFormularioRecuperarPassword.estado==1'>Instrucciones enviadas al correo electrónico</p>
-                        <p class="error" *ngIf='miFormularioRecuperarPassword.estado==2'>Algo ha salido mal, vuelve a
-                            intentarlo
-                        </p>
                         <button type="submit" class="btn btn-rounded btn-guinda mt-2">Restablecer contraseña</button>
                     </div>
                 </form>

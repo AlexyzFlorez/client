@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
 
   iniciarSesion()
   {
-    console.log("Entra")
     let correo=this.usuario.correo;
     let password=this.usuario.password;
 
@@ -52,8 +51,6 @@ export class LoginComponent implements OnInit {
 
     if(!this.miFormulario.correoVacio && !this.miFormulario.passwordVacia && this.miFormulario.correoFormato && this.miFormulario.passwordFormato)
     {
-      console.log("Campos Validos")
-
       let formData=new FormData();
       formData.append('correo',this.usuario.correo);
       formData.append('password',this.usuario.password);
@@ -62,23 +59,6 @@ export class LoginComponent implements OnInit {
         res =>
         {
           this.respuesta=res;
-
-          if(this.respuesta.errores.includes('Usuario no registrado') && !this.miFormulario.correoVacio)
-          {
-            this.miFormulario.correoRegistrado = false;
-
-            setTimeout(() => {
-              this.miFormulario.correoRegistrado = true;
-            }, 2000);
-          }
-
-          if(this.respuesta.errores.includes('Password incorrecta') && !this.miFormulario.passwordVacia)
-          {
-            this.miFormulario.passwordIguales = false;
-            setTimeout(() => {
-              this.miFormulario.passwordIguales = true;
-            }, 2000);
-          }
 
           if(this.respuesta.errores.includes('Ninguno'))
           {
@@ -96,13 +76,37 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate(['/calendario']);
           }
+          else
+          {
+            if(this.respuesta.errores.includes('Usuario no registrado') && !this.miFormulario.correoVacio)
+            {
+              this.miFormulario.correoRegistrado = false;
+  
+              setTimeout(() => {
+                this.miFormulario.correoRegistrado = true;
+              }, 2000);
+            }
+  
+            if(this.respuesta.errores.includes('Password incorrecta') && !this.miFormulario.passwordVacia)
+            {
+              this.miFormulario.passwordIguales = false;
+              setTimeout(() => {
+                this.miFormulario.passwordIguales = true;
+              }, 2000);
+            }
+          }
         },
-        err => console.log("error")
+        err =>
+        swal({
+          title: "Error",
+          text: "Vuelve a intentarlo.",
+          icon: "error"
+        })
       );
     }
     else
     {
-      console.log("Campos Invalidos")
+     // console.log("Campos Invalidos")
     }
   }
 //------------------------------------------------------------------------
@@ -117,8 +121,6 @@ export class LoginComponent implements OnInit {
 
     if(!this.miFormularioRecuperarPassword.correoVacio && this.miFormularioRecuperarPassword.correoFormato )
     {
-      console.log('Validacion de inputs correcta');
-
       this.apiSisEventService.recuperarPassword(usuarioRecuperar).subscribe(
         res =>
         {
@@ -126,10 +128,11 @@ export class LoginComponent implements OnInit {
     
           if(this.respuesta.errores.includes('Correo no registrado') && !this.miFormularioRecuperarPassword.correoVacio)
           {
-            this.miFormularioRecuperarPassword.correoRegistrado = true;
-            setTimeout(() => {
-              this.miFormularioRecuperarPassword.correoRegistrado = false;
-            }, 2000);
+            swal({
+              title: "Error",
+              text: "Correo no registrado.",
+              icon: "error"
+            });
           }
       
           if(this.respuesta.errores.includes('Ninguno'))
@@ -143,17 +146,23 @@ export class LoginComponent implements OnInit {
             formulario.resetForm();
 
             swal({
+              title: "Correcto",
               icon: "success",
-              text:"Instrucciones enviadas al correo electrónico"
+              text:"Instrucciones enviadas al correo electrónico."
             });
           }
         },
-        err => console.log("error")
+        err => 
+        swal({
+          title: "Error",
+          text: "Vuelve a intentarlo.",
+          icon: "error"
+        })
       );
     }
     else
     {
-      console.log('Validacion de inputs incorrecta');
+      //console.log('Validacion de inputs incorrecta');
     }
   }
 }

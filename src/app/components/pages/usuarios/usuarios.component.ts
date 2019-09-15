@@ -22,7 +22,7 @@ export class UsuariosComponent implements OnInit {
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
 
     this.titleService.setTitle('Usuarios');
-    
+
   }
   ngOnInit() {
     this.mostrarUsuarios();
@@ -33,19 +33,20 @@ export class UsuariosComponent implements OnInit {
       res => {
         this.usuarios = res;
         this.dtOptions = dataTablePersonalizada.dtOptions();
-        this.mostrarTabla=true;
-        
+        this.mostrarTabla = true;
       },
-      err => console.log("error")
+      err =>
+        swal({
+          title: "Error",
+          text: "Por favor recarga la página.",
+          icon: "error"
+        })
     );
-  
   }
 
-  aceptarUsuario(id:string)
-  {
+  aceptarUsuario(id: string) {
     swal({
       title: "¿Estás seguro?",
-      text: "Esta acción es permanente",
       icon: "warning",
       buttons: ["Cancelar", "Aceptar"],
       dangerMode: false,
@@ -53,15 +54,33 @@ export class UsuariosComponent implements OnInit {
       .then((aceptar) => {
         if (aceptar) {
 
-          let usuario=new Usuario();
-          usuario.id_usuario=id;
+          let usuario = new Usuario();
+          usuario.id_usuario = id;
 
-          this.apiSisEvent.aceptarUsuario(id,usuario).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
             res => {
-              swal("Usuario registrado correctamente.", {
-                icon: "success",
-              });
-              this.mostrarUsuarios();
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                this.apiSisEvent.aceptarUsuario(id, usuario).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Usuario registrado correctamente."
+                    });
+                    this.mostrarUsuarios();
+                  },
+                  err =>
+                    swal({
+                      title: "Error",
+                      text: "Vuelve a intentarlo.",
+                      icon: "error"
+                    })
+                );
+              }
             },
             err => console.log("error")
           );
@@ -69,11 +88,9 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
-  rechazarUsuario(id:string)
-  {
+  rechazarUsuario(id: string) {
     swal({
       title: "¿Estás seguro?",
-      text: "Esta acción es permanente",
       icon: "warning",
       buttons: ["Cancelar", "Rechazar"],
       dangerMode: true,
@@ -81,12 +98,30 @@ export class UsuariosComponent implements OnInit {
       .then((rechazar) => {
         if (rechazar) {
 
-          this.apiSisEvent.rechazarUsuario(id).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
             res => {
-              swal("Usuario rechazado correctamente.", {
-                icon: "success",
-              });
-              this.mostrarUsuarios();
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                this.apiSisEvent.rechazarUsuario(id).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Usuario rechazado correctamente."
+                    });
+                    this.mostrarUsuarios();
+                  },
+                  err =>
+                    swal({
+                      title: "Error",
+                      text: "Vuelve a intentarlo.",
+                      icon: "error"
+                    })
+                );
+              }
             },
             err => console.log("error")
           );
@@ -94,11 +129,9 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
-  eliminarUsuario(id:string)
-  {
+  eliminarUsuario(id: string) {
     swal({
       title: "¿Estás seguro?",
-      text: "Esta acción es permanente",
       icon: "warning",
       buttons: ["Cancelar", "Eliminar"],
       dangerMode: true,
@@ -106,12 +139,30 @@ export class UsuariosComponent implements OnInit {
       .then((borrar) => {
         if (borrar) {
 
-          this.apiSisEvent.eliminarUsuario(id).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
             res => {
-              swal("Usuario Eliminado correctamente.", {
-                icon: "success",
-              });
-              this.mostrarUsuarios();
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                this.apiSisEvent.eliminarUsuario(id).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Usuario eliminado correctamente."
+                    });
+                    this.mostrarUsuarios();
+                  },
+                  err =>
+                    swal({
+                      title: "Error",
+                      text: "Vuelve a intentarlo.",
+                      icon: "error"
+                    })
+                );
+              }
             },
             err => console.log("error")
           );

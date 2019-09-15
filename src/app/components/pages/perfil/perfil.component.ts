@@ -30,7 +30,12 @@ export class PerfilComponent implements OnInit {
       {
           this.departamentos=res;
       },
-      err => console.log("error")
+      err => 
+      swal({
+        title: "Error",
+        text: "Por favor vuelve a recargar la página.",
+        icon: "error"
+      })
     );
     this.obtenerUsuario();
   }
@@ -38,19 +43,37 @@ export class PerfilComponent implements OnInit {
   obtenerUsuario()
   {
     const params=this.activeRoute.snapshot.params;
+    const idUsuario=params.id;
 
-    this.apiSisEvent.obtenerPerfil(params.id).subscribe(
+    this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
       res =>
       {
-          this.usuario=res[0];
-          console.log(this.usuario)
-          this.usuario.password="";
-          this.usuario.password2="";
+        let respuesta:any=res;
+        if(respuesta.errores.includes('No existe'))
+        {
+          this.apiSisEvent.salir();
+        }
+        else
+        {    
+          this.apiSisEvent.obtenerPerfil(idUsuario).subscribe(
+            res =>
+            {
+                this.usuario=res[0];
+                this.usuario.password="";
+                this.usuario.password2="";
+            },
+            err => 
+            swal({
+              title: "Error",
+              text: "Por favor vuelve a recargar la página.",
+              icon: "error"
+            })
+          );
+        }
       },
       err => console.log("error")
     );
   }
-
 
   actualizarPerfil()
   {
@@ -115,93 +138,105 @@ export class PerfilComponent implements OnInit {
         //Validamos formatos
         if(this.miFormulario.nombreFormato && this.miFormulario.apellidoPaternoFormato && this.miFormulario.apellidoMaternoFormato && this.miFormulario.telefonoFormato && this.miFormulario.correoFormato && this.miFormulario.passwordFormato && this.miFormulario.password2Formato && this.miFormulario.passwordIguales)
         {
-          console.log(this.usuario)
-          this.apiSisEvent.actualizarPerfil(params.id,this.usuario).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
             res =>
             {
-              this.respuesta=res;
-              //Checar los errores del servidor y mostrarlos
-    
-              if(this.respuesta.errores.includes('Usuario registrado') && !this.miFormulario.correoVacio)
+              let respuesta:any=res;
+              if(respuesta.errores.includes('No existe'))
               {
-                this.miFormulario.usuarioRegistrado = true;
-                setTimeout(() => {
-                  this.miFormulario.usuarioRegistrado = undefined;
-                  }, 2000);
+                this.apiSisEvent.salir();
               }
-    
-              if(this.respuesta.errores.includes('Num empleado registrado'))
+              else
               {
-                this.miFormulario.numEmpleadoRegistrado = true;
-                setTimeout(() => {
-                  this.miFormulario.numEmpleadoRegistrado = undefined;
-                  }, 2000);
-              }
-
-              if(this.respuesta.errores.includes('No existe'))
-              {
-                this.router.navigate(['/login']);
-              }
-         
-              if(this.respuesta.errores.includes('Ninguno'))
-              {
-                this.miFormulario.estado = 1;
-                setTimeout(() => {
-                  this.miFormulario.estado = 0;
-                }, 1000);
-  
-                const usuarioActualizado=new Usuario();
-                usuarioActualizado.id_usuario=params.id;
-                usuarioActualizado.correo=this.usuario.correo;
-                usuarioActualizado.tipo=localStorage.getItem('tipo')
-
-                localStorage.setItem('usuario',JSON.stringify(usuarioActualizado));
-                this.usuario.password="";
-                this.usuario.password2="";
-
-                swal({
-                  icon: "success",
-                  text:"Perfil actualizado correctamente"
-                });
-    
-              }
-              else if(this.respuesta.errores.includes('Consultas'))
-              {
-                this.miFormulario.estado = 2;
-    
-                setTimeout(() => {
-                this.miFormulario.estado = 0;
-                }, 2000);
-
-                swal({
-                  icon: "error",
-                  text: "Error, vuelve a intentarlo"
-                });
+                this.apiSisEvent.actualizarPerfil(params.id,this.usuario).subscribe(
+                  res =>
+                  {
+                    this.respuesta=res;
+               
+                    if(this.respuesta.errores.includes('Ninguno'))
+                    {
+                      this.miFormulario.estado = 1;
+                      setTimeout(() => {
+                        this.miFormulario.estado = 0;
+                      }, 1000);
+        
+                      const usuarioActualizado=new Usuario();
+                      usuarioActualizado.id_usuario=params.id;
+                      usuarioActualizado.correo=this.usuario.correo;
+                      usuarioActualizado.tipo=localStorage.getItem('tipo')
+      
+                      localStorage.setItem('usuario',JSON.stringify(usuarioActualizado));
+                      this.usuario.password="";
+                      this.usuario.password2="";
+      
+                      swal({
+                        title:"Correcto",
+                        icon: "success",
+                        text:"Perfil actualizado correctamente."
+                      });
+          
+                    }
+                    else if(this.respuesta.errores.includes('Consultas'))
+                    {
+                      this.miFormulario.estado = 2;
+          
+                      setTimeout(() => {
+                      this.miFormulario.estado = 0;
+                      }, 2000);
+      
+                      swal({
+                        title: "Error",
+                        text: "Vuelve a intentarlo.",
+                        icon: "error"
+                      })
+                    }
+                    else
+                    {
+                      //Checar los errores del servidor y mostrarlos
+                      if(this.respuesta.errores.includes('Usuario registrado') && !this.miFormulario.correoVacio)
+                      {
+                        this.miFormulario.usuarioRegistrado = true;
+                        setTimeout(() => {
+                          this.miFormulario.usuarioRegistrado = undefined;
+                          }, 2000);
+                      }
+            
+                      if(this.respuesta.errores.includes('Num empleado registrado'))
+                      {
+                        this.miFormulario.numEmpleadoRegistrado = true;
+                        setTimeout(() => {
+                          this.miFormulario.numEmpleadoRegistrado = undefined;
+                          }, 2000);
+                      }
+                    }
+                  },
+                  err=>
+                  {
+                    this.miFormulario.estado = 2;
+          
+                    setTimeout(() => {
+                      this.miFormulario.estado = 0;
+                    }, 2000);
+      
+                    swal({
+                      title: "Error",
+                      text: "Vuelve a intentarlo.",
+                      icon: "error"
+                    })
+                  });
               }
             },
-            err=>
-            {
-              console.log('Errores en el servidor');
-              this.miFormulario.estado = 2;
-    
-              setTimeout(() => {
-                this.miFormulario.estado = 0;
-              }, 2000);
-
-              swal({
-                icon: "error",
-                text: "Error, vuelve a intentarlo"
-              });
-            });
+            err => console.log("error")
+          );
         }
         else
         {
-          console.log("Campos Invalidos");
+          //console.log("Campos Invalidos");
         }
       }
       else
       {
-        console.log("Campos Invalidos");
+        //console.log("Campos Invalidos");
       }
   }
 }

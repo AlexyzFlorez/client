@@ -48,7 +48,7 @@
                         *ngIf='miFormulario.numEmpleadoFormato==false && !this.miFormulario.numEmpleadoVacio'>
                         Formato
                         inválido.</p>
-                    <p class="error" *ngIf='miFormulario.numEmpleadoRegistrado'>Este No. empleado ya esta en uso.</p>
+                    <p class="error" *ngIf='miFormulario.numEmpleadoRegistrado'>No. empleado en uso.</p>
                 </div>
 
                 <div class="form-group">
@@ -69,7 +69,7 @@
                     <p class="error" *ngIf='miFormulario.correoFormato==false && !this.miFormulario.correoVacio'>Formato
                         inválido.</p>
                     <p class="error" *ngIf='miFormulario.correoNoPreregistrado'>Es necesario estar pre registrado.</p>
-                    <p class="error" *ngIf='miFormulario.usuarioRegistrado'>El correo electrónico en uso.</p>
+                    <p class="error" *ngIf='miFormulario.usuarioRegistrado'>Correo electrónico en uso.</p>
                 </div>
 
                 <div class="form-group">
