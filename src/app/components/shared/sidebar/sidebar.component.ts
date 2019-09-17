@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
   tipoUsuario: String;
   token: String = "Ninguno";
   eventos: any;
-  mostrarContadores:boolean;
+  mostrarContadores:boolean=true;
 
   constructor(private router: Router, private apiSisEvent: ApiSisEventService) {
     this.tipoUsuario = localStorage.getItem('tipo');
@@ -31,8 +31,7 @@ export class SidebarComponent implements OnInit {
   }
 
   mostrarEventos() {
-    console.log("Hola")
-
+  
     if(this.mostrarContadores==true){
         this.mostrarContadores=false;
     }

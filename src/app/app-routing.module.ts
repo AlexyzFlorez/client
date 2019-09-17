@@ -37,7 +37,7 @@ const routes: Routes = [
         component: CalendarioComponent
       },
       {
-        path: 'eventos/:tipo',
+        path: 'eventos/:id',
         component: EventosComponent
       },
       {

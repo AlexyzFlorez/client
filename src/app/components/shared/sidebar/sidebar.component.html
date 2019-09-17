@@ -16,7 +16,7 @@
 
         <div *ngIf="mostrarContadores==true">
             <li class="red margin-left-25" *ngFor="let evento of eventos">
-                <a routerLink="/eventos/{{evento.id}}" class="label-right">
+                <a href="/eventos/{{evento.id}}" class="label-right">
                     <span class="lbl">{{evento.nombre}}</span>
                     <span class="label label-custom label-pill label-danger">{{evento.numero}}</span>
                 </a>

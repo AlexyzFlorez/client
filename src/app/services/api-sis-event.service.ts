@@ -132,5 +132,17 @@ export class ApiSisEventService {
   obtenerNumeroEventos() {
     return this.http.get(`${this.API_URI}/usuario/obtener-numero-eventos`);
   }
+
+  obtenerNombreActividad(id) {
+    return this.http.get(`${this.API_URI}/usuario/obtener-nombre-actividad/${id}`);
+  }
+
+  obtenerEventos(id) {
+    return this.http.get(`${this.API_URI}/usuario/obtener-eventos/${id}`);
+  }
+
+  obtenerDetallesEvento(id) {
+    return this.http.get(`${this.API_URI}/usuario/obtener-detalles-evento/${id}`);
+  }
 }
 

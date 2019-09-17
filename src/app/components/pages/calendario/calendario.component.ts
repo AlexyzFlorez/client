@@ -171,15 +171,15 @@ export class CalendarioComponent implements OnInit {
     let nombre = this.evento.nombre;
     let departamento = this.evento.departamento;
     let costo = this.evento.costo;
-    let tipoActividad = this.evento.tipoActividad;
-    let nombreActividad = this.evento.nombreActividad;
+    let tipoActividad = this.evento.tipo_actividad;
+    let nombreActividad = this.evento.actividad;
     let categoria = this.evento.categoria;
     let ponentes = this.evento.ponentes;
     let poblacion = this.evento.poblacion;
-    let fechaInicio = this.evento.fechaInicio;
-    let fechaTermino = this.evento.fechaTermino;
-    let horaInicio = this.evento.horaInicio;
-    let horaTermino = this.evento.horaTermino;
+    let fechaInicio = this.evento.fecha_inicio;
+    let fechaTermino = this.evento.fecha_termino;
+    let horaInicio = this.evento.hora_inicio;
+    let horaTermino = this.evento.hora_termino;
     let descripcion = this.evento.descripcion;
     
     //VALIDACIONES DE FORMULARIO
@@ -274,13 +274,13 @@ export class CalendarioComponent implements OnInit {
       formData.append('nombre', this.evento.nombre);
       formData.append('departamento', this.evento.departamento);
       formData.append('costo', this.evento.costo);
-      formData.append('tipo_actividad', this.evento.tipoActividad);
-      formData.append('nombre_actividad', this.evento.nombreActividad);
+      formData.append('tipo_actividad', this.evento.tipo_actividad);
+      formData.append('nombre_actividad', this.evento.actividad);
       formData.append('categoria', this.evento.categoria);
-      formData.append('fecha_inicio', this.evento.fechaInicio.toString());
-      formData.append('fecha_termino', this.evento.fechaTermino.toString());
-      formData.append('hora_inicio', this.evento.horaInicio);
-      formData.append('hora_termino', this.evento.horaTermino);
+      formData.append('fecha_inicio', this.evento.fecha_inicio.toString());
+      formData.append('fecha_termino', this.evento.fecha_termino.toString());
+      formData.append('hora_inicio', this.evento.hora_inicio);
+      formData.append('hora_termino', this.evento.hora_termino);
       formData.append('descripcion', this.evento.descripcion);
       formData.append('ponentes', this.evento.ponentes);
       formData.append('poblacion', this.evento.poblacion);
@@ -310,15 +310,15 @@ export class CalendarioComponent implements OnInit {
             this.evento.nombre="";
             this.evento.departamento="";
             this.evento.costo="";
-            this.evento.tipoActividad="";
-            this.evento.nombreActividad="";
+            this.evento.tipo_actividad="";
+            this.evento.actividad="";
             this.evento.ponentes="";
             this.evento.poblacion="";
             this.evento.categoria="";
-            this.evento.fechaInicio=undefined;
-            this.evento.fechaTermino=undefined;
-            this.evento.horaInicio="";
-            this.evento.horaTermino="";
+            this.evento.fecha_inicio=undefined;
+            this.evento.fecha_termino=undefined;
+            this.evento.hora_inicio="";
+            this.evento.hora_termino="";
             this.evento.descripcion="";
 
             this.miFormularioEvento.archivoCargado = false;

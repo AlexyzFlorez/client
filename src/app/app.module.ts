@@ -1,11 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiSisEventService } from './services/api-sis-event.service';
+import { registerLocaleData } from '@angular/common';
 
+import localePy from '@angular/common/locales/es-PY';
+import localePt from '@angular/common/locales/pt';
+import localeEn from '@angular/common/locales/en';
+import localeEsAr from '@angular/common/locales/es-AR';
+
+registerLocaleData(localePy, 'es');
+registerLocaleData(localePt, 'pt');
+registerLocaleData(localeEn, 'en')
+registerLocaleData(localeEsAr, 'es-Ar');
 //GUARDS
 import { LoginGuard } from './services/guards/login.guard';
 import { EditorGuard } from './services/guards/editor.guard';
@@ -29,6 +39,7 @@ import { EditarEventoComponent } from './components/pages/editar-evento/editar-e
 import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
 import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -57,13 +68,15 @@ import { RestablecerPasswordComponent } from './components/restablecer-password/
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     ApiSisEventService,
     LoginGuard,
     AdminGuard,
-    EditorGuard
+    EditorGuard,
+    { provide: LOCALE_ID, useValue: 'es-Ar' }
   ],
   bootstrap: [AppComponent]
 })

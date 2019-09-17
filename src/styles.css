@@ -19,7 +19,7 @@
     --color-gris:#53575A;
     --color-negro: #000;
     --color-fondo: #ECEFF4;
-    --color-azul-primario: #16B4FC;
+    --color-azul-primario: #00A8FF;
     --color-naranja-suave: #F29824;
     --color-morado-suave: #AC6BEC;
     --color-link:#0056B3;
@@ -54,8 +54,9 @@ h1
 }
 .icono
 {
-    padding-right: 3px;
+    padding-right: 10px;
     padding-left: 3px;
+    cursor: pointer;
 }
 .icono-azul-suave
 {
@@ -107,6 +108,16 @@ h1
 .texto-blanco
 {
     color: var(--color-blanco);
+}
+
+.color-rojo
+{
+    color:var(--color-rojo-suave);
+}
+
+.color-verde
+{
+    color:var(--color-verde-suave);
 }
 
 .texto-verde
@@ -300,4 +311,116 @@ table{
 .width-100
 {
     width: 100%;
+}
+
+.titulo-tarjeta
+{
+    margin: 0;
+}
+
+.side-menu .jspPane, .side-menu-list
+{
+    background: var(--color-azul-marino);
+}
+
+.card-typical .card-typical-content .photo
+{
+    margin-bottom: 0;
+}
+
+.card-typical .card-typical-content
+{
+    padding: 10px;
+    padding-bottom: 0;
+    border: none;
+}
+
+.padding-5
+{
+    padding:5px 0;
+}
+
+.portada-evento
+{
+    height: 200px;
+}
+
+.targeta-eventos
+{
+    border-radius: 30px;
+}
+
+.contenedor-title-tarjeta
+{
+    border-radius: 20px 20px 0 0;
+}
+
+.fondo-azul-primario
+{
+    background: var(--color-azul-primario)
+}
+
+.titulo-tarjeta{
+    font-size: 1rem;
+}
+
+.fondo-gris{
+    background: var(--color-gris)
+}
+
+.theme-side-ebony-clay .side-menu
+{
+    background: var(--color-azul-marino);
+}
+
+.margin-bottom-20
+{
+    margin-bottom: 20px;
+}
+.width-50
+{
+    width: 50%;
+}
+
+.nombre-actividad
+{
+    text-align: center;
+    width: 100%;
+}
+
+.contenedor-buscar
+{
+    height: 40px;
+    display: flex;
+    width: 100%;
+}
+
+.input-buscar
+{
+    border-radius: 50px;
+}
+
+.boton-icono
+{
+    background: none;
+    border: none;
+}
+/*M*/
+@media (min-width: 768px) {
+    .nombre-actividad
+    {
+        text-align: left;
+        width:50%;
+    }
+
+    .contenedor-buscar
+    {
+        width: 50%;
+    }
+
+    .contendor-header-eventos
+    {
+        display: flex;
+        justify-content:space-between;
+    }
 }

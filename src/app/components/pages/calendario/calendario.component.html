@@ -72,9 +72,9 @@
         <!--Tipo de actividad-->
         <div class="form-group row">
           <div class="col-sm-12">
-            <label class="form-label semibold" for="tipoActividad">Tipo de actividad</label>
-            <select class="form-control" id="tipoActividad" name="tipoActividad" [(ngModel)]="evento.tipoActividad"
-              #tipoActividad="ngModel">
+            <label class="form-label semibold" for="tipo_actividad">Tipo de actividad</label>
+            <select class="form-control" id="tipo_actividad" name="tipo_actividad" [(ngModel)]="evento.tipo_actividad"
+              #tipo_actividad="ngModel">
               <option *ngFor="let actividad of actividades" [value]="actividad.nombre">
                 {{actividad.nombre}}
               </option>
@@ -87,11 +87,11 @@
         </div>
 
         <!--Nombre actividad-->
-        <div class="form-group row" *ngIf="evento.tipoActividad=='Otra'">
+        <div class="form-group row" *ngIf="evento.tipo_actividad=='Otra'">
           <div class="col-sm-12">
-            <label class="form-label semibold" for="nombreActividad">Nombre de actividad</label>
-            <input type="text" class="form-control" id="nombreActividad" name="nombreActividad"
-              [(ngModel)]="evento.nombreActividad" #nombreActividad="ngModel" name="nombreActividad" />
+            <label class="form-label semibold" for="actividad">Nombre de actividad</label>
+            <input type="text" class="form-control" id="actividad" name="actividad"
+              [(ngModel)]="evento.actividad" #actividad="ngModel" name="actividad" />
             <p class="error" *ngIf='miFormularioEvento.nombreActividadVacio'>Completa este campo.</p>
             <p class="error"
               *ngIf='miFormularioEvento.nombreActividadFormato==false && !this.miFormularioEvento.nombreActividadVacio'>
@@ -146,9 +146,9 @@
         <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
-              <label class="form-label semibold" for="fechaInicio">Fecha de inicio</label>
-              <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
-                [(ngModel)]="evento.fechaInicio" #fechaInicio="ngModel" />
+              <label class="form-label semibold" for="fecha_inicio">Fecha de inicio</label>
+              <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio"
+                [(ngModel)]="evento.fecha_inicio" #fecha_inicio="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.fechaInicioVacia'>Completa este campo.</p>
               <p class="error"
                 *ngIf='miFormularioEvento.fechaInicioValida==false && !miFormularioEvento.fechaInicioVacia'>Selecciona
@@ -157,9 +157,9 @@
           </div>
           <div class="col-lg-6">
             <fieldset class="form-group">
-              <label class="form-label semibold" for="horaInicio">Hora</label>
-              <input type="time" class="form-control" id="horaInicio" name="horaInicio" [(ngModel)]="evento.horaInicio"
-                #horaInicio="ngModel" />
+              <label class="form-label semibold" for="hora_inicio">Hora</label>
+              <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" [(ngModel)]="evento.hora_inicio"
+                #hora_inicio="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.horaInicioVacia'>Completa este campo.</p>
             </fieldset>
           </div>
@@ -170,9 +170,9 @@
         <div class="row">
           <div class="col-lg-6">
             <fieldset class="form-group">
-              <label class="form-label semibold" for="fechaTermino">Fecha de término</label>
-              <input type="date" class="form-control" id="fechaTermino" name="fechaTermino"
-                [(ngModel)]="evento.fechaTermino" #fechaTermino="ngModel" />
+              <label class="form-label semibold" for="fecha_termino">Fecha de término</label>
+              <input type="date" class="form-control" id="fecha_termino" name="fecha_termino"
+                [(ngModel)]="evento.fecha_termino" #fecha_termino="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.fechaTerminoVacia'>Completa este campo.</p>
               <p class="error"
               *ngIf='(miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia) || (miFormularioEvento.fechasValidas==false && !miFormularioEvento.fechaTerminoVacia)'>Selecciona
@@ -183,8 +183,8 @@
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="exampleInputEmail1">Hora</label>
-              <input type="time" class="form-control" id="horaTermino" name="horaTermino"
-                [(ngModel)]="evento.horaTermino" #horaTermino="ngModel" />
+              <input type="time" class="form-control" id="hora_termino" name="hora_termino"
+                [(ngModel)]="evento.hora_termino" #hora_termino="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.horaTerminoVacia'>Completa este campo.</p>
             </fieldset>
           </div>
