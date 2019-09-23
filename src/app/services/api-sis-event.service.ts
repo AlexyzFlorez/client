@@ -114,6 +114,10 @@ export class ApiSisEventService {
     return this.http.put(`${this.API_URI}/editor/actualizar-perfil/${id}?token=${this.tokenLogin}`, usuario);
   }
 
+  obtenerMisEventos(idUsuario) {
+    return this.http.get(`${this.API_URI}/editor/obtener-mis-eventos/${idUsuario}?token=${this.tokenLogin}`);
+  }
+
   salir() {
     this.idUsuarioLogin = "";
     this.tipoUsuarioLogin = "";
@@ -137,8 +141,12 @@ export class ApiSisEventService {
     return this.http.get(`${this.API_URI}/usuario/obtener-nombre-actividad/${id}`);
   }
 
-  obtenerEventos(id) {
-    return this.http.get(`${this.API_URI}/usuario/obtener-eventos/${id}`);
+  obtenerEventos(idActividad) {
+    return this.http.get(`${this.API_URI}/usuario/obtener-eventos/${idActividad}`);
+  }
+
+  obtenerEventosCalendario() {
+    return this.http.get(`${this.API_URI}/usuario/obtener-eventos-calendario`);
   }
 
   obtenerDetallesEvento(id) {

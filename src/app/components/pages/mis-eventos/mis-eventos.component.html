@@ -1,43 +1,147 @@
 <div class="row box-typical seccion">
 
-		<div class="row mb-4">
-				<div class="col-md-10">
-				  <h3 class="">Mis eventos</h3>
-				</div>
-			  </div>
-
-	<div class="col-sm-12">
-			<table datatable [dtOptions]="dtOptions" class="display table table-bordered" cellspacing="0" width="100%">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Departamento</th>
-							<th>Tipo</th>
-							<th>Categoría</th>
-							<th>Costo</th>
-							<th>Fecha de inicio</th>
-              <th>Fecha de termino</th>
-              <th>Evidencias</th>
-							<th>Acciones</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Policamp</td>
-							<td>Dirección</td>
-							<td>Taller</td>
-							<td>Actividades culturales</td>
-							<td>$300</td>
-							<td>12/Junio/2019</td>
-              <td>15/Junio/2019</td>
-              <td><span>No</span><i class="fas fa-plus icono-verde-suave icono-dt icono margen-izquierdo"></i></td>
-							<td class="text-center"><i class="fas fa-eye icono-gris icono-dt icono"></i><i class="fas fa-edit icono-dt icono-azul-suave icono"></i><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"></i></td>
-						</tr>
-						
-	
-					</tbody>
-				</table>
+	<div class="row margin-bottom-20">
+		<div class="col-md-12 contendor-header-eventos">
+			<h3 class="nombre-actividad">Mis eventos</h3>
+			<div class="contenedor-buscar">
+				<input type="text" class="form-control input-buscar" placeholder="Buscar" name="filtroEventos"
+					[(ngModel)]="filtroEventos">
+			</div>
+		</div>
 	</div>
-    
+
+	<div class="row">
+		<div class="col-xs-12 text-center" *ngIf="eventosVacios==true">
+			<h6>Aún no tienes ningún evento registrado.</h6>
+		</div>
+
+		<div class="col-xs-12 col-sm-6 col-lg-4 margin-bottom-20" *ngFor="let evento of eventos | filter:filtroEventos">
+			<article class="card-typical targeta-eventos">
+				<div class="card-typical-section fondo-azul-primario contenedor-title-tarjeta">
+					<h4 class="title text-center texto-blanco texto-negrita titulo-tarjeta">
+						{{evento.nombre | uppercase}}</h4>
+					<p class="text-center texto-blanco">({{evento.actividad}})</p>
+				</div>
+
+				<div class="card-typical-section card-typical-content ">
+					<div class="photo">
+						<img src="{{rutaArchivo}}{{evento.url_portada}}" alt="" class="portada-evento">
+					</div>
+
+				</div>
+
+				<div class="card-typical-section text-center">
+					<p class=""><strong>Fecha de inicio:
+						</strong><span>{{evento.fecha_inicio | date:'mediumDate'}}</span></p>
+					<p class=""><strong>Fecha de término:
+						</strong><span>{{evento.fecha_termino | date:'mediumDate'}}</span></p>
+				</div>
+
+				<div class="card-typical-section text-right">
+					<button (click)='verDetalles(evento.id_evento)' class="boton-icono" data-target="#verDetalles"
+						data-toggle="modal"><i class="fas fa-eye icono-gris icono-dt icono"
+							title="Ver detalles"></i></button>
+					<button *ngIf="tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom'"
+						class="boton-icono"><i class="fas fa-plus icono-verde-suave icono-dt icono"
+							title="Agregar a memoria"></i></button>
+					<button
+						*ngIf="(tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom') || (idUsuario==evento.fk_id_usuario)"
+						class="boton-icono"><i class="fas fa-edit icono-dt icono-azul-suave icono"
+							title="Editar"></i></button>
+					<button
+						*ngIf="(tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom') || (idUsuario==evento.fk_id_usuario)"
+						class="boton-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"
+							title="Eliminar"></i></button>
+
+				</div>
+			</article>
+		</div>
+	</div>
 </div>
+
+<!--Modal de registro-->
+<div class="modal fade" id="verDetalles" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+					<i class="font-icon-close-2"></i>
+				</button>
+				<h4 class="modal-title text-center" id="myModalLabel">{{detallesEvento.nombre | uppercase}}</h4>
+			</div>
+
+			<div class="modal-body">
+				<article class="card-typical targeta-eventos">
+
+					<div class="card-typical-section card-typical-content ">
+						<div class="photo">
+							<img src="{{rutaArchivo}}{{detallesEvento.url_portada}}" alt="">
+						</div>
+
+					</div>
+
+					<div class="card-typical-section text-center">
+
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="padding-5"><strong>Tipo de actividad:
+									</strong><span>{{detallesEvento.actividad}}</span></p>
+								<p class="padding-5"><strong>Departamento:
+									</strong><span>{{detallesEvento.departamento}}</span></p>
+								<p class="padding-5"><strong>Categoría:
+									</strong><span>{{detallesEvento.categoria}}</span></p>
+								<p class="padding-5"><strong>Costo:
+									</strong><span>$ {{detallesEvento.costo}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Fecha de inicio:
+									</strong><span>{{detallesEvento.fecha_inicio | date:'mediumDate'}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Hora de inicio:
+									</strong><span>{{detallesEvento.hora_inicio}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Fecha de término:
+									</strong><span>{{detallesEvento.fecha_termino | date:'mediumDate'}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Hora de término:
+									</strong><span>{{detallesEvento.hora_termino}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Ponentes:
+									</strong><span>{{detallesEvento.ponentes}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Poblacion:
+									</strong><span>{{detallesEvento.poblacion}}</span></p>
+							</div>
+
+						</div>
+					</div>
+
+				</article>
+
+
+			</div>
+		</div>
+	</div>
+	<!--.modal-->

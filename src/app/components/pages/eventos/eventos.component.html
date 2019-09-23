@@ -10,11 +10,16 @@
 	</div>
 
 	<div class="row">
+		<div class="col-xs-12 text-center" *ngIf="eventosVacios==true">
+			<h6>No hay eventos registrados.</h6>
+		</div>
+
 		<div class="col-xs-12 col-sm-6 col-lg-4 margin-bottom-20" *ngFor="let evento of eventos | filter:filtroEventos">
 			<article class="card-typical targeta-eventos">
 				<div class="card-typical-section fondo-azul-primario contenedor-title-tarjeta">
 					<h4 class="title text-center texto-blanco texto-negrita titulo-tarjeta">
 						{{evento.nombre | uppercase}}</h4>
+					<p class="text-center texto-blanco">({{evento.actividad}})</p>
 				</div>
 
 				<div class="card-typical-section card-typical-content ">
@@ -25,9 +30,9 @@
 				</div>
 
 				<div class="card-typical-section text-center">
-					<p class="padding-5"><strong>Fecha de inicio:
+					<p class=""><strong>Fecha de inicio:
 						</strong><span>{{evento.fecha_inicio | date:'mediumDate'}}</span></p>
-					<p class="padding-5"><strong>Fecha de término:
+					<p class=""><strong>Fecha de término:
 						</strong><span>{{evento.fecha_termino | date:'mediumDate'}}</span></p>
 				</div>
 
@@ -35,11 +40,16 @@
 					<button (click)='verDetalles(evento.id_evento)' class="boton-icono" data-target="#verDetalles"
 						data-toggle="modal"><i class="fas fa-eye icono-gris icono-dt icono"
 							title="Ver detalles"></i></button>
-					<button class="boton-icono"><i class="fas fa-plus icono-verde-suave icono-dt icono"
+					<button *ngIf="tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom'"
+						class="boton-icono"><i class="fas fa-plus icono-verde-suave icono-dt icono"
 							title="Agregar a memoria"></i></button>
-					<button class="boton-icono"><i class="fas fa-edit icono-dt icono-azul-suave icono"
+					<button
+						*ngIf="(tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom') || (idUsuario==evento.fk_id_usuario)"
+						class="boton-icono"><i class="fas fa-edit icono-dt icono-azul-suave icono"
 							title="Editar"></i></button>
-					<button class="boton-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"
+					<button
+						*ngIf="(tipoUsuario=='$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom') || (idUsuario==evento.fk_id_usuario)"
+						class="boton-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"
 							title="Eliminar"></i></button>
 
 				</div>
@@ -71,42 +81,65 @@
 					</div>
 
 					<div class="card-typical-section text-center">
-						<p class="padding-5"><strong>Departamento:
-							</strong><span>{{detallesEvento.departamento}}</span></p>
-						<p class="padding-5"><strong>Tipo de actividad:
-							</strong><span>{{detallesEvento.actividad}}</span></p>
-						<p class="padding-5"><strong>Categoría:
-							</strong><span>{{detallesEvento.categoria}}</span></p>
-						<p class="padding-5"><strong>Costo:
-							</strong><span>$ {{detallesEvento.costo}}</span></p>
-						<p class="padding-5"><strong>Fecha de inicio:
-							</strong><span>{{detallesEvento.fecha_inicio | date:'mediumDate'}}</span></p>
-						<p class="padding-5"><strong>Hora de inicio:
-							</strong><span>{{detallesEvento.hora_inicio}}</span></p>
-						<p class="padding-5"><strong>Fecha de término:
-							</strong><span>{{detallesEvento.fecha_termino | date:'mediumDate'}}</span></p>
-						<p class="padding-5"><strong>Hora de término:
-							</strong><span>{{detallesEvento.hora_termino}}</span></p>
-						<p class="padding-5"><strong>Ponentes:
-							</strong><span>{{detallesEvento.ponentes}}</span></p>
-						<p class="padding-5"><strong>Poblacion:
-							</strong><span>{{detallesEvento.poblacion}}</span></p>
-							<!--
-						<p class="padding-5"><strong>Hombres:
-							</strong><span>{{detallesEvento.hombres}}</span></p>
-						<p class="padding-5"><strong>Mujeres:
-							</strong><span>{{detallesEvento.mujeres}}</span></p>
-						<p class="padding-5"><strong>Horas:
-							</strong><span>{{detallesEvento.horas}}</span></p>
--->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="padding-5"><strong>Tipo de actividad:
+									</strong><span>{{detallesEvento.actividad}}</span></p>
+								<p class="padding-5"><strong>Departamento:
+									</strong><span>{{detallesEvento.departamento}}</span></p>
+								<p class="padding-5"><strong>Categoría:
+									</strong><span>{{detallesEvento.categoria}}</span></p>
+								<p class="padding-5"><strong>Costo:
+									</strong><span>$ {{detallesEvento.costo}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Fecha de inicio:
+									</strong><span>{{detallesEvento.fecha_inicio | date:'mediumDate'}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Hora de inicio:
+									</strong><span>{{detallesEvento.hora_inicio}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Fecha de término:
+									</strong><span>{{detallesEvento.fecha_termino | date:'mediumDate'}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Hora de término:
+									</strong><span>{{detallesEvento.hora_termino}}</span></p>
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Ponentes:
+									</strong><span>{{detallesEvento.ponentes}}</span></p>
+							</div>
+
+							<div class="col-md-6">
+								<p class="padding-5"><strong>Poblacion:
+									</strong><span>{{detallesEvento.poblacion}}</span></p>
+							</div>
+
+						</div>
 					</div>
 
 				</article>
 
-				<div class="modal-footer">
-					<button type="button" class="btn btn-block btn-rounded btn-primary" id="btn-cerrar-modal"
-						data-dismiss="modal">Cerrar</button>
-				</div>
+
 			</div>
 		</div>
 	</div>

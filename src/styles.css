@@ -8,6 +8,10 @@
     padding: 0;
 }
 
+*::-webkit-scrollbar
+{
+    display: none;
+}
 :root
 {
     font-family: 'Roboto', sans-serif;
@@ -347,12 +351,19 @@ table{
 
 .targeta-eventos
 {
-    border-radius: 30px;
+    border-radius: 5px;
+}
+
+.fondo-rojo-suave
+{
+    background:var(--color-rojo-suave);
 }
 
 .contenedor-title-tarjeta
 {
-    border-radius: 20px 20px 0 0;
+    border-radius: 5px 5px 0 0;
+    height: 70px;
+    max-height: 70px;
 }
 
 .fondo-azul-primario
@@ -362,6 +373,8 @@ table{
 
 .titulo-tarjeta{
     font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .fondo-gris{
@@ -404,6 +417,11 @@ table{
 {
     background: none;
     border: none;
+}
+
+.modal-title
+{
+    overflow-wrap: break-word;
 }
 /*M*/
 @media (min-width: 768px) {

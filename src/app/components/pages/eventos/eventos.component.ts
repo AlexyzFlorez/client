@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { dataTablePersonalizada } from '../../../fnAuxiliares/datatablePersonalizada';
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +12,7 @@ import { Evento } from 'src/app/models/Evento';
   styles: []
 })
 export class EventosComponent implements OnInit {
-  dtOptions: any;
+  
   nombreActividad: any;
   eventos: any;
   rutaArchivo = VariablesGlobales.rutaArchivo;
@@ -21,6 +20,9 @@ export class EventosComponent implements OnInit {
   fechas = new Fechas();
   detallesEvento;
   mostrarTodo:boolean;
+  tipoUsuario:string;
+  idUsuario:string;
+  eventosVacios:boolean;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
 
@@ -28,7 +30,10 @@ export class EventosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tipoUsuario=localStorage.getItem("tipo");
     this.detallesEvento = new Evento();
+    this.idUsuario=localStorage.getItem("id");
+
     const params = this.activeRoute.snapshot.params;
 
     if (params.id == "7c3d4ab1-38e6-4406-87b5-ecee274e3f5b") {
@@ -45,17 +50,25 @@ export class EventosComponent implements OnInit {
 
     this.obtenerEventos(params.id);
 
-    this.dtOptions = dataTablePersonalizada.dtOptions();
   }
 
-  obtenerEventos(id) {
-    this.apiSisEvent.obtenerEventos(id).subscribe(
+  obtenerEventos(idActividad) {
+    this.apiSisEvent.obtenerEventos(idActividad).subscribe(
       res => {
         this.eventos = res;
         for (let i = 0; i < this.eventos.length; i++) {
           this.eventos[i].fecha_inicio = this.fechas.darFormato(this.eventos[i].fecha_inicio);
           this.eventos[i].fecha_termino = this.fechas.darFormato(this.eventos[i].fecha_termino);
 
+        }
+
+        if(this.eventos.length<1 || this.eventos.length==undefined)
+        {
+          this.eventosVacios=true;
+        }
+        else
+        {
+          this.eventosVacios=false;
         }
       },
       err => console.log("error")

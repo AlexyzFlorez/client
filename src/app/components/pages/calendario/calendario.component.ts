@@ -9,9 +9,11 @@ import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { Router } from '@angular/router';
 import { FormularioEvento } from 'src/app/models/FormularioEvento';
 import { Evento } from 'src/app/models/Evento';
+import { Fechas } from 'src/app/models/Fechas';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 const swal: SweetAlert = _swal as any;
+import {calendarioPersonalizado} from '../../../fnAuxiliares/calendarioPersonalizado';
 
 registerLocaleData(localeEs);
 @Component({
@@ -25,6 +27,7 @@ export class CalendarioComponent implements OnInit {
   @Input()
   set configurations(config: any) {
     if (config) {
+      console.log(config)
       this.defaultConfigurations = config;
     }
   }
@@ -45,6 +48,9 @@ export class CalendarioComponent implements OnInit {
   ponentesArray: any;
   poblaciones: any;
   portada: File;
+  eventos:any;
+  fechas = new Fechas();
+  mostrarCalendario:boolean;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
     
@@ -52,8 +58,30 @@ export class CalendarioComponent implements OnInit {
     this.token = localStorage.getItem('token');
 
     this.titleService.setTitle('Calendario');
+    this.apiSisEvent.obtenerEventosCalendario().subscribe(
+      res => {
 
-    this.eventData = [
+       this.eventData = res;
+        for (let i = 0; i < this.eventData.length; i++) {
+
+          this.eventData[i].fecha_inicio = this.fechas.darFormato(this.eventData[i].fecha_inicio);
+          this.eventData[i].fecha_termino = this.fechas.darFormato(this.eventData[i].fecha_termino);
+          this.eventData[i].start=this.eventData[i].fecha_inicio;   
+          this.eventData[i].end=this.eventData[i].fecha_termino;  
+        }
+      
+        this.defaultConfigurations = calendarioPersonalizado.calendarOptions(this.eventData);
+       
+        $('#full-calendar').fullCalendar(
+          this.defaultConfigurations
+        );
+        this.mostrarCalendario = true;
+      },
+      err => console.log("error")
+    );
+  
+    /*
+    this.eventos = [
       {
         title: 'Graduación',
         start: new Date(2019, 5, 5, 10, 20)
@@ -73,53 +101,10 @@ export class CalendarioComponent implements OnInit {
         end: new Date(2019, 5, 20, 10, 0)
       },
     ];
-
-    this.defaultConfigurations = {
-      locale: 'es',
-      editable: true,
-      eventLimit: true,
-      titleFormat: 'MMM D YYYY',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      buttonText: {
-        today: 'Hoy',
-        month: 'Mes',
-        week: 'Semana',
-        day: 'Dia'
-      },
-      views: {
-        agenda: {
-          eventLimit: 2
-        }
-      },
-      allDaySlot: false,
-      slotDuration: moment.duration('00:15:00'),
-      slotLabelInterval: moment.duration('01:00:00'),
-      firstDay: 1,
-      selectable: true,
-      selectHelper: true,
-      events: this.eventData,
-
-      dayClick: (date, jsEvent, activeView) => {
-        console.log("Agregar evento")
-      },
-      eventClick: (date, jsEvent, activeView) => {
-        console.log(date)
-        console.log(date._id);
-        console.log(date.title)
-        console.log(date.start)
-        console.log(date.end)
-      }
-    };
+    */
   }
-  ngOnInit() {
 
-    $('#full-calendar').fullCalendar(
-      this.defaultConfigurations
-    );
+  ngOnInit() {
 
     this.apiSisEvent.obtenerDepartamentos().subscribe(
       res => {
