@@ -7,11 +7,13 @@ export class Usuario {
     public apellido_materno?: string;
     public telefono?: string;
     public num_empleado?: string;
-    public departamento?: string;
+    public departamento?={
+      nombre:""
+    };
     public correo?: string;
     public password?: string;
     public password2?: string;
-    public tipo?: string;
+    public tipo_usuario?: string;
     public estado_registro?: string;
     public codigo_res_password?:string;
     

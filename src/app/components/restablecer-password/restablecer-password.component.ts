@@ -37,6 +37,7 @@ export class RestablecerPasswordComponent implements OnInit {
       res =>
       {
         this.respuesta=res;
+        console.log(this.respuesta)
  
         if(this.respuesta.errores.includes('Codigo incorrecto'))
         {

@@ -135,7 +135,7 @@ export class RegistroComponent implements OnInit {
                 title: "Correcto",
                 text: "Pre registro exitoso."
               });
-
+      
               this.router.navigate(['/login']);
 
             }

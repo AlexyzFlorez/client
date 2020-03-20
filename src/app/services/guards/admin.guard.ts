@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router} from '@angular/router';
 import { ApiSisEventService } from '../api-sis-event.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate( )
   {
-   if(this.apiSisEvent.tipoUsuarioLogin==="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom")
+   if(this.apiSisEvent.tipoUsuarioLogin===environment.TIPO_ADMINISTRADOR)
    {
      console.log("PASO GUARD ADMINISTRADOR")
       return true;

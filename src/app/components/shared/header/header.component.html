@@ -18,7 +18,7 @@
 	                            Iniciar sesión
                             </a>
 	                   
-                        <div class="dropdown user-menu" *ngIf='tipoUsuario=="$2a$10$m3XP./02B3jWnBX1YV.Ua.vWD2LXw/oC81eAjnPaJrqV0ImnD3SxW" || tipoUsuario=="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom"'>
+                        <div class="dropdown user-menu" *ngIf='tipoUsuario==tipoAdministrador || tipoUsuario==tipoEditor'>
                                 <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <img src="assets/img/avatar-2-64.png" alt="">

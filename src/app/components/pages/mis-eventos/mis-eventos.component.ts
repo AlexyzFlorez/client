@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VariablesGlobales } from 'src/app/models/VariablesGlobales';
 import { Fechas } from 'src/app/models/Fechas';
 import { Evento } from 'src/app/models/Evento';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'ipn-mis-eventos',
@@ -16,7 +16,7 @@ export class MisEventosComponent implements OnInit {
 
     nombreActividad: any;
     eventos: any;
-    rutaArchivo = VariablesGlobales.rutaArchivo;
+    rutaArchivo = environment.URI_ARCHIVOS;
     filtroEventos;
     fechas = new Fechas();
     detallesEvento;

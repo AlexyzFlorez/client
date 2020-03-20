@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  URI_API : "http://localhost:3000/api/sis-event",
+  URI_ARCHIVOS : "http://localhost:3000/archivos/",
+  TIPO_ADMINISTRADOR:"$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom",
+  TIPO_EDITOR:"$2a$10$m3XP./02B3jWnBX1YV.Ua.vWD2LXw/oC81eAjnPaJrqV0ImnD3SxW"
+
 };
 
 /*

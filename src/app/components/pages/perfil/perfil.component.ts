@@ -61,6 +61,7 @@ export class PerfilComponent implements OnInit {
                 this.usuario=res[0];
                 this.usuario.password="";
                 this.usuario.password2="";
+                console.log(this.usuario)
             },
             err => 
             swal({
@@ -127,7 +128,7 @@ export class PerfilComponent implements OnInit {
 
       this.miFormulario.passwordIguales=this.miFormulario.validarPasswordsIguales(password, password2);
 
-      if(this.usuario.departamento=="Departamento")
+      if(this.usuario.departamento.nombre=="Departamento" || this.usuario.departamento.nombre=="")
       {
           this.miFormulario.departamentoVacio=true;
       }
@@ -163,7 +164,7 @@ export class PerfilComponent implements OnInit {
                       const usuarioActualizado=new Usuario();
                       usuarioActualizado.id_usuario=params.id;
                       usuarioActualizado.correo=this.usuario.correo;
-                      usuarioActualizado.tipo=localStorage.getItem('tipo')
+                      usuarioActualizado.tipo_usuario=localStorage.getItem('tipo')
       
                       localStorage.setItem('usuario',JSON.stringify(usuarioActualizado));
                       this.usuario.password="";

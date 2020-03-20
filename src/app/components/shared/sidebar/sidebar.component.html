@@ -23,32 +23,12 @@
             </li>
         </div>
 
-        <!--
-        <li class="grey with-sub">
-            <span>
-                <i class="fas fa-calendar-week icono-azul-suave icono"></i>
-                <span class="lbl">Eventos</span>
-            </span>
-            <ul>
-
-            <li class="red" *ngFor="let evento of eventos">
-                <a routerLink="/eventos/{{evento.id}}" class="label-right">
-                    <span class="lbl">{{evento.nombre}}</span>
-                    <span class="label label-custom label-pill label-danger">{{evento.numero}}</span>
-                </a>
-            </li>
-
-            </ul>
-        </li>
-
-        -->
-
-        <li *ngIf='tipoUsuario=="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom"'>
+        <li *ngIf='tipoUsuario==tipoAdministrador'>
             <a routerLink="/usuarios"><span class="lbl"><i
                         class="fas fa-users icono-naranja-suave icono"></i>Usuarios</span></a>
         </li>
 
-        <li>
+        <li *ngIf='banderaMostrarSalir==true'>
             <a routerLink="/" (click)="apiSisEvent.salir()"><span class="lbl"><i class="fas fa-sign-out-alt icono-rojo-suave icono"></i>Salir</span></a>
         </li>
 

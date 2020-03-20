@@ -24,7 +24,7 @@
           <tbody>
             <tr *ngFor="let usuario of usuarios">
               <td>{{usuario.nombre}} {{usuario.apellido_paterno}} {{usuario.apellido_materno}}</td>
-              <td>{{usuario.nombre_departamento}}</td>
+              <td>{{usuario.departamento.nombre}}</td>
               <td>{{usuario.num_empleado}}</td>
               <td>{{usuario.telefono}}</td>
               <td>{{usuario.correo}}</td>

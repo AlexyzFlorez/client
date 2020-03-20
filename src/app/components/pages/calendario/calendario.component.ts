@@ -27,7 +27,6 @@ export class CalendarioComponent implements OnInit {
   @Input()
   set configurations(config: any) {
     if (config) {
-      console.log(config)
       this.defaultConfigurations = config;
     }
   }
@@ -60,7 +59,6 @@ export class CalendarioComponent implements OnInit {
     this.titleService.setTitle('Calendario');
     this.apiSisEvent.obtenerEventosCalendario().subscribe(
       res => {
-
        this.eventData = res;
         for (let i = 0; i < this.eventData.length; i++) {
 
@@ -275,7 +273,6 @@ export class CalendarioComponent implements OnInit {
       this.apiSisEvent.registrarEvento(formData).subscribe(
         res => {
           this.respuesta = res;
-          console.log(this.respuesta)
 
           if (this.respuesta.errores.includes('Ninguno')) {
 

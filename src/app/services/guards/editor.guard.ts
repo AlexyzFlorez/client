@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router} from '@angular/router';
 import { ApiSisEventService } from '../api-sis-event.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class EditorGuard implements CanActivate {
 
   canActivate( )
   {
-   if(this.apiSisEvent.tipoUsuarioLogin==="$2a$10$m3XP./02B3jWnBX1YV.Ua.vWD2LXw/oC81eAjnPaJrqV0ImnD3SxW" || this.apiSisEvent.tipoUsuarioLogin==="$2a$10$kAuF.n3BG7N8rXpqKnGziOkk8jplw4DWVdkUshhsc3Bvt8YVx2Yom")
+   if(this.apiSisEvent.tipoUsuarioLogin===environment.TIPO_ADMINISTRADOR || this.apiSisEvent.tipoUsuarioLogin===environment.TIPO_EDITOR)
    {
      console.log("PASO GUARD EDITOR")
       return true;
