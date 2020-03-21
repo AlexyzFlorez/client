@@ -14,11 +14,13 @@ import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/su
 import { EventoComponent } from './components/pages/evento/evento.component';
 import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
+import { ListaEventosComponent } from './components/pages/lista-eventos/lista-eventos.component';
 
 //GUARDS
 import { LoginGuard } from './services/guards/login.guard';
 import { EditorGuard } from './services/guards/editor.guard';
 import { AdminGuard } from './services/guards/admin.guard';
+
 
 
 const routes: Routes = [
@@ -43,6 +45,11 @@ const routes: Routes = [
       {
         path: 'usuarios',
         component: UsuariosComponent,
+        canActivate:[LoginGuard,AdminGuard]
+      },
+      {
+        path: 'eventosAdmin',
+        component: ListaEventosComponent,
         canActivate:[LoginGuard,AdminGuard]
       },
       {

@@ -53,7 +53,6 @@ export class CalendarioComponent implements OnInit {
   mostrarCalendario: boolean;
   errorHelper;
 
-
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
     this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     this.tipoUsuario = localStorage.getItem('tipo_usuario');
@@ -167,6 +166,7 @@ export class CalendarioComponent implements OnInit {
     let horaInicio = this.evento.hora_inicio;
     let horaTermino = this.evento.hora_termino;
     let descripcion = this.evento.descripcion;
+    let solicitudMemoria=this.evento.solicitud_memoria
 
     //VALIDACIONES DE FORMULARIO
 
@@ -198,6 +198,9 @@ export class CalendarioComponent implements OnInit {
     //poblacion
     this.miFormularioEvento.poblacionVacia = this.miFormularioEvento.validarCampoVacio(poblacion);
 
+    //solicitud memoria
+    this.miFormularioEvento.solicitudMemoriaVacia = this.miFormularioEvento.validarCampoVacio(solicitudMemoria);
+
     //Fecha inicio
     this.miFormularioEvento.fechaInicioValida = this.miFormularioEvento.validarFecha(new Date(), new Date(`${fechaInicio}`));
 
@@ -223,7 +226,7 @@ export class CalendarioComponent implements OnInit {
     }
 
     //Validamos los estados de campos,primero campos vacios
-    if (!this.miFormularioEvento.nombreVacio && !this.miFormularioEvento.departamentoVacio && !this.miFormularioEvento.costoVacio && !this.miFormularioEvento.tipoActividadVacio && !this.miFormularioEvento.categoriaVacia && !this.miFormularioEvento.ponentesVacios && !this.miFormularioEvento.poblacionVacia && !this.miFormularioEvento.horaInicioVacia && !this.miFormularioEvento.horaTerminoVacia && !this.miFormularioEvento.descripcionVacia) {
+    if (!this.miFormularioEvento.solicitudMemoriaVacia && !this.miFormularioEvento.nombreVacio && !this.miFormularioEvento.departamentoVacio && !this.miFormularioEvento.costoVacio && !this.miFormularioEvento.tipoActividadVacio && !this.miFormularioEvento.categoriaVacia && !this.miFormularioEvento.ponentesVacios && !this.miFormularioEvento.poblacionVacia && !this.miFormularioEvento.horaInicioVacia && !this.miFormularioEvento.horaTerminoVacia && !this.miFormularioEvento.descripcionVacia) {
 
       if ((tipoActividad == "Otra" && !this.miFormularioEvento.nombreActividadVacio) || ((tipoActividad != "Otra"))) {
         //Validamos formatos
@@ -255,8 +258,7 @@ export class CalendarioComponent implements OnInit {
     if (validacionFormulario === true) {
       //console.log("Campos Validos");
       let formData = new FormData();
-      console.log(this.evento.tipo_actividad.nombre)
-      console.log(this.evento.actividad)
+      console.log(this.evento.solicitud_memoria)
 
       formData.append('usuario', localStorage.getItem('_id'));
       formData.append('nombre', this.evento.nombre);
@@ -272,6 +274,7 @@ export class CalendarioComponent implements OnInit {
       formData.append('descripcion', this.evento.descripcion);
       formData.append('ponentes', this.evento.ponentes.nombre);
       formData.append('poblacion', this.evento.poblacion.nombre);
+      formData.append('solicitud_memoria', this.evento.solicitud_memoria);
 
       formData.append('archivo', this.portada, this.portada.name);
 
@@ -294,6 +297,7 @@ export class CalendarioComponent implements OnInit {
               text: "Evento registrado correctamente."
             });
 
+            /*
             this.evento.nombre = "";
             this.evento.departamento.nombre = "";
             this.evento.costo = "";
@@ -307,11 +311,12 @@ export class CalendarioComponent implements OnInit {
             this.evento.hora_inicio = "";
             this.evento.hora_termino = "";
             this.evento.descripcion = "";
-           
+            this.evento.solicitud_memoria = "";
+           */
             this.miFormularioEvento.archivoCargado = false;
             this.miFormularioEvento.archivoFormato = undefined;
 
-           this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
+          // this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
 
           }
           else if (this.respuesta.errores.includes('Actividad existente')) {

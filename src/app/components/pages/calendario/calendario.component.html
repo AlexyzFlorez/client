@@ -75,8 +75,8 @@
         <div class="form-group row">
           <div class="col-sm-12">
             <label class="form-label semibold" for="tipo_actividad">Tipo de actividad</label>
-            <select class="form-control" id="tipo_actividad" name="tipo_actividad" [(ngModel)]="evento.tipo_actividad.nombre"
-              #tipo_actividad="ngModel">
+            <select class="form-control" id="tipo_actividad" name="tipo_actividad"
+              [(ngModel)]="evento.tipo_actividad.nombre" #tipo_actividad="ngModel">
               <option *ngFor="let actividad of actividades" [value]="actividad.nombre">
                 {{actividad.nombre}}
               </option>
@@ -92,8 +92,8 @@
         <div class="form-group row" *ngIf="evento.tipo_actividad.nombre=='Otra'">
           <div class="col-sm-12">
             <label class="form-label semibold" for="actividad">Nombre de actividad</label>
-            <input type="text" class="form-control" id="actividad" name="actividad"
-              [(ngModel)]="evento.actividad" #actividad="ngModel" name="actividad" />
+            <input type="text" class="form-control" id="actividad" name="actividad" [(ngModel)]="evento.actividad"
+              #actividad="ngModel" name="actividad" />
             <p class="error" *ngIf='miFormularioEvento.nombreActividadVacio'>Completa este campo.</p>
             <p class="error"
               *ngIf='miFormularioEvento.nombreActividadFormato==false && !this.miFormularioEvento.nombreActividadVacio'>
@@ -116,21 +116,21 @@
           </div>
         </div>
 
-          <!--Ponentes-->
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <label class="form-label semibold" for="ponentes">Ponentes</label>
-              <select class="form-control" id="ponentes" name="ponentes" [(ngModel)]="evento.ponentes.nombre"
-                #ponentes="ngModel">
-                <option *ngFor="let ponente of ponentesArray" [value]="ponente.nombre">
-                  {{ponente.nombre}}
-                </option>
-              </select>
-              <p class="error" *ngIf='miFormularioEvento.ponentesVacios'>Selecciona los ponentes.</p>
-            </div>
+        <!--Ponentes-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="ponentes">Ponentes</label>
+            <select class="form-control" id="ponentes" name="ponentes" [(ngModel)]="evento.ponentes.nombre"
+              #ponentes="ngModel">
+              <option *ngFor="let ponente of ponentesArray" [value]="ponente.nombre">
+                {{ponente.nombre}}
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.ponentesVacios'>Selecciona los ponentes.</p>
           </div>
+        </div>
 
-            <!--Poblacion-->
+        <!--Poblacion-->
         <div class="form-group row">
           <div class="col-sm-12">
             <label class="form-label semibold" for="poblacion">Poblacion</label>
@@ -141,6 +141,23 @@
               </option>
             </select>
             <p class="error" *ngIf='miFormularioEvento.poblacionVacia'>Selecciona una población.</p>
+          </div>
+        </div>
+
+        <!--Solicitud_memoria-->
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label class="form-label semibold" for="solicitudMemoria">Agregar a memoria</label>
+            <select class="form-control" id="solicitudMemoria" name="solicitudMemoria"
+              [(ngModel)]="evento.solicitud_memoria" #solicitudMemoria="ngModel">
+              <option value=Si>
+                Si
+              </option>
+              <option value=No>
+                No
+              </option>
+            </select>
+            <p class="error" *ngIf='miFormularioEvento.solicitudMemoriaVacia'>Selecciona una opción.</p>
           </div>
         </div>
 
@@ -160,8 +177,8 @@
           <div class="col-lg-6">
             <fieldset class="form-group">
               <label class="form-label semibold" for="hora_inicio">Hora</label>
-              <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" [(ngModel)]="evento.hora_inicio"
-                #hora_inicio="ngModel" />
+              <input type="time" class="form-control" id="hora_inicio" name="hora_inicio"
+                [(ngModel)]="evento.hora_inicio" #hora_inicio="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.horaInicioVacia'>Completa este campo.</p>
             </fieldset>
           </div>
@@ -177,9 +194,10 @@
                 [(ngModel)]="evento.fecha_termino" #fecha_termino="ngModel" />
               <p class="error" *ngIf='miFormularioEvento.fechaTerminoVacia'>Completa este campo.</p>
               <p class="error"
-              *ngIf='(miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia) || (miFormularioEvento.fechasValidas==false && !miFormularioEvento.fechaTerminoVacia)'>Selecciona
-              una fecha válida.</p>
-              
+                *ngIf='(miFormularioEvento.fechaTerminoValida==false && !miFormularioEvento.fechaTerminoVacia) || (miFormularioEvento.fechasValidas==false && !miFormularioEvento.fechaTerminoVacia)'>
+                Selecciona
+                una fecha válida.</p>
+
             </fieldset>
           </div>
           <div class="col-lg-6">
@@ -224,7 +242,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-rounded btn-default" id="btn-cerrar-modal" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-rounded btn-default" id="btn-cerrar-modal"
+          data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-rounded btn-success" (click)="registrarEvento()">Registrar</button>
       </div>
     </div>

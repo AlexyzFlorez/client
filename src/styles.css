@@ -307,6 +307,10 @@ table{
   margin-left: 5px;
 }
 
+.mb-0{
+    margin-bottom: 0;
+}
+
 .m-5
 {
     margin: 5px;

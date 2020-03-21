@@ -27,8 +27,11 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
                                     <a class="dropdown-item" routerLink='/perfil/{{idUsuarioLogin}}'><i class="fas fa-user-alt icono-gris icono"></i>
                                         <span class="lbl">Perfil</span></a>
+                                        <a class="dropdown-item" routerLink="/eventosAdmin" *ngIf='tipoUsuario==tipoAdministrador'><i class="fas fa-th-list icono-gris icono"></i>
+                                            <span class="lbl">Lista de eventos</span></a>
                                     <a class="dropdown-item" routerLink="/mis-eventos"><i class="far fa-calendar-check icono-gris icono"></i>
                                         <span class="lbl">Mis eventos</span></a>
+                                       
                                     <a class="dropdown-item"routerLink="/" (click)="apiSisEvent.salir()"><i class="fas fa-sign-out-alt icono-gris icono"></i>
                                         <span class="lbl">Salir</span></a>
                                 </div>

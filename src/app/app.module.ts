@@ -40,6 +40,7 @@ import { EvidenciasComponent } from './components/pages/evidencias/evidencias.co
 import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ListaEventosComponent } from './components/pages/lista-eventos/lista-eventos.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     EditarEventoComponent,
     EvidenciasComponent,
     SubirEvidenciasComponent,
-    RestablecerPasswordComponent
+    RestablecerPasswordComponent,
+    ListaEventosComponent
   ],
   imports: [
     BrowserModule,

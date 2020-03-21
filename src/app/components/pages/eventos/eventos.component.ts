@@ -86,4 +86,12 @@ export class EventosComponent implements OnInit {
       err => this.errorHelper.manejarError(err.status)
     );
   }
+
+  editarEvento(id) {
+    this.router.navigate([`/evento/${id}`]);
+  }
+
+  eliminarEvento(id) {
+    console.log("Eliminar", id)
+  }
 }

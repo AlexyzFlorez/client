@@ -17,6 +17,7 @@ export class FormularioEvento {
   public descripcionVacia: boolean;
   public ponentesVacios: boolean;
   public poblacionVacia: boolean;
+  public solicitudMemoriaVacia: boolean;
 
   //Validacion de Formatos de usuario
   public nombreFormato: boolean;

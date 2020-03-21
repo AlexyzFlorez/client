@@ -1,0 +1,56 @@
+<div class="row box-typical seccion">
+  <div class="row mb-4">
+    <div class="col-md-10">
+      <h3 class="">Eventos</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive" *ngIf="mostrarTabla==true">
+        <table datatable [dtOptions]="dtOptions" class="table table-sm table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Departamento</th>
+              <th>Costo</th>
+              <th>Actividad</th>
+              <th>Inicia</th>
+              <th>Termina</th>
+              <th>Ponentes</th>
+              <th>Población</th>
+              <th>En memoria</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let evento of eventos">
+              <td>{{evento.nombre}}</td>
+              <td>{{evento.departamento.nombre}}</td>
+              <td>{{evento.costo}}</td>
+              <td>{{evento.tipo_actividad.nombre}}</td>
+              <td>{{evento.fecha_inicio | date:'mediumDate'}}</td>
+              <td>{{evento.fecha_termino | date:'mediumDate'}}</td>
+              <td>{{evento.ponentes.nombre}}</td>
+              <td>{{evento.poblacion.nombre}}</td>
+              <td *ngIf='evento.en_memoria==true'>Si</td>
+              <td *ngIf='evento.en_memoria==false'>No</td>
+              <td class="text-center">
+                <button *ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria!=true" class="boton-icono"
+                  (click)='agregarAMemoria(evento._id)'><i class="fas fa-plus icono-verde-suave icono-dt icono"
+                    title="Agregar a memoria"></i></button>
+                <button *ngIf="(tipoUsuario==tipoAdministrador)" (click)='eliminarEvento(evento._id)'
+                  class="boton-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"
+                    title="Eliminar"></i></button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

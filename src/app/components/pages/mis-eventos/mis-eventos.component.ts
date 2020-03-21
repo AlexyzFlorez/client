@@ -26,6 +26,8 @@ export class MisEventosComponent implements OnInit {
     eventosVacios:boolean;
     tipoUsuario:string;
     errorHelper;
+    tipoAdministrador=environment.TIPO_ADMINISTRADOR;
+    tipoEditor=environment.TIPO_EDITOR;
     
     constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
       this.titleService.setTitle('Mis eventos');
@@ -34,8 +36,8 @@ export class MisEventosComponent implements OnInit {
   
     ngOnInit() {
       this.detallesEvento = new Evento();
-      this.idUsuario=localStorage.getItem("id")
-      this.tipoUsuario=localStorage.getItem("tipo");
+      this.idUsuario=localStorage.getItem("_id")
+      this.tipoUsuario=localStorage.getItem("tipo_usuario");
       this.obtenerMisEventos(this.idUsuario);
   
     }
@@ -48,7 +50,6 @@ export class MisEventosComponent implements OnInit {
           for (let i = 0; i < this.eventos.length; i++) {
             this.eventos[i].fecha_inicio = this.fechas.darFormato(this.eventos[i].fecha_inicio);
             this.eventos[i].fecha_termino = this.fechas.darFormato(this.eventos[i].fecha_termino);
-  
           }
 
           if(this.eventos.length<1 || this.eventos.length==undefined)
@@ -73,6 +74,14 @@ export class MisEventosComponent implements OnInit {
         },
         err => this.errorHelper.manejarError(err.status)
       );
+    }
+
+    editarEvento(id) {
+      this.router.navigate([`/evento/${id}`]);
+    }
+
+    eliminarEvento(id) {
+      console.log("Eliminar", id)
     }
   }
   

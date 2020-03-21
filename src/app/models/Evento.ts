@@ -25,6 +25,7 @@ export class Evento {
   public poblacion: Poblacion;
   public url_portada: string;
   public evidencias: Evidencia[];
+  public solicitud_memoria:string;
   public en_memoria: boolean;
 
   constructor() {
@@ -45,6 +46,7 @@ export class Evento {
     this.poblacion=new Poblacion();
     this.url_portada="";
     this.evidencias=[];
+    this.solicitud_memoria="";
     this.en_memoria=false;
   }
 }
