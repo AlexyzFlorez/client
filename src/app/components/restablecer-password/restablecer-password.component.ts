@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Usuario } from 'src/app/models/Usuario';
-import { Formulario } from 'src/app/models/Formulario';
+import { Usuario } from 'src/app/models/usuario';
+import { Formulario } from 'src/app/fnAuxiliares/formulario';
 import { ApiSisEventService } from 'src/app/services/api-sis-event.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 const swal: SweetAlert = _swal as any;
 
 @Component({
@@ -19,8 +20,10 @@ export class RestablecerPasswordComponent implements OnInit {
   miFormulario= new Formulario();
   respuesta:any={errores:[]};
   mostrarFormulario:boolean;
+  errorHelper;
 
   constructor(private titleService: Title, private router: Router,private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
+    this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     this.titleService.setTitle('Restablecer contraseña');
 
     if(localStorage.getItem('token'))
@@ -37,7 +40,6 @@ export class RestablecerPasswordComponent implements OnInit {
       res =>
       {
         this.respuesta=res;
-        console.log(this.respuesta)
  
         if(this.respuesta.errores.includes('Codigo incorrecto'))
         {
@@ -48,7 +50,7 @@ export class RestablecerPasswordComponent implements OnInit {
           this.mostrarFormulario=true;
         }
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 
@@ -110,7 +112,6 @@ export class RestablecerPasswordComponent implements OnInit {
             },
             err=>
             {
-              console.log('Errores en el servidor');
               this.miFormulario.estado = 2;
     
               setTimeout(() => {
@@ -119,6 +120,8 @@ export class RestablecerPasswordComponent implements OnInit {
  
              this.usuario.password="";
              this.usuario.password2="";
+
+             this.errorHelper.manejarError(err.status)
               
             });
         }

@@ -7,13 +7,14 @@ import localeEs from '@angular/common/locales/es';
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { Router } from '@angular/router';
-import { FormularioEvento } from 'src/app/models/FormularioEvento';
-import { Evento } from 'src/app/models/Evento';
-import { Fechas } from 'src/app/models/Fechas';
+import { FormularioEvento } from 'src/app/fnAuxiliares/formularioEvento';
+import { Evento } from 'src/app/models/evento';
+import { Fechas } from 'src/app/fnAuxiliares/fechas';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 const swal: SweetAlert = _swal as any;
-import {calendarioPersonalizado} from '../../../fnAuxiliares/calendarioPersonalizado';
+import { calendarioPersonalizado } from '../../../fnAuxiliares/calendarioPersonalizado';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
 registerLocaleData(localeEs);
 @Component({
@@ -47,37 +48,39 @@ export class CalendarioComponent implements OnInit {
   ponentesArray: any;
   poblaciones: any;
   portada: File;
-  eventos:any;
+  eventos: any;
   fechas = new Fechas();
-  mostrarCalendario:boolean;
+  mostrarCalendario: boolean;
+  errorHelper;
+
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
-    
-    this.tipoUsuario = localStorage.getItem('tipo');
+    this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
+    this.tipoUsuario = localStorage.getItem('tipo_usuario');
     this.token = localStorage.getItem('token');
 
     this.titleService.setTitle('Calendario');
     this.apiSisEvent.obtenerEventosCalendario().subscribe(
       res => {
-       this.eventData = res;
+        this.eventData = res;
         for (let i = 0; i < this.eventData.length; i++) {
 
           this.eventData[i].fecha_inicio = this.fechas.darFormato(this.eventData[i].fecha_inicio);
           this.eventData[i].fecha_termino = this.fechas.darFormato(this.eventData[i].fecha_termino);
-          this.eventData[i].start=this.eventData[i].fecha_inicio;   
-          this.eventData[i].end=this.eventData[i].fecha_termino;  
+          this.eventData[i].start = this.eventData[i].fecha_inicio;
+          this.eventData[i].end = this.eventData[i].fecha_termino;
         }
-      
+
         this.defaultConfigurations = calendarioPersonalizado.calendarOptions(this.eventData);
-       
+
         $('#full-calendar').fullCalendar(
           this.defaultConfigurations
         );
         this.mostrarCalendario = true;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
-  
+
     /*
     this.eventos = [
       {
@@ -108,35 +111,35 @@ export class CalendarioComponent implements OnInit {
       res => {
         this.departamentos = res;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
 
     this.apiSisEvent.obtenerActividades().subscribe(
       res => {
         this.actividades = res;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
 
     this.apiSisEvent.obtenerCategorias().subscribe(
       res => {
         this.categorias = res;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
 
     this.apiSisEvent.obtenerPonentes().subscribe(
       res => {
         this.ponentesArray = res;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
 
     this.apiSisEvent.obtenerPoblacion().subscribe(
       res => {
         this.poblaciones = res;
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 
@@ -152,19 +155,19 @@ export class CalendarioComponent implements OnInit {
     let btnCerrarModal = document.getElementById("btn-cerrar-modal");
 
     let nombre = this.evento.nombre;
-    let departamento = this.evento.departamento;
+    let departamento = this.evento.departamento.nombre;
     let costo = this.evento.costo;
-    let tipoActividad = this.evento.tipo_actividad;
+    let tipoActividad = this.evento.tipo_actividad.nombre;
     let nombreActividad = this.evento.actividad;
-    let categoria = this.evento.categoria;
-    let ponentes = this.evento.ponentes;
-    let poblacion = this.evento.poblacion;
+    let categoria = this.evento.categoria.nombre;
+    let ponentes = this.evento.ponentes.nombre;
+    let poblacion = this.evento.poblacion.nombre;
     let fechaInicio = this.evento.fecha_inicio;
     let fechaTermino = this.evento.fecha_termino;
     let horaInicio = this.evento.hora_inicio;
     let horaTermino = this.evento.hora_termino;
     let descripcion = this.evento.descripcion;
-    
+
     //VALIDACIONES DE FORMULARIO
 
     //Nombre
@@ -189,10 +192,10 @@ export class CalendarioComponent implements OnInit {
     //Categoria
     this.miFormularioEvento.categoriaVacia = this.miFormularioEvento.validarCampoVacio(categoria);
 
-     //Ponentes
-     this.miFormularioEvento.ponentesVacios = this.miFormularioEvento.validarCampoVacio(ponentes);
+    //Ponentes
+    this.miFormularioEvento.ponentesVacios = this.miFormularioEvento.validarCampoVacio(ponentes);
 
-      //poblacion
+    //poblacion
     this.miFormularioEvento.poblacionVacia = this.miFormularioEvento.validarCampoVacio(poblacion);
 
     //Fecha inicio
@@ -224,14 +227,14 @@ export class CalendarioComponent implements OnInit {
 
       if ((tipoActividad == "Otra" && !this.miFormularioEvento.nombreActividadVacio) || ((tipoActividad != "Otra"))) {
         //Validamos formatos
-        if (this.miFormularioEvento.costoFormato && this.miFormularioEvento.fechaInicioValida && this.miFormularioEvento.fechaTerminoValida && this.miFormularioEvento.fechasValidas  && this.miFormularioEvento.archivoFormato && this.miFormularioEvento.archivoCargado) {
+        if (this.miFormularioEvento.costoFormato && this.miFormularioEvento.fechaInicioValida && this.miFormularioEvento.fechaTerminoValida && this.miFormularioEvento.fechasValidas && this.miFormularioEvento.archivoFormato && this.miFormularioEvento.archivoCargado) {
 
           if ((tipoActividad == "Otra" && this.miFormularioEvento.nombreActividadFormato) || ((tipoActividad != "Otra"))) {
 
             validacionFormulario = true;
           }
           else {
-           // console.log("Formatos invalidos")
+            // console.log("Formatos invalidos")
             validacionFormulario = false;
           }
         }
@@ -240,7 +243,7 @@ export class CalendarioComponent implements OnInit {
         }
       }
       else {
-       // console.log("Campos vacios")
+        // console.log("Campos vacios")
         validacionFormulario = false;
       }
     }
@@ -252,21 +255,23 @@ export class CalendarioComponent implements OnInit {
     if (validacionFormulario === true) {
       //console.log("Campos Validos");
       let formData = new FormData();
+      console.log(this.evento.tipo_actividad.nombre)
+      console.log(this.evento.actividad)
 
-      formData.append('id_usuario', localStorage.getItem('id'));
+      formData.append('usuario', localStorage.getItem('_id'));
       formData.append('nombre', this.evento.nombre);
-      formData.append('departamento', this.evento.departamento);
+      formData.append('departamento', this.evento.departamento.nombre);
       formData.append('costo', this.evento.costo);
-      formData.append('tipo_actividad', this.evento.tipo_actividad);
-      formData.append('nombre_actividad', this.evento.actividad);
-      formData.append('categoria', this.evento.categoria);
+      formData.append('tipo_actividad', this.evento.tipo_actividad.nombre);
+      formData.append('actividad', this.evento.actividad);
+      formData.append('categoria', this.evento.categoria.nombre);
       formData.append('fecha_inicio', this.evento.fecha_inicio.toString());
       formData.append('fecha_termino', this.evento.fecha_termino.toString());
       formData.append('hora_inicio', this.evento.hora_inicio);
       formData.append('hora_termino', this.evento.hora_termino);
       formData.append('descripcion', this.evento.descripcion);
-      formData.append('ponentes', this.evento.ponentes);
-      formData.append('poblacion', this.evento.poblacion);
+      formData.append('ponentes', this.evento.ponentes.nombre);
+      formData.append('poblacion', this.evento.poblacion.nombre);
 
       formData.append('archivo', this.portada, this.portada.name);
 
@@ -277,7 +282,7 @@ export class CalendarioComponent implements OnInit {
           if (this.respuesta.errores.includes('Ninguno')) {
 
             btnCerrarModal.click();
-           
+
             this.miFormularioEvento.estado = 1;
             setTimeout(() => {
               this.miFormularioEvento.estado = 0;
@@ -285,29 +290,28 @@ export class CalendarioComponent implements OnInit {
 
             swal({
               icon: "success",
-              title:"Correcto",
+              title: "Correcto",
               text: "Evento registrado correctamente."
             });
 
-            this.evento.nombre="";
-            this.evento.departamento="";
-            this.evento.costo="";
-            this.evento.tipo_actividad="";
-            this.evento.actividad="";
-            this.evento.ponentes="";
-            this.evento.poblacion="";
-            this.evento.categoria="";
-            this.evento.fecha_inicio=undefined;
-            this.evento.fecha_termino=undefined;
-            this.evento.hora_inicio="";
-            this.evento.hora_termino="";
-            this.evento.descripcion="";
-
+            this.evento.nombre = "";
+            this.evento.departamento.nombre = "";
+            this.evento.costo = "";
+            this.evento.tipo_actividad.nombre = "";
+            this.evento.actividad = "";
+            this.evento.ponentes.nombre = "";
+            this.evento.poblacion.nombre = "";
+            this.evento.categoria.nombre = "";
+            this.evento.fecha_inicio = undefined;
+            this.evento.fecha_termino = undefined;
+            this.evento.hora_inicio = "";
+            this.evento.hora_termino = "";
+            this.evento.descripcion = "";
+           
             this.miFormularioEvento.archivoCargado = false;
             this.miFormularioEvento.archivoFormato = undefined;
 
-            
-            this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
+           this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
 
           }
           else if (this.respuesta.errores.includes('Actividad existente')) {
@@ -319,7 +323,7 @@ export class CalendarioComponent implements OnInit {
 
             swal({
               icon: "error",
-              title:"Error",
+              title: "Error",
               text: "El nombre de la actividad ya existe en las opciones."
             });
           }
@@ -344,10 +348,7 @@ export class CalendarioComponent implements OnInit {
             this.miFormularioEvento.estado = 0;
           }, 2000);
 
-          swal({
-            icon: "error",
-            text: "Error, vuelve a intentarlo"
-          });
+          this.errorHelper.manejarError(err.status)
         });
     }
     else {

@@ -3,10 +3,12 @@ import { dataTablePersonalizada } from '../../../fnAuxiliares/datatablePersonali
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/Usuario';
+import { Usuario } from 'src/app/models/usuario';
 
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
+import { environment } from '../../../../environments/environment';
 const swal: SweetAlert = _swal as any;
 
 @Component({
@@ -19,11 +21,14 @@ export class UsuariosComponent implements OnInit {
   dtOptions: any;
   usuarios: any = [];
   mostrarTabla: boolean;
+  errorHelper;
+  tipoAdministrador = environment.TIPO_ADMINISTRADOR;
+
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
-
+    this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     this.titleService.setTitle('Usuarios');
-
   }
+
   ngOnInit() {
     this.mostrarUsuarios();
   }
@@ -35,12 +40,7 @@ export class UsuariosComponent implements OnInit {
         this.dtOptions = dataTablePersonalizada.dtOptions();
         this.mostrarTabla = true;
       },
-      err =>
-        swal({
-          title: "Error",
-          text: "Por favor recarga la página.",
-          icon: "error"
-        })
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 
@@ -55,9 +55,9 @@ export class UsuariosComponent implements OnInit {
         if (aceptar) {
 
           let usuario = new Usuario();
-          usuario.id_usuario = id;
+          usuario._id = id;
 
-          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
             res => {
               let respuesta: any = res;
               if (respuesta.errores.includes('No existe')) {
@@ -73,16 +73,11 @@ export class UsuariosComponent implements OnInit {
                     });
                     this.mostrarUsuarios();
                   },
-                  err =>
-                    swal({
-                      title: "Error",
-                      text: "Vuelve a intentarlo.",
-                      icon: "error"
-                    })
+                  err => this.errorHelper.manejarError(err.status)
                 );
               }
             },
-            err => console.log("error")
+            err => this.errorHelper.manejarError(err.status)
           );
         }
       });
@@ -98,7 +93,7 @@ export class UsuariosComponent implements OnInit {
       .then((rechazar) => {
         if (rechazar) {
 
-          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
             res => {
               let respuesta: any = res;
               if (respuesta.errores.includes('No existe')) {
@@ -114,16 +109,11 @@ export class UsuariosComponent implements OnInit {
                     });
                     this.mostrarUsuarios();
                   },
-                  err =>
-                    swal({
-                      title: "Error",
-                      text: "Vuelve a intentarlo.",
-                      icon: "error"
-                    })
+                  err => this.errorHelper.manejarError(err.status)
                 );
               }
             },
-            err => console.log("error")
+            err => this.errorHelper.manejarError(err.status)
           );
         }
       });
@@ -139,7 +129,7 @@ export class UsuariosComponent implements OnInit {
       .then((borrar) => {
         if (borrar) {
 
-          this.apiSisEvent.existeUsuario(localStorage.getItem('id')).subscribe(
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
             res => {
               let respuesta: any = res;
               if (respuesta.errores.includes('No existe')) {
@@ -155,16 +145,11 @@ export class UsuariosComponent implements OnInit {
                     });
                     this.mostrarUsuarios();
                   },
-                  err =>
-                    swal({
-                      title: "Error",
-                      text: "Vuelve a intentarlo.",
-                      icon: "error"
-                    })
+                  err => this.errorHelper.manejarError(err.status)
                 );
               }
             },
-            err => console.log("error")
+            err => this.errorHelper.manejarError(err.status)
           );
         }
       });

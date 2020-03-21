@@ -30,9 +30,15 @@
               <td>{{usuario.correo}}</td>
               <td>{{usuario.estado_registro}}</td>
               <td class="text-center">
-                <button *ngIf='usuario.estado_registro!="Registrado"' (click)="aceptarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-check icono-verde-suave icono-dt icono" title="Aceptar"></i></button>
-                <button *ngIf='usuario.estado_registro!="Registrado"' (click)="rechazarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-times icono-dt icono-rojo-suave icono" title="Rechazar"></i></button>
-                <button (click)="eliminarUsuario(usuario.id_usuario)" class="btn-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono" title="Eliminar"></i></button>
+                <button *ngIf='usuario.estado_registro!="Registrado" && usuario.tipo_usuario!=tipoAdministrador'
+                  (click)="aceptarUsuario(usuario._id)" class="btn-icono"><i
+                    class="fas fa-check icono-verde-suave icono-dt icono" title="Aceptar"></i></button>
+                <button *ngIf='usuario.estado_registro!="Registrado" && usuario.tipo_usuario!=tipoAdministrador'
+                  (click)="rechazarUsuario(usuario._id)" class="btn-icono"><i
+                    class="fas fa-times icono-dt icono-rojo-suave icono" title="Rechazar"></i></button>
+                <button *ngIf='usuario.tipo_usuario!=tipoAdministrador' (click)="eliminarUsuario(usuario._id)"
+                  class="btn-icono"><i class="fas fa-trash-alt icono-dt  icono-rojo-suave icono"
+                    title="Eliminar"></i></button>
               </td>
             </tr>
 

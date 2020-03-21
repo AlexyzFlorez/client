@@ -1,36 +1,50 @@
+import { Usuario } from './usuario';
+import { Departamento } from './departamento';
+import { Actividad } from './actividad';
+import { Categoria } from './categoria';
+import { Poblacion } from './poblacion';
+import { Ponente } from './ponente';
+import { Evidencia } from './evidencia';
+
 export class Evento {
 
-    //Generales
-    public id_evento?: string;
-    public nombre?: string;
-    public costo?: string;
-    public mujeres?: string;
-    public hombres?: string;
-    public horas?: string;
-    public descripcion?: string;
-    public url_portada?: string;
-    public en_memoria?: boolean;
-    public fk_id_usuario: string;
-    public fecha_inicio: Date;
-    public fecha_termino: Date;
-    public hora_inicio: string;
-    public hora_termino: string;
-    public fk_id_departamento: string;
-    public fk_id_actividad: string;
-    public fk_id_categoria: string;
-    public fk_id_ponentes:string;
-    public fk_id_poblacion: string;
-    public evidencias_cargadas: string;
-    public departamento: string;
-    public categoria:string;
-    public ponentes: string;
-    public poblacion: string;
-    public actividad: string;
+  public _id: string;
+  public usuario: Usuario;
+  public nombre: string;
+  public departamento: Departamento;
+  public costo: string;
+  public tipo_actividad: Actividad;
+  public actividad: string;
+  public categoria: Categoria;
+  public fecha_inicio: string;
+  public fecha_termino: string;
+  public hora_inicio: string;
+  public hora_termino: string;
+  public descripcion: string;
+  public ponentes: Ponente
+  public poblacion: Poblacion;
+  public url_portada: string;
+  public evidencias: Evidencia[];
+  public en_memoria: boolean;
 
-    public tipo_actividad: string;
-
-    constructor() {
-  
-    }
+  constructor() {
+    this._id="";
+    this.usuario=new Usuario();
+    this.nombre="";
+    this.departamento=new Departamento();
+    this.costo="";
+    this.tipo_actividad=new Actividad();
+    this.actividad="";
+    this.categoria=new Categoria();
+    this.fecha_inicio="";
+    this.fecha_termino="";
+    this.hora_inicio="";
+    this.hora_termino="";
+    this.descripcion="";
+    this.ponentes=new Ponente();
+    this.poblacion=new Poblacion();
+    this.url_portada="";
+    this.evidencias=[];
+    this.en_memoria=false;
   }
-  
+}

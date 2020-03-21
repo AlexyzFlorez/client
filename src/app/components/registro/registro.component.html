@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control" id="departamento" name="departamento" [(ngModel)]="usuario.departamento"
+                    <select class="form-control" id="departamento" name="departamento" [(ngModel)]="usuario.departamento.nombre"
                         #departamento="ngModel">
                         <option disabled>Departamento</option>
                         <option *ngFor="let departamento of departamentos" [value]="departamento.nombre">

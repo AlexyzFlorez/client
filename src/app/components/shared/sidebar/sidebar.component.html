@@ -15,10 +15,10 @@
         </li>
 
         <div *ngIf="mostrarContadores==true">
-            <li class="red margin-left-25" *ngFor="let evento of eventos">
-                <a href="/eventos/{{evento.id}}" class="label-right">
-                    <span class="lbl">{{evento.nombre}}</span>
-                    <span class="label label-custom label-pill label-danger">{{evento.numero}}</span>
+            <li class="red margin-left-25" *ngFor="let actividad of actividades">
+                <a href="/eventos/{{actividad._id}}" class="label-right">
+                    <span class="lbl">{{actividad.nombre}}</span>
+                    <span class="label label-custom label-pill label-danger">{{actividad.numero}}</span>
                 </a>
             </li>
         </div>

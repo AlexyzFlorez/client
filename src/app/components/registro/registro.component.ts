@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Usuario } from 'src/app/models/Usuario';
-import { Formulario } from 'src/app/models/Formulario';
+import { Usuario } from 'src/app/models/usuario';
+import { Formulario } from 'src/app/fnAuxiliares/formulario';
 import { Router } from '@angular/router';
 import { ApiSisEventService } from 'src/app/services/api-sis-event.service';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 const swal: SweetAlert = _swal as any;
 
 @Component({
@@ -19,13 +20,15 @@ export class RegistroComponent implements OnInit {
   miFormulario = new Formulario();
   respuesta: any = { errores: [] };
   departamentos: any;
+  errorHelper;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
+    this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     this.titleService.setTitle('Crear cuenta');
 
     if (localStorage.getItem('token')) {
       //Si ya inicio sesion de redirege
-      if (localStorage.getItem('tipo')) {
+      if (localStorage.getItem('tipo_usuario')) {
         this.router.navigate(['/calendario']);
       }
     }
@@ -36,18 +39,13 @@ export class RegistroComponent implements OnInit {
     this.usuario.telefono = "";
     this.usuario.password = "";
     this.usuario.password2 = "";
-    this.usuario.departamento = "Departamento";
+    this.usuario.departamento.nombre = "Departamento";
 
     this.apiSisEvent.obtenerDepartamentos().subscribe(
       res => {
         this.departamentos = res;
       },
-      err => 
-      swal({
-        title: "Error",
-        text: "Por favor vuelve a recargar la página.",
-        icon: "error"
-      })
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 
@@ -57,7 +55,6 @@ export class RegistroComponent implements OnInit {
     let apellidoMaterno = this.usuario.apellido_materno;
     let telefono = this.usuario.telefono;
     let numEmpleado = this.usuario.num_empleado;
-    let departamento = this.usuario.departamento;
     let correo = this.usuario.correo;
     let password = this.usuario.password;
     let password2 = this.usuario.password2;
@@ -86,7 +83,7 @@ export class RegistroComponent implements OnInit {
     this.miFormulario.numEmpleadoFormato = this.miFormulario.validarFormatoNumEmpleado(numEmpleado);
 
     //Departamento
-    this.miFormulario.departamentoVacio = this.miFormulario.validarCampoVacio(departamento);
+    this.miFormulario.departamentoVacio = this.miFormulario.validarCampoVacio(this.usuario.departamento.nombre);
 
     //Correo
     this.miFormulario.correoVacio = this.miFormulario.validarCampoVacio(correo);
@@ -102,7 +99,7 @@ export class RegistroComponent implements OnInit {
 
     this.miFormulario.passwordIguales = this.miFormulario.validarPasswordsIguales(password, password2);
 
-    if (this.usuario.departamento == "Departamento") {
+    if (this.usuario.departamento.nombre == "Departamento") {
       this.miFormulario.departamentoVacio = true;
     }
 
@@ -110,6 +107,7 @@ export class RegistroComponent implements OnInit {
     if (!this.miFormulario.nombreVacio && !this.miFormulario.apellidoPaternoVacio && !this.miFormulario.apellidoMaternoVacio && !this.miFormulario.telefonoVacio && !this.miFormulario.numEmpleadoVacio && !this.miFormulario.telefonoVacio && !this.miFormulario.departamentoVacio && !this.miFormulario.correoVacio && !this.miFormulario.passwordVacia && !this.miFormulario.password2Vacia) {
       //Validamos formatos
       if (this.miFormulario.nombreFormato && this.miFormulario.apellidoPaternoFormato && this.miFormulario.apellidoMaternoFormato && this.miFormulario.telefonoFormato && this.miFormulario.numEmpleadoFormato && this.miFormulario.correoFormato && this.miFormulario.passwordFormato && this.miFormulario.password2Formato && this.miFormulario.passwordIguales) {
+        
         this.apiSisEvent.preregistrarUsuario(this.usuario).subscribe(
           res => {
             this.respuesta = res;
@@ -124,12 +122,12 @@ export class RegistroComponent implements OnInit {
               this.usuario.apellido_paterno = "";
               this.usuario.apellido_materno = "";
               this.usuario.telefono = "";
-              this.usuario.departamento = "";
+              this.usuario.departamento.nombre = "";
               this.usuario.num_empleado = "";
               this.usuario.correo = "";
               this.usuario.password = "";
               this.usuario.password2 = "";
-
+              
               swal({
                 icon: "success",
                 title: "Correcto",
@@ -177,11 +175,7 @@ export class RegistroComponent implements OnInit {
               this.miFormulario.estado = 0;
             }, 2000);
 
-            swal({
-              icon: "error",
-              title: "Error",
-              text: "Error, vuelve a intentarlo."
-            });
+            this.errorHelper.manejarError(err.status)
 
           });
       }

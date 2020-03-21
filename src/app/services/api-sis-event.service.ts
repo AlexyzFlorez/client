@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../models/Usuario';
+import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
@@ -28,8 +28,8 @@ export class ApiSisEventService {
 
   cargarStorage() {
     if (localStorage.getItem('token')) {
-      this.idUsuarioLogin = localStorage.getItem('id')
-      this.tipoUsuarioLogin = localStorage.getItem('tipo')
+      this.idUsuarioLogin = localStorage.getItem('_id')
+      this.tipoUsuarioLogin = localStorage.getItem('tipo_usuario')
       this.tokenLogin = localStorage.getItem('token');
       this.usuarioLogin = JSON.parse(localStorage.getItem('usuario'));
     }
@@ -125,8 +125,8 @@ export class ApiSisEventService {
     this.tokenLogin = "";
     this.usuarioLogin = null;
 
-    localStorage.removeItem('id');
-    localStorage.removeItem('tipo');
+    localStorage.removeItem('_id');
+    localStorage.removeItem('tipo_usuario');
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
 

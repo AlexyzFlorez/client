@@ -17,9 +17,9 @@ export class HeaderComponent implements OnInit {
   tipoEditor=environment.TIPO_EDITOR;
 
   constructor(private router: Router, private apiSisEvent: ApiSisEventService) {
-    this.tipoUsuario=localStorage.getItem('tipo');
+    this.tipoUsuario=localStorage.getItem('tipo_usuario');
     this.token=localStorage.getItem('token');
-    this.idUsuarioLogin=localStorage.getItem('id')
+    this.idUsuarioLogin=localStorage.getItem('_id')
   }
 
   ngOnInit() {

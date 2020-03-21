@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Fechas } from 'src/app/models/Fechas';
-import { Evento } from 'src/app/models/Evento';
+import { Fechas } from 'src/app/fnAuxiliares/fechas';
+import { Evento } from 'src/app/models/evento';
 import { environment } from '../../../../environments/environment';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
 @Component({
   selector: 'ipn-mis-eventos',
@@ -24,9 +25,11 @@ export class MisEventosComponent implements OnInit {
     idUsuario:string;
     eventosVacios:boolean;
     tipoUsuario:string;
+    errorHelper;
     
     constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
       this.titleService.setTitle('Mis eventos');
+      this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     }
   
     ngOnInit() {
@@ -57,7 +60,7 @@ export class MisEventosComponent implements OnInit {
             this.eventosVacios=false;
           }
         },
-        err => console.log("error")
+        err => this.errorHelper.manejarError(err.status)
       );
     }
   
@@ -68,7 +71,7 @@ export class MisEventosComponent implements OnInit {
           this.detallesEvento.hora_inicio = this.fechas.darFormatoHora(this.detallesEvento.hora_inicio);
           this.detallesEvento.hora_termino = this.fechas.darFormatoHora(this.detallesEvento.hora_termino);
         },
-        err => console.log("error")
+        err => this.errorHelper.manejarError(err.status)
       );
     }
   }

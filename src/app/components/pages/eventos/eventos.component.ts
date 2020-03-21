@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Fechas } from 'src/app/models/Fechas';
-import { Evento } from 'src/app/models/Evento';
+import { Fechas } from 'src/app/fnAuxiliares/fechas';
+import { Evento } from 'src/app/models/evento';
 import { environment } from '../../../../environments/environment';
+import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
 @Component({
   selector: 'ipn-eventos',
@@ -23,16 +24,19 @@ export class EventosComponent implements OnInit {
   tipoUsuario: string;
   idUsuario: string;
   eventosVacios: boolean;
-
+  errorHelper;
+  tipoAdministrador=environment.TIPO_ADMINISTRADOR;
+  tipoEditor=environment.TIPO_EDITOR;
+  
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
-
+    this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
     this.titleService.setTitle('Eventos');
   }
 
   ngOnInit() {
-    this.tipoUsuario = localStorage.getItem("tipo");
+    this.tipoUsuario = localStorage.getItem("tipo_usuario");
     this.detallesEvento = new Evento();
-    this.idUsuario = localStorage.getItem("id");
+    this.idUsuario = localStorage.getItem("_id");
 
     const params = this.activeRoute.snapshot.params;
 
@@ -44,7 +48,7 @@ export class EventosComponent implements OnInit {
         res => {
           this.nombreActividad = res;
         },
-        err => console.log("error")
+        err => this.errorHelper.manejarError(err.status)
       );
     }
 
@@ -68,7 +72,7 @@ export class EventosComponent implements OnInit {
           this.eventosVacios = false;
         }
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 
@@ -79,7 +83,7 @@ export class EventosComponent implements OnInit {
         this.detallesEvento.hora_inicio = this.fechas.darFormatoHora(this.detallesEvento.hora_inicio);
         this.detallesEvento.hora_termino = this.fechas.darFormatoHora(this.detallesEvento.hora_termino);
       },
-      err => console.log("error")
+      err => this.errorHelper.manejarError(err.status)
     );
   }
 }
