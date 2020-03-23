@@ -27,6 +27,8 @@ export class Evento {
   public evidencias: Evidencia[];
   public solicitud_memoria:string;
   public en_memoria: boolean;
+  public hombres:string;
+  public mujeres:string;
 
   constructor() {
     this._id="";
@@ -48,5 +50,7 @@ export class Evento {
     this.evidencias=[];
     this.solicitud_memoria="";
     this.en_memoria=false;
+    this.hombres="-";
+    this.mujeres="-";
   }
 }

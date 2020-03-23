@@ -7,6 +7,10 @@ import { Evento } from 'src/app/models/evento';
 import { environment } from '../../../../environments/environment';
 import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
+
 @Component({
   selector: 'ipn-mis-eventos',
   templateUrl: './mis-eventos.component.html',
@@ -66,22 +70,55 @@ export class MisEventosComponent implements OnInit {
     }
   
     verDetalles(id) {
-      this.apiSisEvent.obtenerDetallesEvento(id).subscribe(
-        res => {
-          this.detallesEvento = res;
-          this.detallesEvento.hora_inicio = this.fechas.darFormatoHora(this.detallesEvento.hora_inicio);
-          this.detallesEvento.hora_termino = this.fechas.darFormatoHora(this.detallesEvento.hora_termino);
-        },
-        err => this.errorHelper.manejarError(err.status)
-      );
-    }
-
-    editarEvento(id) {
       this.router.navigate([`/evento/${id}`]);
     }
-
-    eliminarEvento(id) {
-      console.log("Eliminar", id)
+  
+    aceptarMemoria(id){
+      console.log("Aceptar a memoria", id)
+    }
+  
+    descartarMemoria(id){
+      console.log("Descartar a memoria", id)
+    }
+  
+    editarEvento(id) {
+      this.router.navigate([`/editar-evento/${id}`]);
+    }
+  
+    eliminarEvento(id: string) {
+      swal({
+        title: "¿Estás seguro?",
+        icon: "warning",
+        buttons: ["Cancelar", "Eliminar"],
+        dangerMode: true,
+      })
+        .then((borrar) => {
+          if (borrar) {
+  
+            this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
+              res => {
+                let respuesta: any = res;
+                if (respuesta.errores.includes('No existe')) {
+                  this.apiSisEvent.salir();
+                }
+                else {
+                  this.apiSisEvent.eliminarEvento(id).subscribe(
+                    res => {
+                      swal({
+                        title: "Correcto",
+                        icon: "success",
+                        text: "Evento eliminado correctamente."
+                      });
+                      this.obtenerMisEventos(this.idUsuario);
+                    },
+                    err => this.errorHelper.manejarError(err.status)
+                  );
+                }
+              },
+              err => this.errorHelper.manejarError(err.status)
+            );
+          }
+        });
     }
   }
   

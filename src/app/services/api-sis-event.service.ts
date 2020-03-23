@@ -46,6 +46,10 @@ export class ApiSisEventService {
     return this.http.get(`${this.API_URI}/administrador/obtener-usuarios?token=${this.tokenLogin}`);
   }
 
+  obtenerEventosEnMemoria() {
+    return this.http.get(`${this.API_URI}/administrador/obtener-eventos-en-memoria?token=${this.tokenLogin}`);
+  }
+
   aceptarUsuario(id: string, usuario) {
     return this.http.put(`${this.API_URI}/administrador/aceptar-usuario/${id}?token=${this.tokenLogin}`, usuario);
   }
@@ -117,6 +121,10 @@ export class ApiSisEventService {
 
   obtenerMisEventos(idUsuario) {
     return this.http.get(`${this.API_URI}/editor/obtener-mis-eventos/${idUsuario}?token=${this.tokenLogin}`);
+  }
+
+  eliminarEvento(id: string) {
+    return this.http.delete(`${this.API_URI}/editor/eliminar-evento/${id}?token=${this.tokenLogin}`);
   }
 
   salir() {

@@ -1,0 +1,201 @@
+<div class="row box-typical seccion">
+	<div class="row margin-bottom-20">
+		<div class="col-md-12 contendor-header-eventos">
+			<h3 class="nombre-actividad">{{nombreActividad}}</h3>
+			<div class="contenedor-buscar">
+				<input type="text" class="form-control input-buscar" placeholder="Buscar" name="filtroEventos"
+					[(ngModel)]="filtroEventos">
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 text-center" *ngIf="eventosVacios==true">
+			<h6>No hay eventos registrados.</h6>
+		</div>
+
+		<div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 margin-bottom-20"
+			*ngFor="let evento of eventos | filter:filtroEventos">
+
+			<article class="card-typical targeta-eventos">
+				<div class="card-typical-section fondo-azul-primario contenedor-title-tarjeta">
+					<h4 class="title text-center texto-blanco texto-negrita titulo-tarjeta">
+						{{evento.nombre | uppercase}}</h4>
+					<p class="text-center texto-blanco">( {{evento.tipo_actividad.nombre}} )</p>
+				</div>
+
+				<div class="card-typical-section card-typical-content ">
+					<div class="photo">
+						<img src="{{rutaArchivo}}{{evento.url_portada}}" alt="" class="portada-evento">
+					</div>
+
+				</div>
+
+				<div class="card-typical-section text-center">
+					<p class=""><strong>Inicia:
+						</strong><span>{{evento.fecha_inicio | date:'mediumDate'}}</span></p>
+					<p class=""><strong>Termina:
+						</strong><span>{{evento.fecha_termino | date:'mediumDate'}}</span></p>
+				</div>
+
+				<div class="card-typical-section text-right">
+					<button *ngIf="(tipoUsuario!=tipoAdministrador) && (tipoUsuario!=tipoEditor)"
+						(click)='verDetalles(evento._id)' class="btn btn-nav btn-rounded btn-primary-outline"
+						data-target="#verDetalles" data-toggle="modal">Ver detalles</button>
+					<button *ngIf="(tipoUsuario==tipoAdministrador) || (tipoUsuario==tipoEditor)"
+						(click)='verDetalles(evento._id)' class="boton-icono" data-target="#verDetalles"
+						data-toggle="modal"><i class="fas fa-eye icono-gris icono-dt icono"
+							title="Ver detalles"></i></button>
+					<button
+						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria!=true"
+						class="boton-icono" (click)='aceptarMemoria(evento._id)'><i
+							class="fas fa-check icono-verde-suave icono-dt icono"
+							title="Agregar a memoria"></i></button>
+					<button
+						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria!=true"
+						class="boton-icono" (click)='descartarMemoria(evento._id)'><i
+							class="fas fa-times icono-rojo-suave icono-dt icono"
+							title="No agregar a memoria"></i></button>
+					<button *ngIf="(tipoUsuario==tipoAdministrador) || (idUsuario==evento.usuario._id)"
+						(click)='editarEvento(evento._id)' class="boton-icono"><i
+							class="fas fa-edit icono-dt icono-azul-suave icono" title="Editar"></i></button>
+					<button *ngIf="(tipoUsuario==tipoAdministrador) || (idUsuario==evento.usuario._id)"
+						(click)='eliminarEvento(evento._id)' class="boton-icono"><i
+							class="fas fa-trash-alt icono-dt  icono-rojo-suave icono" title="Eliminar"></i></button>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+
+<!--Modal de evidencias-->
+<div class="modal fade" id="verEvidencias" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+					<i class="font-icon-close-2"></i>
+				</button>
+				<h4 class="modal-title text-center" id="myModalLabel">Evidencia del evento: Conferencia "Sororidad"</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="form-group row">
+					<div class="col-md-4 text-center">
+						<p>Hombres</p>
+						<p class="texto-negrita">25</p>
+					</div>
+
+					<div class="col-md-4 text-center">
+						<p>Mujeres</p>
+						<p class="texto-negrita">28</p>
+					</div>
+
+					<div class="col-md-4 text-center">
+						<p>Horas</p>
+						<p class="texto-negrita">2</p>
+					</div>
+
+				</div>
+
+				<div class="form-group row d-flex justify-content-between">
+					<div class="col-md-4 text-center">
+						<p>Ponentes</p>
+						<p class="texto-negrita">Externos</p>
+					</div>
+
+					<div class="col-md-4 text-center">
+						<p>Población atendida</p>
+						<p class="texto-negrita">Interna</p>
+					</div>
+
+					<div class="col-md-4 text-center">
+						<p>Tipo de actividad</p>
+						<p class="texto-negrita">Conferencia</p>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-12">
+						<p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti
+							aliquid debitis
+							delectus, obcaecati rem adipisci minima neque velit! Provident quis, at facere nemo delectus
+							sequi cum
+							asperiores hic quos voluptas.
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi molestiae eum excepturi
+							enim error
+							aperiam assumenda, rerum ratione, fugit fugiat voluptate perferendis libero tenetur atque
+							nobis velit iste
+							aspernatur ipsa!
+						</p>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-12 col-md-4">
+						<article class="card-typical">
+							<div class="zoom">
+								<p class="text-center texto-negrita">Evidencia 1</p>
+							</div>
+
+							<div class="">
+								<a href="../../../../assets/img/ev1.jpg" target="blank"><img
+										src="../../../../assets/img/ev1.jpg" alt=""
+										class="portada-evento imagen-evidencia"></a>
+							</div>
+							<!--
+              <div class="">
+                <img src="../../../../assets/img/ev1.jpg" alt="" class="imagen-evidencia zoom">
+              </div>
+-->
+						</article>
+						<!--.card-typical-->
+					</div>
+
+					<div class="col-sm-12 col-md-4">
+						<article class="card-typical">
+							<div class="">
+								<p class="text-center texto-negrita">Evidencia 2</p>
+							</div>
+
+							<div class="">
+								<a href="../../../../assets/img/ev2.jpg" target="blank"><img
+										src="../../../../assets/img/ev2.jpg" alt=""
+										class="portada-evento imagen-evidencia"></a>
+							</div>
+							<!--
+              <div class="zoom">
+                <img src="../../../../assets/img/ev2.jpg" alt="" class="portada-evento imagen-evidencia zoom">
+              </div>
+-->
+						</article>
+						<!--.card-typical-->
+					</div>
+
+					<div class="col-sm-12 col-md-4">
+						<article class="card-typical">
+							<div class="">
+								<p class="text-center texto-negrita">Evidencia 3</p>
+							</div>
+
+							<div class="">
+								<a href="../../../../assets/img/ev3.jpg" target="blank"><img
+										src="../../../../assets/img/ev3.jpg" alt=""
+										class="portada-evento imagen-evidencia"></a>
+							</div>
+
+						</article>
+						<!--.card-typical-->
+					</div>
+				</div>
+
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--.modal-->

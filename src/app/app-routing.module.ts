@@ -9,18 +9,15 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
 import { EventosComponent } from './components/pages/eventos/eventos.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { MisEventosComponent } from './components/pages/mis-eventos/mis-eventos.component';
-import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
-import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
 import { EventoComponent } from './components/pages/evento/evento.component';
 import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
-import { ListaEventosComponent } from './components/pages/lista-eventos/lista-eventos.component';
+import { EventosMemoriaComponent } from './components/pages/eventos-memoria/eventos-memoria.component';
 
 //GUARDS
 import { LoginGuard } from './services/guards/login.guard';
 import { EditorGuard } from './services/guards/editor.guard';
 import { AdminGuard } from './services/guards/admin.guard';
-
 
 
 const routes: Routes = [
@@ -33,57 +30,45 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children:
-    [
-      {
-        path: 'calendario',
-        component: CalendarioComponent
-      },
-      {
-        path: 'eventos/:id',
-        component: EventosComponent
-      },
-      {
-        path: 'usuarios',
-        component: UsuariosComponent,
-        canActivate:[LoginGuard,AdminGuard]
-      },
-      {
-        path: 'eventosAdmin',
-        component: ListaEventosComponent,
-        canActivate:[LoginGuard,AdminGuard]
-      },
-      {
-        path: 'evento/:id',
-        component: EventoComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      },
-    
-      {
-        path: 'perfil/:id',
-        component: PerfilComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      },
-      {
-        path: 'mis-eventos',
-        component: MisEventosComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      },
+      [
         {
-        path: 'editar-evento',
-        component: EditarEventoComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      },
-      {
-        path: 'evidencias',
-        component: EvidenciasComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      },
-      {
-        path: 'subir-evidencias',
-        component: SubirEvidenciasComponent,
-        canActivate:[LoginGuard,EditorGuard]
-      }
-    ]
+          path: 'calendario',
+          component: CalendarioComponent
+        },
+        {
+          path: 'eventos/:id',
+          component: EventosComponent
+        },
+        {
+          path: 'evento/:id',
+          component: EventoComponent
+        },
+        {
+          path: 'usuarios',
+          component: UsuariosComponent,
+          canActivate: [LoginGuard, AdminGuard]
+        },
+        {
+          path: 'eventos-en-memoria',
+          component: EventosMemoriaComponent,
+          canActivate: [LoginGuard, AdminGuard]
+        },
+        {
+          path: 'perfil/:id',
+          component: PerfilComponent,
+          canActivate: [LoginGuard, EditorGuard]
+        },
+        {
+          path: 'mis-eventos',
+          component: MisEventosComponent,
+          canActivate: [LoginGuard, EditorGuard]
+        },
+        {
+          path: 'editar-evento/:id',
+          component: EditarEventoComponent,
+          canActivate: [LoginGuard, EditorGuard]
+        }
+      ]
   },
   {
     path: 'login',
@@ -111,4 +96,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

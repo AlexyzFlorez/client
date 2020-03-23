@@ -36,11 +36,9 @@ import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { MisEventosComponent } from './components/pages/mis-eventos/mis-eventos.component';
 import { EventoComponent } from './components/pages/evento/evento.component';
 import { EditarEventoComponent } from './components/pages/editar-evento/editar-evento.component';
-import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
-import { SubirEvidenciasComponent } from './components/pages/subir-evidencias/subir-evidencias.component';
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { ListaEventosComponent } from './components/pages/lista-eventos/lista-eventos.component';
+import { EventosMemoriaComponent } from './components/pages/eventos-memoria/eventos-memoria.component';
 
 @NgModule({
   declarations: [
@@ -58,10 +56,8 @@ import { ListaEventosComponent } from './components/pages/lista-eventos/lista-ev
     MisEventosComponent,
     EventoComponent,
     EditarEventoComponent,
-    EvidenciasComponent,
-    SubirEvidenciasComponent,
     RestablecerPasswordComponent,
-    ListaEventosComponent
+    EventosMemoriaComponent
   ],
   imports: [
     BrowserModule,

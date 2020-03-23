@@ -399,10 +399,25 @@ table{
     width: 50%;
 }
 
+.p-10{
+    padding: 10px;
+}
+
+.centrar-contenido{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .nombre-actividad
 {
     text-align: center;
     width: 100%;
+}
+
+.contenedor-centrado{
+    display: flex;
+    justify-content: center;
 }
 
 .contenedor-buscar

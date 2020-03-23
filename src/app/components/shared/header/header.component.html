@@ -1,47 +1,50 @@
 <header class="site-header">
-        <div class="container-fluid">
-            <a href="#" class="site-logo">
-                <img class="hidden-md-down" src="assets/img/logo-upiiz.png" alt=""> <span
-                    class="titulo-icono hidden-md-down">SisEvent</span>
-                <img class="hidden-lg-up" src="assets/img/logo-upiiz.png" alt="">
-            </a>
-            <button class="hamburger hamburger--htla">
-                <span>toggle menu</span>
-            </button>
-    
-    
-            <div class="site-header-content">
-                <div class="site-header-content-in">
-                    <div class="site-header-shown">
+    <div class="container-fluid">
+        <a href="#" class="site-logo">
+            <img class="hidden-md-down" src="assets/img/logo-upiiz.png" alt=""> <span
+                class="titulo-icono hidden-md-down">SisEvent</span>
+            <img class="hidden-lg-up" src="assets/img/logo-upiiz.png" alt="">
+        </a>
+        <button class="hamburger hamburger--htla">
+            <span>toggle menu</span>
+        </button>
 
-                            <a class="btn btn-nav btn-rounded btn-inline btn-primary" routerLink="/login" *ngIf='token==null'>
-	                            Iniciar sesión
-                            </a>
-	                   
-                        <div class="dropdown user-menu" *ngIf='tipoUsuario==tipoAdministrador || tipoUsuario==tipoEditor'>
-                                <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="assets/img/avatar-2-64.png" alt="">
-                                </button>
-                                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-                                    <a class="dropdown-item" routerLink='/perfil/{{idUsuarioLogin}}'><i class="fas fa-user-alt icono-gris icono"></i>
-                                        <span class="lbl">Perfil</span></a>
-                                        <a class="dropdown-item" routerLink="/eventosAdmin" *ngIf='tipoUsuario==tipoAdministrador'><i class="fas fa-th-list icono-gris icono"></i>
-                                            <span class="lbl">Lista de eventos</span></a>
-                                    <a class="dropdown-item" routerLink="/mis-eventos"><i class="far fa-calendar-check icono-gris icono"></i>
-                                        <span class="lbl">Mis eventos</span></a>
-                                       
-                                    <a class="dropdown-item"routerLink="/" (click)="apiSisEvent.salir()"><i class="fas fa-sign-out-alt icono-gris icono"></i>
-                                        <span class="lbl">Salir</span></a>
-                                </div>
-                            </div>
-	                </div>
-	
-	            </div>
-	        </div>
-	    </div>
-	</header>
+
+        <div class="site-header-content">
+            <div class="site-header-content-in">
+                <div class="site-header-shown">
+
+                    <a class="btn btn-nav btn-rounded btn-inline btn-primary" routerLink="/login" *ngIf='token==null'>
+                        Iniciar sesión
+                    </a>
+
+                    <div class="dropdown user-menu" *ngIf='tipoUsuario==tipoAdministrador || tipoUsuario==tipoEditor'>
+                        <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/img/avatar-2-64.png" alt="">
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
+                            <a class="dropdown-item" routerLink='/perfil/{{idUsuarioLogin}}'><i
+                                    class="fas fa-user-alt icono-gris icono"></i>
+                                <span class="lbl">Perfil</span></a>
+                            <a class="dropdown-item" routerLink="/eventos-en-memoria" *ngIf='tipoUsuario==tipoAdministrador'><i
+                                    class="far fa-calendar-check icono-gris icono"></i>
+                                <span class="lbl">Eventos en memoria</span></a>
+                            <a class="dropdown-item" routerLink="/mis-eventos"><i
+                                    class="fas fa-calendar-week icono-gris icono"></i>
+                                <span class="lbl">Mis eventos</span></a>
+                            <a class="dropdown-item" routerLink="/" (click)="apiSisEvent.salir()"><i
+                                    class="fas fa-sign-out-alt icono-gris icono"></i>
+                                <span class="lbl">Salir</span></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
 
 
 

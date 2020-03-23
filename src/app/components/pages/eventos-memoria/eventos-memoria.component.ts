@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fechas } from 'src/app/fnAuxiliares/fechas';
+import { Evento } from 'src/app/models/evento';
 import { environment } from '../../../../environments/environment';
 import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
@@ -11,17 +12,19 @@ import { SweetAlert } from 'sweetalert/typings/core';
 const swal: SweetAlert = _swal as any;
 
 @Component({
-  selector: 'ipn-eventos',
-  templateUrl: './eventos.component.html',
+  selector: 'ipn-eventos-memoria',
+  templateUrl: './eventos-memoria.component.html',
   styles: []
 })
-export class EventosComponent implements OnInit {
+export class EventosMemoriaComponent implements OnInit {
+
 
   nombreActividad: any;
   eventos: any;
   rutaArchivo = environment.URI_ARCHIVOS;
   filtroEventos;
   fechas = new Fechas();
+  detallesEvento;
   mostrarTodo: boolean;
   tipoUsuario: string;
   idUsuario: string;
@@ -32,35 +35,22 @@ export class EventosComponent implements OnInit {
   
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService, private activeRoute: ActivatedRoute) {
     this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
-    this.titleService.setTitle('Eventos');
+    this.titleService.setTitle('Eventos en memoria');
   }
 
   ngOnInit() {
     this.tipoUsuario = localStorage.getItem("tipo_usuario");
-
+    this.detallesEvento = new Evento();
     this.idUsuario = localStorage.getItem("_id");
 
-    const params = this.activeRoute.snapshot.params;
-
-    if (params.id == "7c3d4ab1-38e6-4406-87b5-ecee274e3f5b") {
-      this.nombreActividad = "Todos"
-    }
-    else {
-      this.apiSisEvent.obtenerNombreActividad(params.id).subscribe(
-        res => {
-          this.nombreActividad = res;
-        },
-        err => this.errorHelper.manejarError(err.status)
-      );
-    }
-
-    this.obtenerEventos(params.id);
+    this.obtenerEventosEnMemoria();
   }
 
-  obtenerEventos(idActividad) {
-    this.apiSisEvent.obtenerEventos(idActividad).subscribe(
+  obtenerEventosEnMemoria() {
+    this.apiSisEvent.obtenerEventosEnMemoria().subscribe(
       res => {
         this.eventos = res;
+        console.log(this.eventos)
         for (let i = 0; i < this.eventos.length; i++) {
           this.eventos[i].fecha_inicio = this.fechas.darFormato(this.eventos[i].fecha_inicio);
           this.eventos[i].fecha_termino = this.fechas.darFormato(this.eventos[i].fecha_termino);
@@ -79,14 +69,6 @@ export class EventosComponent implements OnInit {
 
   verDetalles(id) {
     this.router.navigate([`/evento/${id}`]);
-  }
-
-  aceptarMemoria(id){
-    console.log("Aceptar a memoria", id)
-  }
-
-  descartarMemoria(id){
-    console.log("Desartar a memoria", id)
   }
 
   editarEvento(id) {
@@ -117,8 +99,7 @@ export class EventosComponent implements OnInit {
                       icon: "success",
                       text: "Evento eliminado correctamente."
                     });
-                    const params = this.activeRoute.snapshot.params;
-                    this.obtenerEventos(params.id);
+                    this.obtenerEventosEnMemoria();
                   },
                   err => this.errorHelper.manejarError(err.status)
                 );
