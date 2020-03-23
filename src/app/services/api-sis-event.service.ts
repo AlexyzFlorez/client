@@ -135,6 +135,10 @@ export class ApiSisEventService {
     return this.http.delete(`${this.API_URI}/editor/eliminar-evento/${id}?token=${this.tokenLogin}`);
   }
 
+  eliminarEvidencia(id: string) {
+    return this.http.delete(`${this.API_URI}/editor/eliminar-evidencia/${id}?token=${this.tokenLogin}`);
+  }
+
   salir() {
     this.idUsuarioLogin = "";
     this.tipoUsuarioLogin = "";

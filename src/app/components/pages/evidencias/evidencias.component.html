@@ -2,8 +2,7 @@
 	<div class="row margin-bottom-20">
 		<div class="col-md-12 contendor-header-eventos">
 			<h3 class="nombre-actividad">Evidencias</h3>
-			<button type="button" class="btn texto-blanco btn-rounded btn-primario btn-block" data-toggle="modal"
-				data-target="#registroEvidencia">Nueva evidencia</button>
+			<button type="button" class="btn texto-blanco btn-rounded btn-primario">Nueva evidencia</button>
 		</div>
 	</div>
 
@@ -34,61 +33,3 @@
 		</div>
 	</div>
 </div>
-
-<!--Modal de registro-->
-<div class="modal fade" id="registroEvidencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-
-			<div class="modal-header">
-				<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-					<i class="font-icon-close-2"></i>
-				</button>
-				<h4 class="modal-title text-center" id="myModalLabel">Nueva eviedencia</h4>
-			</div>
-
-			<div class="modal-body">
-
-				<!--Descripcion-->
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<label class="form-label semibold" for="descripcion">Descripción</label>
-						<textarea rows="4" class="form-control" id="descripcion" [(ngModel)]="evidencia.descripcion"
-							#descripcion="ngModel" name="descripcion"> </textarea>
-						<p class="error" *ngIf='miFormularioEvento.descripcionVacia'>Completa este campo.</p>
-						<p class="error"
-							*ngIf='miFormularioEvento.descripcionFormato==false && !this.miFormularioEvento.descripcionVacia'>
-							Formato
-							inválido.</p>
-					</div>
-				</div>
-
-				<!--Portada-->
-				<div class="form-group row">
-					<div class="col-sm-12">
-						<span class="btn btn-rounded btn-file">
-							<span>Selecciona portada</span>
-							<form enctype="multipart/form-data">
-								<input type="file" class="custom-file-input" id="input-custom-file" name="Archivo"
-									(change)=onFileChange($event)>
-							</form>
-						</span>
-
-						<span for="" class="margen-izquierdo"><small class="texto-verde"
-								*ngIf='miFormularioEvento.archivoCargado'>Cargado</small></span>
-						<p class="error" *ngIf='miFormularioEvento.archivoFormato==false'>Selecciona un archivo válido.
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-rounded btn-default" id="btn-cerrar-modal"
-					data-dismiss="modal">Cerrar</button>
-				<button type="button" class="btn btn-rounded btn-success" (click)="registrarEvento()">Registrar</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!--.modal-->

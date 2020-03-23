@@ -13,7 +13,7 @@ import { Fechas } from 'src/app/fnAuxiliares/fechas';
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 const swal: SweetAlert = _swal as any;
-import { calendarioPersonalizado } from '../../../fnAuxiliares/calendarioPersonalizado';
+import { CalendarioPersonalizado } from '../../../fnAuxiliares/calendarioPersonalizado';
 import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
 
 registerLocaleData(localeEs);
@@ -52,9 +52,12 @@ export class CalendarioComponent implements OnInit {
   fechas = new Fechas();
   mostrarCalendario: boolean;
   errorHelper;
+  calendarioPersonalizado;
 
   constructor(private titleService: Title, private router: Router, private apiSisEvent: ApiSisEventService) {
     this.errorHelper = new ErrorHelper(this.router, this.apiSisEvent);
+    this.calendarioPersonalizado = new CalendarioPersonalizado(this.router);
+
     this.tipoUsuario = localStorage.getItem('tipo_usuario');
     this.token = localStorage.getItem('token');
 
@@ -68,9 +71,10 @@ export class CalendarioComponent implements OnInit {
           this.eventData[i].fecha_termino = this.fechas.darFormato(this.eventData[i].fecha_termino);
           this.eventData[i].start = this.eventData[i].fecha_inicio;
           this.eventData[i].end = this.eventData[i].fecha_termino;
+          this.eventData[i].title = this.eventData[i].nombre;
         }
 
-        this.defaultConfigurations = calendarioPersonalizado.calendarOptions(this.eventData);
+        this.defaultConfigurations = this.calendarioPersonalizado.getOptions(this.eventData);
 
         $('#full-calendar').fullCalendar(
           this.defaultConfigurations

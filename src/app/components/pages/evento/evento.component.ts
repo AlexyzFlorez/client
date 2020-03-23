@@ -33,6 +33,12 @@ export class EventoComponent implements OnInit {
     this.apiSisEvent.obtenerDetallesEvento(idEvento).subscribe(
       res => {
         this.evento = res;
+        this.evento.evidencias=[
+          {
+            url_evidencia:"2f67904b-bf2b-46cd-ba94-7221f50e0240.png",
+            descripcion:"Descripcion de la primer evidencia"
+          }
+        ]
         this.evento.hora_inicio = this.fechas.darFormatoHora(this.evento.hora_inicio);
         this.evento.hora_termino = this.fechas.darFormatoHora(this.evento.hora_termino);
       },

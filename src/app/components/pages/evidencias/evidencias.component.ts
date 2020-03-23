@@ -6,8 +6,10 @@ import { ApiSisEventService } from '../../../services/api-sis-event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fechas } from 'src/app/fnAuxiliares/fechas';
 import { ErrorHelper } from 'src/app/fnAuxiliares/errorHelper';
-import { FormularioEvento } from 'src/app/fnAuxiliares/formularioEvento';
 import { Evidencia } from 'src/app/models/evidencia';
+import * as _swal from 'sweetalert';
+import { SweetAlert } from 'sweetalert/typings/core';
+const swal: SweetAlert = _swal as any;
 
 @Component({
   selector: 'ipn-evidencias',
@@ -33,15 +35,24 @@ export class EvidenciasComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.obtenerEvento();
+  }
 
+  obtenerEvento(){
     const idEvento = this.activeRoute.snapshot.params.id;
     this.apiSisEvent.obtenerDetallesEvento(idEvento).subscribe(
       res => {
         this.evento = res;
-        console.log("evento",this.evento)
+
+        this.evento.evidencias=[
+          {
+            _id:"id_prueba",
+            url_evidencia:"2f67904b-bf2b-46cd-ba94-7221f50e0240.png",
+            descripcion:"Descripcion de la primer evidencia"
+          }
+        ]
 
         this.evidencias=this.evento.evidencias;
-        console.log("evidencias",this.evidencias)
 
         if(this.evidencias.length<5){
           this.banderaAgregarEvidencias=true;
@@ -59,6 +70,42 @@ export class EvidenciasComponent implements OnInit {
       },
       err => this.errorHelper.manejarError(err.status)
     );
+  }
+
+  eliminarEvidencia(id: string) {
+    swal({
+      title: "¿Estás seguro?",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+      dangerMode: true,
+    })
+      .then((borrar) => {
+        if (borrar) {
+
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
+            res => {
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                this.apiSisEvent.eliminarEvidencia(id).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Evidencia eliminada correctamente."
+                    });
+                    this.obtenerEvento();
+                  },
+                  err => this.errorHelper.manejarError(err.status)
+                );
+              }
+            },
+            err => this.errorHelper.manejarError(err.status)
+          );
+        }
+      });
   }
 
 }
