@@ -62,6 +62,10 @@ export class ApiSisEventService {
     return this.http.delete(`${this.API_URI}/administrador/eliminar-usuario/${id}?token=${this.tokenLogin}`);
   }
 
+  actualizarMemoria(id: string, actualizacion) {
+    return this.http.put(`${this.API_URI}/administrador/actualizar-memoria/${id}?token=${this.tokenLogin}`,actualizacion);
+  }
+
   //EDITOR-----------------------------------------------------
   existeUsuario(id: string) {
     return this.http.get(`${this.API_URI}/editor/existe-usuario/${id}?token=${this.tokenLogin}`);

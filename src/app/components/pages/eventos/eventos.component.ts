@@ -82,11 +82,83 @@ export class EventosComponent implements OnInit {
   }
 
   aceptarMemoria(id){
-    console.log("Aceptar a memoria", id)
+    swal({
+      title: "¿Estás seguro?",
+      icon: "warning",
+      buttons: ["Cancelar", "Agregar"],
+      dangerMode: false,
+    })
+      .then((borrar) => {
+        if (borrar) {
+
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
+            res => {
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                let actualizacion={
+                  en_memoria:true
+                }
+                this.apiSisEvent.actualizarMemoria(id, actualizacion).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Evento agregado correctamente."
+                    });
+                    const params = this.activeRoute.snapshot.params;
+                    this.obtenerEventos(params.id);
+                  },
+                  err => this.errorHelper.manejarError(err.status)
+                );
+              }
+            },
+            err => this.errorHelper.manejarError(err.status)
+          );
+        }
+      });
   }
 
   descartarMemoria(id){
-    console.log("Desartar a memoria", id)
+    swal({
+      title: "¿Estás seguro?",
+      icon: "warning",
+      buttons: ["Cancelar", "Descartar"],
+      dangerMode: false,
+    })
+      .then((borrar) => {
+        if (borrar) {
+
+          this.apiSisEvent.existeUsuario(localStorage.getItem('_id')).subscribe(
+            res => {
+              let respuesta: any = res;
+              if (respuesta.errores.includes('No existe')) {
+                this.apiSisEvent.salir();
+              }
+              else {
+                let actualizacion={
+                  en_memoria:false
+                }
+                this.apiSisEvent.actualizarMemoria(id, actualizacion).subscribe(
+                  res => {
+                    swal({
+                      title: "Correcto",
+                      icon: "success",
+                      text: "Evento descartado correctamente."
+                    });
+                    const params = this.activeRoute.snapshot.params;
+                    this.obtenerEventos(params.id);
+                  },
+                  err => this.errorHelper.manejarError(err.status)
+                );
+              }
+            },
+            err => this.errorHelper.manejarError(err.status)
+          );
+        }
+      });
   }
 
   editarEvento(id) {

@@ -297,7 +297,6 @@ export class CalendarioComponent implements OnInit {
               text: "Evento registrado correctamente."
             });
 
-            /*
             this.evento.nombre = "";
             this.evento.departamento.nombre = "";
             this.evento.costo = "";
@@ -312,11 +311,11 @@ export class CalendarioComponent implements OnInit {
             this.evento.hora_termino = "";
             this.evento.descripcion = "";
             this.evento.solicitud_memoria = "";
-           */
+
             this.miFormularioEvento.archivoCargado = false;
             this.miFormularioEvento.archivoFormato = undefined;
 
-          // this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
+           this.router.navigate([`/evento/${this.respuesta.errores[0]}`]);
 
           }
           else if (this.respuesta.errores.includes('Actividad existente')) {

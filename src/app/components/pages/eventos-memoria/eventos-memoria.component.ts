@@ -50,7 +50,6 @@ export class EventosMemoriaComponent implements OnInit {
     this.apiSisEvent.obtenerEventosEnMemoria().subscribe(
       res => {
         this.eventos = res;
-        console.log(this.eventos)
         for (let i = 0; i < this.eventos.length; i++) {
           this.eventos[i].fecha_inicio = this.fechas.darFormato(this.eventos[i].fecha_inicio);
           this.eventos[i].fecha_termino = this.fechas.darFormato(this.eventos[i].fecha_termino);

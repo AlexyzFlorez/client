@@ -1,7 +1,7 @@
 <div class="row box-typical seccion">
 	<div class="row margin-bottom-20">
 		<div class="col-md-12 contendor-header-eventos">
-			<h3 class="nombre-actividad">{{nombreActividad}}</h3>
+			<h3 class="nombre-actividad">{{nombreActividad}} ({{eventos.length}})</h3>
 			<div class="contenedor-buscar">
 				<input type="text" class="form-control input-buscar" placeholder="Buscar" name="filtroEventos"
 					[(ngModel)]="filtroEventos">
@@ -47,12 +47,12 @@
 						data-toggle="modal"><i class="fas fa-eye icono-gris icono-dt icono"
 							title="Ver detalles"></i></button>
 					<button
-						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria!=true"
+						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria==undefined"
 						class="boton-icono" (click)='aceptarMemoria(evento._id)'><i
 							class="fas fa-check icono-verde-suave icono-dt icono"
 							title="Agregar a memoria"></i></button>
 					<button
-						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria!=true"
+						*ngIf="tipoUsuario==tipoAdministrador && evento.solicitud_memoria=='Si' && evento.en_memoria==undefined"
 						class="boton-icono" (click)='descartarMemoria(evento._id)'><i
 							class="fas fa-times icono-rojo-suave icono-dt icono"
 							title="No agregar a memoria"></i></button>
