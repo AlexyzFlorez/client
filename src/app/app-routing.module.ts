@@ -18,6 +18,7 @@ import { EventosMemoriaComponent } from './components/pages/eventos-memoria/even
 import { LoginGuard } from './services/guards/login.guard';
 import { EditorGuard } from './services/guards/editor.guard';
 import { AdminGuard } from './services/guards/admin.guard';
+import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
 
 
 const routes: Routes = [
@@ -67,7 +68,12 @@ const routes: Routes = [
           path: 'editar-evento/:id',
           component: EditarEventoComponent,
           canActivate: [LoginGuard, EditorGuard]
-        }
+        },
+        {
+          path: 'evidencias/:id',
+          component: EvidenciasComponent,
+          canActivate: [LoginGuard, EditorGuard]
+        },
       ]
   },
   {

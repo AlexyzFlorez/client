@@ -20,7 +20,7 @@ const swal: SweetAlert = _swal as any;
 export class MisEventosComponent implements OnInit {
 
     nombreActividad: any;
-    eventos: any;
+    eventos: any=[];
     rutaArchivo = environment.URI_ARCHIVOS;
     filtroEventos;
     fechas = new Fechas();

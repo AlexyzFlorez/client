@@ -39,6 +39,7 @@ import { EditarEventoComponent } from './components/pages/editar-evento/editar-e
 import { RestablecerPasswordComponent } from './components/restablecer-password/restablecer-password.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { EventosMemoriaComponent } from './components/pages/eventos-memoria/eventos-memoria.component';
+import { EvidenciasComponent } from './components/pages/evidencias/evidencias.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { EventosMemoriaComponent } from './components/pages/eventos-memoria/even
     EventoComponent,
     EditarEventoComponent,
     RestablecerPasswordComponent,
-    EventosMemoriaComponent
+    EventosMemoriaComponent,
+    EvidenciasComponent
   ],
   imports: [
     BrowserModule,

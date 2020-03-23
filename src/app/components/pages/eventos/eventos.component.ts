@@ -18,7 +18,7 @@ const swal: SweetAlert = _swal as any;
 export class EventosComponent implements OnInit {
 
   nombreActividad: any;
-  eventos: any;
+  eventos: any=[];
   rutaArchivo = environment.URI_ARCHIVOS;
   filtroEventos;
   fechas = new Fechas();

@@ -56,6 +56,23 @@ h1
 {
     margin-top: 20px;
 }
+
+.ml-10{
+    margin-left: 10px;
+}
+
+.mt-10{
+    margin-top: 10px;
+}
+
+.pb-0{
+    padding-bottom: 0px !important;
+}
+
+.pt-0{
+    padding-top: 0px !important;
+}
+
 .icono
 {
     padding-right: 10px;

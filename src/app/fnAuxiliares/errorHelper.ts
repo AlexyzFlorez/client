@@ -24,7 +24,7 @@ export class ErrorHelper
                     text: "Algo salió mal.",
                     icon: "error"
                   })
-                  this.router.navigate(['/calendario']);
+                //  this.router.navigate(['/calendario']);
                 break;
         }
     }

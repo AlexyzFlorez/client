@@ -115,6 +115,10 @@ export class ApiSisEventService {
     return this.http.post(`${this.API_URI}/editor/registrar-evento?token=${this.tokenLogin}`, evento);
   }
 
+  editarEvento(id,evento: any) {
+    return this.http.put(`${this.API_URI}/editor/editar-evento/${id}?token=${this.tokenLogin}`, evento);
+  }
+
   obtenerPerfil(id: string) {
     return this.http.get(`${this.API_URI}/editor/obtener-perfil/${id}?token=${this.tokenLogin}`);
   }

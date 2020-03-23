@@ -258,7 +258,6 @@ export class CalendarioComponent implements OnInit {
     if (validacionFormulario === true) {
       //console.log("Campos Validos");
       let formData = new FormData();
-      console.log(this.evento.solicitud_memoria)
 
       formData.append('usuario', localStorage.getItem('_id'));
       formData.append('nombre', this.evento.nombre);

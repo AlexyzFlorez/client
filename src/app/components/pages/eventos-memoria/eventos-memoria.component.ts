@@ -20,7 +20,7 @@ export class EventosMemoriaComponent implements OnInit {
 
 
   nombreActividad: any;
-  eventos: any;
+  eventos: any=[];
   rutaArchivo = environment.URI_ARCHIVOS;
   filtroEventos;
   fechas = new Fechas();
